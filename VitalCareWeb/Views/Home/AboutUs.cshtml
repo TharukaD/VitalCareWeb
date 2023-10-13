@@ -1,47 +1,191 @@
 ﻿@{
-	ViewData["Title"] = "About Us";
+    ViewData["Title"] = "About Us";
 }
 
-<section class="banner-section-fourteen banner-section-twelve bg-white">
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar-two">
     <div class="container">
-        <h2>About Us</h2>
-    </div>   
-</section>
+        <div class="row align-items-center inner-banner">
+            <div class="col-md-12 col-12 text-center">
+                <h2 class="breadcrumb-title">About Us</h2>
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page">About Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
 
+<!-- About Us -->
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="about-img-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="about-inner-img">
+                                <div class="about-img">
+                                    <img src="~/assets/img/about-images/about-img-1.jpg" class="img-fluid" alt="about-image">
+                                </div>
+                                <div class="about-img">
+                                    <img src="~/assets/img/about-images/about-img-2.jpg" class="img-fluid" alt="about-image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="about-inner-img">
+                                <div class="about-box" style="background-color:#06A5A0 !important">
+                                    <h4>Over 5+ Years Experience</h4>
+                                </div>
+                                <div class="about-img">
+                                    <img src="~/assets/img/about-images/about-img-3.jpeg" class="img-fluid" alt="about-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="section-inner-header about-inner-header">
+                    <h6 style="color:#06A5A0 !important">About Our Company</h6>
+                    <h3>We Are Always Ensure Best Medical Treatment For Your Health</h3>
+                </div>
+                <div class="about-content">
+                    <div class="about-content-details">
+                        <p>
+                            VitalCare is a multispecialty medical company that
+                            integrates medical specialties, comprehensive dental care,
+                            diagnostic laboratories and pharmaceuticals.
+                        </p>
+                    </div>
+                </div>
+                <div class="section-inner-header about-inner-header mt-2">
+                    <h4 style="color:#06A5A0 !important">Vision</h4>
+                    <p class="mt-4">
+                        VitalCare will be recognized as a preeminent healthcare
+                        company that strives to provide outstanding patient
+                        experience, superior clinical outcomes, and an improved quality
+                        of life for the people it serves.
+                    </p>
+                </div>
+                <div class="section-inner-header about-inner-header mt-2">
+                    <h4 style="color:#06A5A0 !important">Mission</h4>
+                    <p class="mt-4">
+                        The mission of VitalCare is to provide compassionate, patient centered care of the highest quality.
+                    </p>
+                </div>
+                <div class="section-inner-header about-inner-header mt-2">
+                    <h4 style="color:#06A5A0 !important">Values</h4>
+                    <p class="mt-4">
+                        “Patients First” is our reason for being and the focus of all our
+                        activities. Our responsibility is to provide the best possible care
+                        and outcome for every patient. We strive to exceed our patient
+                        expectations for comfort and convenience.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /About Us -->
+
+<!-- Why Choose Us -->
+<section class="why-choose-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-inner-header text-center">
+                    <h3>Leadership</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card why-choose-card w-100">
+                    <div class="card-body">
+                        <div class="why-choose-content">
+                            <h4>Dr. Mohamed Muthuim</h4>
+                            <p>
+                                MBBS, MD (Internal Medicine)
+                            </p>
+                            <p>Managing Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card why-choose-card w-100">
+                    <div class="card-body">                        
+                        <div class="why-choose-content">
+                            <h4>Dr. Thooha Saeed</h4>
+                            <p>
+                                MBBS, MS (ENT, Head & Neck Surgery)
+                            </p>
+                            <p>Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card why-choose-card w-100">
+                    <div class="card-body">
+                        <div class="why-choose-content">
+                            <h4>Ahmed Suhail</h4>
+                            <p>
+                                BSc, PGD,MSc (Masters in public administration
+                                major in public policy)
+                            </p>
+                            <p>
+                                Chief Executive Officer
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Why Choose Us -->
 
 <style>
 
-	#IndexNavId a {
-		color: #4D555F !important;
-	}
+    #IndexNavId a {
+        color: #4D555F !important;
+    }
 
-	#AboutUsNavId a {
-		color: #06A5A0 !important;
-		text-decoration: underline;
-		text-underline-offset: 8px;
-	}
+    #AboutUsNavId a {
+        color: #06A5A0 !important;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+    }
 
-	#ServicesNavId a {
-		color: #4D555F !important;
-	}
+    #ServicesNavId a {
+        color: #4D555F !important;
+    }
 
-	#DoctorsNavId a {
-		color: #4D555F !important;
-	}
+    #DoctorsNavId a {
+        color: #4D555F !important;
+    }
 
-	#ArticlesNavId a {
-		color: #4D555F !important;
-	}
+    #ArticlesNavId a {
+        color: #4D555F !important;
+    }
 
-	#ContactNavId a {
-		color: #4D555F !important;
-	}
+    #ContactNavId a {
+        color: #4D555F !important;
+    }
 
 </style>
 
 @section Scripts{
-	<script>
+    <script>
 
 
-	</script>
+    </script>
 }
