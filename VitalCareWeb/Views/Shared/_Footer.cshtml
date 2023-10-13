@@ -1,114 +1,128 @@
-﻿<footer class="footer footer-one footer-fourteen footer-twelve">
-	<div class="footer-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-4">
-					<div class="footer-widget footer-about">
-						<div class="footer-logo">
-							<a href="index-10.html"><img src="~/assets/img/logo.png" alt="logo"></a>
-						</div>
-						<div class="footer-about-content">
-							<p>Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ad minim veniam aliqua.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-5">
-					<div class="row">
-						<div class="col-lg-3 col-md-4">
-							<div class="footer-widget footer-menu">
-								<h2 class="footer-title">Company</h2>
-								<ul>
-									<li><a href="index-10.html">Home</a></li>
-									<li><a href="javascript:void(0);">Specialities</a></li>
-									<li><a href="javascript:void(0);">Consult</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-4">
-							<div class="footer-widget footer-menu">
-								<h2 class="footer-title">Specialities</h2>
-								<ul>
-									<li><a href="javascript:void(0);">Neurology</a></li>
-									<li><a href="javascript:void(0);">Cardiologist</a></li>
-									<li><a href="javascript:void(0);">Dentist</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-4">
-							<div class="footer-widget footer-contact">
-								<h2 class="footer-title">Contact Us</h2>
-								<div class="footer-contact-info">
-									<div class="footer-address">
-										<p><i class="feather-map-pin"></i> 3556 Beech Street, USA</p>
-									</div>
-									<div class="footer-address">
-										<p><i class="feather-phone-call"></i> +1 315 369 5943</p>
-									</div>
-									<div class="footer-address mb-0">
-										<p><i class="feather-mail"></i> doccure@example.com</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+﻿@{
+    int currentYear = DateTime.Now.Year;
+}
+<footer class="footer footer-one footer-fourteen footer-twelve">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="footer-widget footer-about">
+                        <div class="footer-logo">
+                            <a href="index-10.html"><img src="~/assets/img/VitalcareLogo.png" alt="logo"></a>
+                        </div>
+                        <div class="footer-about-content">
+                            <p>
+                                VitalCare is a multispecialty medical company that
+                                integrates medical specialties, comprehensive dental care,
+                                diagnostic laboratories and pharmaceuticals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="row">
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">Useful Links</h2>
+                            <ul class="useFulLinks">
+                                <li >
+                                    <a asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="AboutUs">About Us</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Services">Services</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Doctors">Doctors</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Articles">Articles</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Home" asp-action="Contact">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <div class="footer-widget footer-contact">
+                        <h2 class="footer-title">Contact Us</h2>
+                        <div class="footer-contact-info">
+                            <div class="footer-address">
+                                <p>
+                                    <i class="feather-map-pin"></i> Lonuziyaarai Magu (Near Jamaalhudheen School)
+                                </p>
+                            </div>
+                            <div class="footer-address">
+                                <p>
+                                    <i class="feather-phone-call"></i>960 3321315
+                                </p>
+                            </div>
+                            <div class="footer-address mb-0">
+                                <p><i class="feather-mail"></i>info@vitalcaremaldives.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="footer-widget">
+                        <div class="social-icon">
+                            <ul class="gap-3">
+                                <li>
+                                    <a href="#" target="_blank"><i class="fab fa-facebook"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <!-- Copyright -->
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="copyright-text">
+                            <p class="mb-0"> © @currentYear VitalCare Pvt Ltd</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
 
-				</div>
-				<div class="col-lg-4 col-md-7">
-					<div class="footer-widget">
-						<h2 class="footer-title">Join Our Newsletter</h2>
-						<div class="subscribe-form">
-							<form action="#">
-								<input type="email" class="form-control" placeholder="Enter Email">
-								<button type="submit" class="btn">Submit</button>
-							</form>
-						</div>
-						<div class="social-icon">
-							<ul>
-								<li>
-									<a href="#" target="_blank"><i class="fab fa-facebook"></i> </a>
-								</li>
-								<li>
-									<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-								</li>
-								<li>
-									<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="footer-bottom">
-		<div class="container">
-			<!-- Copyright -->
-			<div class="copyright">
-				<div class="row">
-					<div class="col-md-6 col-lg-6">
-						<div class="copyright-text">
-							<p class="mb-0"> Copyright © 2023 All Rights Reserved</p>
-						</div>
-					</div>
-					<div class="col-md-6 col-lg-6">
+                        <!-- Copyright Menu -->
+                        <div class="copyright-menu">
+                            <ul class="policy-menu">
+                                <li>Developed by - <a href="https://www.tharukadeshan.com"> Tharuka Deshan</a></li>
+                                @*<li><a href="terms-condition.html">Terms and Conditions</a></li>
+                                <li><a href="login.html">Login & Register</a></li>*@
+                            </ul>
+                        </div>
+                        <!-- /Copyright Menu -->
 
-						<!-- Copyright Menu -->
-						<div class="copyright-menu">
-							<ul class="policy-menu">
-								<li><a href="privacy-policy.html">Privacy Policy</a></li>
-								<li><a href="terms-condition.html">Terms and Conditions</a></li>
-								<li><a href="login.html">Login & Register</a></li>
-							</ul>
-						</div>
-						<!-- /Copyright Menu -->
-
-					</div>
-				</div>
-			</div>
-			<!-- /Copyright -->
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Copyright -->
+        </div>
+    </div>
 </footer>
+
+<style>
+
+    .useFulLinks a:hover {
+        color: #06A5A0 !important
+    }
+
+</style>
