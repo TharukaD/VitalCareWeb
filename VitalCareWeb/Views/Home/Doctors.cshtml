@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Doctors";
+}
+
+<section class="banner-section-fourteen banner-section-twelve bg-white">
+    <div class="container">
+        <h2>Doctors</h2>
+    </div>
+</section>
+
+<style>
+
+	#IndexNavId a {
+		color: #4D555F !important;
+	}
+
+	#AboutUsNavId a {
+		color: #4D555F !important;
+	}
+
+	#ServicesNavId a {
+		color: #4D555F !important;
+	}
+
+	#DoctorsNavId a {
+		color: #06A5A0 !important;
+		text-decoration: underline;
+		text-underline-offset: 8px;
+	}
+
+	#ArticlesNavId a {
+		color: #4D555F !important;
+	}
+
+	#ContactNavId a {
+		color: #4D555F !important;
+	}
+
+</style>
+
+@section Scripts{
+    <script>
+
+        $(".main-nav").removeClass("active");
+        $("#DoctorsNavId").addClass("active");
+
+    </script>
+}
