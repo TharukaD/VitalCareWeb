@@ -44,7 +44,7 @@ namespace VitalCareWeb.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Contact()
+		public IActionResult ContactUs()
 		{
 			return View();
 		}

@@ -1,4 +1,5 @@
-﻿<header class="header header-custom header-fixed header-one bg-white">
+﻿@using static VitalCareWeb.Data.ModelConstants;
+<header class="header header-custom header-fixed header-one bg-white">
     <div class="container">
         <nav class="navbar navbar-expand-lg header-nav">
             <div class="navbar-header">
@@ -16,18 +17,7 @@
             <div class="main-menu-wrapper bg-white">
                 <div class="menu-header">
                     <ul class="nav text-lg gap-3">
-                        <li>
-                            <a href="#" target="_blank"><i class="fab fa-facebook"></i> </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-                        </li>
+                        <partial name="_SocialMediaLinks" />
                     </ul>                   
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>
@@ -50,24 +40,13 @@
                         <a asp-controller="Home" asp-action="Articles" style="font-size:16px;font-weight:500;">Articles</a>
                     </li>
                     <li id="ContactNavId">
-                        <a asp-controller="Home" asp-action="Contact" style="font-size:16px;font-weight:500;">Contact</a>
+                        <a asp-controller="Home" asp-action="ContactUs" style="font-size:16px;font-weight:500;">Contact Us</a>
                     </li>
                 </ul>
             </div>
             <div class="header-navbar-rht">
                 <ul class="nav text-lg">
-                    <li>
-                        <a href="#" target="_blank"><i class="fab fa-facebook"></i> </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-                    </li>
+                    <partial name="_SocialMediaLinks" />
                 </ul>
             </div>
         </nav>
