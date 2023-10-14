@@ -2,47 +2,155 @@
     ViewData["Title"] = "Doctors";
 }
 
-<section class="banner-section-fourteen banner-section-twelve bg-white">
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar-two">
     <div class="container">
-        <h2>Doctors</h2>
+        <div class="row align-items-center inner-banner">
+            <div class="col-md-12 col-12 text-center">
+                <h2 class="breadcrumb-title">Doctors</h2>
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Doctors</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
     </div>
-</section>
+</div>
+<!-- /Breadcrumb -->
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+
+                <!-- Search Filter -->
+                <div class="card search-filter">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Search Filter</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="filter-widget">
+                            <input type="text" class="form-control" placeholder="Search Doctor">
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Location</h4>
+                            <div>
+                             
+                            </div>                          
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Gender</h4>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type" checked>
+                                    <span class="checkmark"></span> Male Doctor
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="gender_type">
+                                    <span class="checkmark"></span> Female Doctor
+                                </label>
+                            </div>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Select Specialist</h4>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist" checked>
+                                    <span class="checkmark"></span> Urology
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist" checked>
+                                    <span class="checkmark"></span> Neurology
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist">
+                                    <span class="checkmark"></span> Dentist
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist">
+                                    <span class="checkmark"></span> Orthopedic
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist">
+                                    <span class="checkmark"></span> Cardiologist
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="checkbox" name="select_specialist">
+                                    <span class="checkmark"></span> Cardiologist
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-search">
+                            <button style="background-color:#06A5A0;border-color:#06A5A0" type="button" class="btn w-100">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Search Filter -->
+
+            </div>
+
+            <div class="col-md-12 col-lg-8 col-xl-9">
+                <div class="row blog-grid-row">
+                    @for (int i = 0; i < 6; i++)
+                    {
+                        <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" />
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <style>
 
-	#IndexNavId a {
-		color: #4D555F !important;
-	}
+    #IndexNavId a {
+        color: #4D555F !important;
+    }
 
-	#AboutUsNavId a {
-		color: #4D555F !important;
-	}
+    #AboutUsNavId a {
+        color: #4D555F !important;
+    }
 
-	#ServicesNavId a {
-		color: #4D555F !important;
-	}
+    #ServicesNavId a {
+        color: #4D555F !important;
+    }
 
-	#DoctorsNavId a {
-		color: #06A5A0 !important;
-		text-decoration: underline;
-		text-underline-offset: 8px;
-	}
+    #DoctorsNavId a {
+        color: #06A5A0 !important;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+    }
 
-	#ArticlesNavId a {
-		color: #4D555F !important;
-	}
+    #ArticlesNavId a {
+        color: #4D555F !important;
+    }
 
-	#ContactNavId a {
-		color: #4D555F !important;
-	}
+    #ContactNavId a {
+        color: #4D555F !important;
+    }
 
 </style>
 
 @section Scripts{
     <script>
 
-        $(".main-nav").removeClass("active");
-        $("#DoctorsNavId").addClass("active");
+
 
     </script>
 }
