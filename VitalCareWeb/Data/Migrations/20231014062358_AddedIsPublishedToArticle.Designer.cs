@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VitalCareWeb.Data;
 
@@ -11,9 +12,11 @@ using VitalCareWeb.Data;
 namespace VitalCareWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014062358_AddedIsPublishedToArticle")]
+    partial class AddedIsPublishedToArticle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,12 +235,6 @@ namespace VitalCareWeb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticleCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ArticleCategoryId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("AuthorName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -265,29 +262,7 @@ namespace VitalCareWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleCategoryId");
-
-                    b.HasIndex("ArticleCategoryId1");
-
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("VitalCareWeb.Entities.ArticleCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ArticleCategories");
                 });
 
             modelBuilder.Entity("VitalCareWeb.Entities.ArticleTag", b =>
@@ -382,21 +357,6 @@ namespace VitalCareWeb.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VitalCareWeb.Entities.Article", b =>
-                {
-                    b.HasOne("VitalCareWeb.Entities.ArticleCategory", "ArticleCategory")
-                        .WithMany()
-                        .HasForeignKey("ArticleCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VitalCareWeb.Entities.ArticleCategory", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("ArticleCategoryId1");
-
-                    b.Navigation("ArticleCategory");
-                });
-
             modelBuilder.Entity("VitalCareWeb.Entities.ArticleTag", b =>
                 {
                     b.HasOne("VitalCareWeb.Entities.Article", "Article")
@@ -419,11 +379,6 @@ namespace VitalCareWeb.Data.Migrations
             modelBuilder.Entity("VitalCareWeb.Entities.Article", b =>
                 {
                     b.Navigation("ArticleTags");
-                });
-
-            modelBuilder.Entity("VitalCareWeb.Entities.ArticleCategory", b =>
-                {
-                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("VitalCareWeb.Entities.Tag", b =>

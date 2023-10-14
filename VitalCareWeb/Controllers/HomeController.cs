@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using VitalCareWeb.Models;
+using VitalCareWeb.Data;
 
 namespace VitalCareWeb.Controllers
 {
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private ApplicationDbContext _context;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
 		{
 			_logger = logger;
+			_context = context;
 		}
 
 		[HttpGet]
@@ -40,6 +41,13 @@ namespace VitalCareWeb.Controllers
 		[HttpGet]
 		public IActionResult Articles()
 		{
+			var articles = _context.Articles.Where(r => r.IsPublished);
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult Article(int id)
+		{
 			return View();
 		}
 
@@ -49,11 +57,5 @@ namespace VitalCareWeb.Controllers
 			return View();
 		}
 
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
 	}
 }
