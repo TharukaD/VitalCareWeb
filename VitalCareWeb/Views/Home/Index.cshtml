@@ -1,105 +1,495 @@
 ﻿@{
-	ViewData["Title"] = "Male' Maldives'";
+    ViewData["Title"] = "Male' Maldives'";
 }
 
-
-<section class="banner-section-fourteen banner-section-twelve bg-white">
-	<div class="container">
-		<h2>Index</h2>
-	</div>
-</section>
-
-
-
 <!-- Home Banner -->
-@*<section class="banner-section-fourteen banner-section-twelve">
-	<div class="banner-section-twelve-bg">
-		<img src="~/assets/img/bg/home-12-banner-bg-1.png" alt="design-image">
-		<img src="~/assets/img/bg/home-12-banner-bg-2.png" alt="design-image">
-	</div>
-	<div class="container">
-		<div class="row">
-
-			<div class="col-lg-6">
-				<div class="banner-img banner-img-twelve aos" data-aos="fade-up">
-					<img src="~/assets/img/bg/home-12-banner-1.png" class="img-fluid" alt="dog-image">
-					<img src="~/assets/img/bg/home-12-banner-2.png" class="img-fluid" alt="cat-image">
-					<div class="banner-banner-img-twelve-bg">
-						<img src="~/assets/img/bg/dot-1.png" alt="dot-icon">
-						<img src="~/assets/img/bg/dot-2.png" alt="dot-icon">
-						<img src="~/assets/img/bg/ring-1.png" alt="ring-icon">
-						<img src="~/assets/img/bg/ring-2.png" alt="ring-icon">
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<div class="banner-content banner-content-fourteen aos" data-aos="fade-up">
-					<h1>We take care <span>of Your Pets</span></h1>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
-					<div class="banner-btns-fourteen ">
-						<a href="booking.html" class="btn btn-primary me-2">Start a Consult</a>
-						<a href="booking.html" class="btn btn-primary ">Schedule a Call</a>
-					</div>
-				</div>
-				<div class="search-box-fourteen aos" data-aos="fade-up">
-					<form action="search.html" class="form-block d-flex">
-						<div class="search-input">
-							<div class="forms-block">
-								<label class="mb-0">Date</label>
-								<input type="text" class="form-control datetimepicker" placeholder="Thu, Mar 24, 2023">
-							</div>
-						</div>
-						<div class="search-input">
-							<div class="forms-block mb-0">
-								<label class="location-icon">Location</label>
-								<input type="text" class="form-control" placeholder="San Diego Branch">
-							</div>
-						</div>
-						<div class="search-btn">
-							<button class="btn btn-primary" type="submit">Book Now</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>*@
+<section class="banner-section" style="height:95vh">
+    <div class="container">
+        <div class="row align-items-center pt-5">
+            <div class="col-lg-6">
+                <div class="banner-content aos" data-aos="fade-up">
+                    <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important">Best Doctors</span> Your Nearby Location.</h1>
+                    <p>Feel free to contact us, get better service.</p>
+                    <a asp-controller="Home" asp-action="ContactUs" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">Contact Us</a>
+                </div>
+                <div class="search-box-one aos" data-aos="fade-up">
+                    <form action="search-2.html">
+                        <div class="search-input search-line">
+                            <i class="feather-search bficon"></i>
+                            <div class=" mb-0">
+                                <input type="text" class="form-control" placeholder="Search doctor">
+                            </div>
+                        </div>
+                        <div class="search-input search-map-line">
+                            <i class="feather-map-pin"></i>
+                            <div class=" mb-0">
+                                <input type="text" class="form-control" placeholder="Location">
+                                <a class="current-loc-icon current_location" href="javascript:void(0);">
+                                    <i class="feather-crosshair"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="search-input search-calendar-line">
+                            <i class="feather-calendar"></i>
+                            <div class=" mb-0">
+                                <input type="text" class="form-control datetimepicker" placeholder="Date">
+                            </div>
+                        </div>
+                        <div class="form-search-btn">
+                            <button class="btn specialHomeBtn" type="submit" style="background-color: #06A5A0;border-color:#06A5A0 !important;">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="banner-img aos" data-aos="fade-up">
+                    <img src="~/assets/img/DocImage-1.png" class="img-fluid" alt="patient-image" style="margin-top:50px;padding-left:100px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- /Home Banner -->
+
+<!-- About Us -->
+<section class="section section-specialities">
+    <div class="container-fluid">
+        <div class="section-header text-center aos" data-aos="fade-up">
+            <div class="section-header-fourteen">
+                <h2>About Us</h2>
+                <p class="px-lg-5">
+                    VitalCare is a multispecialty medical company that integrates medical specialties,
+                    comprehensive dental care, diagnostic laboratories and pharmaceuticals.
+                    Our story begins from October of 2011. Back then we were a clinic with a single dental unit in the capital city of Male’.
+                    Vitalcare was established by doctors with a dream of advancing quality healthcare, and to help ensure that people’s health is protected
+                </p>
+                <p>
+                    Below are our sub companies
+                </p>
+            </div>
+            
+        </div>
+
+        <div class="row blog-grid-row">
+
+            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Huvadhoo.jpeg" height="100" width="100" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">
+                            <a href="#">
+                                VitalCare Huvadhoo
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Dental.jpeg" height="100" width="100" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">
+                            <a href="#">
+                                VitalCare Dental
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Multispeciality.jpeg" height="100" width="100" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">
+                            <a href="#">
+                                VitalCare Multispeciality
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Kulhudhuffushi.jpeg" height="100" width="100" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">
+                            <a href="#">
+                                VitalCare Kulhudhuffushi
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="banner-content aos d-flex justify-content-center" data-aos="fade-up" style="margin-top:20px;padding-bottom:0px !important">
+                <a asp-controller="Home" asp-action="AboutUs" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">Read More</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- /About Us -->
+
+<!-- Doctors Section -->
+<section class="doctors-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 aos" data-aos="fade-up">
+                <div class="section-header-one section-header-slider">
+                    <h2 class="section-titl">Best Doctors</h2>
+                </div>
+            </div>
+            <div class="col-md-6 aos" data-aos="fade-up">
+                <div class="owl-nav slide-nav-2 text-end nav-control"></div>
+            </div>
+        </div>
+        <div class="owl-carousel doctor-slider-one owl-theme aos mt-3 mt-md-0" data-aos="fade-up">
+
+            <!-- Doctor Item -->
+            <div class="item px-5 px-sm-2">
+                <div class="doctor-profile-widget">
+                    <div class="doc-pro-img">
+                        <a href="#">
+                            <div class="doctor-profile-img">
+                                <img src="assets/img/doctors/Doctor-1.png" class="img-fluid" alt="Ruby Perrin">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="doc-content">
+                        <div class="doc-pro-info">
+                            <div class="doc-pro-name">
+                                <a href="#">Dr. Ruby Perrin</a>
+                                <p>Cardiology</p>
+                            </div>
+                        </div>
+                        <div class="doc-pro-location">
+                            <p><i class="feather-map-pin"></i> Newyork, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Doctor Item -->
+            <!-- Doctor Item -->
+            <div class="item px-5 px-sm-2">
+                <div class="doctor-profile-widget">
+                    <div class="doc-pro-img">
+                        <a href="#">
+                            <div class="doctor-profile-img">
+                                <img src="assets/img/doctors/Doctor-2.png" class="img-fluid" alt="Ruby Perrin">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="doc-content">
+                        <div class="doc-pro-info">
+                            <div class="doc-pro-name">
+                                <a href="#">Dr. Ruby Perrin</a>
+                                <p>Cardiology</p>
+                            </div>
+                        </div>
+                        <div class="doc-pro-location">
+                            <p><i class="feather-map-pin"></i> Newyork, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Doctor Item -->
+            <!-- Doctor Item -->
+            <div class="item px-5 px-sm-2">
+                <div class="doctor-profile-widget">
+                    <div class="doc-pro-img">
+                        <a href="#">
+                            <div class="doctor-profile-img">
+                                <img src="assets/img/doctors/Doctor-3.png" class="img-fluid" alt="Ruby Perrin">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="doc-content">
+                        <div class="doc-pro-info">
+                            <div class="doc-pro-name">
+                                <a href="#">Dr. Ruby Perrin</a>
+                                <p>Cardiology</p>
+                            </div>
+                        </div>
+                        <div class="doc-pro-location">
+                            <p><i class="feather-map-pin"></i> Newyork, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Doctor Item -->
+            <!-- Doctor Item -->
+            <div class="item px-5 px-sm-2">
+                <div class="doctor-profile-widget">
+                    <div class="doc-pro-img">
+                        <a href="#">
+                            <div class="doctor-profile-img">
+                                <img src="assets/img/doctors/Doctor-4.png" class="img-fluid" alt="Ruby Perrin">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="doc-content">
+                        <div class="doc-pro-info">
+                            <div class="doc-pro-name">
+                                <a href="#">Dr. Ruby Perrin</a>
+                                <p>Cardiology</p>
+                            </div>
+                        </div>
+                        <div class="doc-pro-location">
+                            <p><i class="feather-map-pin"></i> Newyork, USA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Doctor Item -->
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="banner-content aos d-flex justify-content-center" data-aos="fade-up" style="margin-top:20px;padding-bottom:0px !important">
+                <a asp-controller="Home" asp-action="Doctors" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">View More</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Doctors Section -->
+
+<!-- services Section -->
+<section class="services-section-fourteen">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 aos" data-aos="fade-up">
+                <div class="section-header-fourteen">
+                    <h2>Our Services</h2>
+                    <p>Our Professional Services</p>
+                </div>
+            </div>
+        </div>
+        <div class="row row-gap justify-content-center">
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/injection.svg" alt="injection-icon">
+                    </div>
+                    <h4>ENT Specialist Service</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/bottel.svg" alt="bottel-icon">
+                    </div>
+                    <h4>Gum Disease</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
+                    </div>
+                    <h4>Dental Hygiene</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
+                    </div>
+                    <h4>Pediatric Dentistry</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
+                    </div>
+                    <h4>Dental Implants</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+             <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                <div class="our-services-list w-100 serviceCard">
+                    <div class="service-icon">
+                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
+                    </div>
+                    <h4>Teeth Whitening</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /services Section -->
+
+<!-- Insurance Section -->
+<section class="eyeclinics-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 aos" data-aos="fade-up">
+                <div class="section-header-fourteen">
+                    <h2>We cover a wide range of insurances for our services</h2>
+                    <p>Your short paragraph here</p>
+                </div>
+            </div>
+        </div>
+        <div class="owl-carousel eye-clinic owl-them aos" data-aos="fade-up">
+            <div class="item align-items-center d-flex justify-content-center">
+                <div class="our-doctors-card eye-doc">
+                    <div class="doctors-header">
+                        <a href="#">
+                            <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-1.jpeg" alt="Andrea" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>           
+            <div class="item">
+                <div class="our-doctors-card eye-doc d-flex justify-content-center">
+                    <div class="doctors-header">
+                        <a href="#">
+                            <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-3.jpeg" alt="Andrea" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="our-doctors-card eye-doc d-flex justify-content-center">
+                    <div class="doctors-header">
+                        <a href="#">
+                            @*<img style="max-height:300px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-4.jpeg" alt="Andrea" class="img-fluid">*@
+                            <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-4.jpeg" alt="Andrea" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="our-doctors-card eye-doc d-flex justify-content-center">
+                    <div class="doctors-header">
+                        <a href="#">
+                            <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-5.jpeg" alt="Andrea" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="our-doctors-card eye-doc d-flex justify-content-center">
+                    <div class="doctors-header">
+                        <a href="#">
+                          <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-2.jpeg" alt="Andrea" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ban-bg">
+        <img src="assets/img/bg/clinic-bg-01.png" alt="design-image" class="img-fluid bg-08">
+    </div>
+</section>
+<!-- /Insurance Section -->
+
 
 <style>
 
-	#IndexNavId a {
-		color: #06A5A0 !important;
-		text-decoration: underline;
-		text-underline-offset: 8px;
-	}
+    .specialHomeBtn {
+        background-color: #06A5A0;
+        border-color: #06A5A0 !important;
+    }
 
-	#AboutUsNavId a {
-		color: #4D555F !important;
-	}
+    .specialHomeBtn:hover {
+        color: #06A5A0 !important;
+        border-color: #06A5A0 !important
+    }
 
-	#ServicesNavId a {
-		color: #4D555F !important;
-	}
+    .service-icon{
+         background-color: #06A5A0 !important;
+    }
 
-	#DoctorsNavId a {
-		color: #4D555F !important;
-	}
+    .serviceCard:hover {
+        background-color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+    }
 
-	#ArticlesNavId a {
-		color: #4D555F !important;
-	}
+    .serviceCard:hover .service-icon {
+        background-color: white !important;
+    }
 
-	#ContactNavId a {
-		color: #4D555F !important;
-	}
+</style>
+
+<style>
+
+    #IndexNavId a {
+        color: #06A5A0 !important;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+    }
+
+    #AboutUsNavId a {
+        color: #4D555F !important;
+    }
+
+    #ServicesNavId a {
+        color: #4D555F !important;
+    }
+
+    #DoctorsNavId a {
+        color: #4D555F !important;
+    }
+
+    #ArticlesNavId a {
+        color: #4D555F !important;
+    }
+
+    #ContactNavId a {
+        color: #4D555F !important;
+    }
 
 </style>
 
 @section Scripts{
-	<script>
+    <script>
 
 
 
-	</script>
+    </script>
 }

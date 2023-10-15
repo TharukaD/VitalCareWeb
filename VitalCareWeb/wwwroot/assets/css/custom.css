@@ -22342,7 +22342,6 @@ a.mute-video.stop {
   width: 120px;
   height: 110px;
   content: "";
-  background-image: url("../img/bg/header-after.png");
   background-repeat: no-repeat;
   background-size: contain;
   transition: transform 0.2s ease-in-out;
