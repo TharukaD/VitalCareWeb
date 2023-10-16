@@ -3,9 +3,9 @@
 }
 
 <!-- Home Banner -->
-<section class="banner-section" style="height:95vh">
+<section class="banner-section d-flex align-items-center" style="height:90vh">
     <div class="container">
-        <div class="row align-items-center pt-5">
+        <div class="row">
             <div class="col-lg-6">
                 <div class="banner-content aos" data-aos="fade-up">
                     <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important">Best Doctors</span> Your Nearby Location.</h1>
@@ -50,7 +50,6 @@
     </div>
 </section>
 <!-- /Home Banner -->
-
 <!-- About Us -->
 <section class="section section-specialities">
     <div class="container-fluid">
@@ -63,99 +62,83 @@
                     Our story begins from October of 2011. Back then we were a clinic with a single dental unit in the capital city of Male’.
                     Vitalcare was established by doctors with a dream of advancing quality healthcare, and to help ensure that people’s health is protected
                 </p>
-                <p>
-                    Below are our sub companies
-                </p>
             </div>
-            
+
         </div>
 
-        <div class="row blog-grid-row">
-
-            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="#">
-                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Huvadhoo.jpeg" height="100" width="100" alt="Post Image">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">
-                            <a href="#">
-                                VitalCare Huvadhoo
-                            </a>
-                        </h3>
-                        <p class="mb-0">
-                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
-                            eiusmod tempor.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="#">
-                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Dental.jpeg" height="100" width="100" alt="Post Image">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">
-                            <a href="#">
-                                VitalCare Dental
-                            </a>
-                        </h3>
-                        <p class="mb-0">
-                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
-                            eiusmod tempor.
-                        </p>
+        <div class="row">
+            <ul class="nav nav-pills gap-2  d-flex justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">Vision</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" role="tab" aria-controls="pills-tab2" aria-selected="false">Mission</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-tab3-tab" data-bs-toggle="pill" data-bs-target="#pills-tab3" role="tab" aria-controls="pills-tab3" aria-selected="false">Values</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;">
+                                <div class="card-body">
+                                    <div class="contact-details">
+                                        <h4>Vision</h4>
+                                        <p>
+                                            VitalCare will be recognized as a preeminent healthcare company that 
+                                            strives to provide outstanding patient experience, superior clinical 
+                                            outcomes, and an improved quality of life for the people it serves.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="card contact-card" style="border: 1px solid #06A5A0;">
+                                    <div class="card-body">
+                                        <div class="contact-details">
+                                            <h4>Mission</h4>
+                                            <p>
+                                                The mission of VitalCare is to provide compassionate, 
+                                                patient centered care of the highest quality.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>      
+                <div class="tab-pane fade" id="pills-tab3" role="tabpanel" aria-labelledby="pills-tab3-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;">
+                                <div class="card-body">
+                                    <div class="contact-details">
+                                        <h4>Values</h4>
+                                        <p>
+                                            “Patients First” is our reason for being and the focus of all our activities. 
+                                            Our responsibility is to provide the best possible care and outcome for every
+                                            patient. We strive to exceed our patient expectations for comfort and convenience.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>      
             </div>
-
-            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="#">
-                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Multispeciality.jpeg" height="100" width="100" alt="Post Image">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">
-                            <a href="#">
-                                VitalCare Multispeciality
-                            </a>
-                        </h3>
-                        <p class="mb-0">
-                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
-                            eiusmod tempor.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
-                <div class="blog grid-blog">
-                    <div class="blog-image">
-                        <a href="#">
-                            <img class="img-fluid" src="~/assets/img/SubCompanies/VitalCare-Kulhudhuffushi.jpeg" height="100" width="100" alt="Post Image">
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <h3 class="blog-title">
-                            <a href="#">
-                                VitalCare Kulhudhuffushi
-                            </a>
-                        </h3>
-                        <p class="mb-0">
-                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
-                            eiusmod tempor.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div class="row">
@@ -290,7 +273,6 @@
     </div>
 </section>
 <!-- /Doctors Section -->
-
 <!-- services Section -->
 <section class="services-section-fourteen">
     <div class="container">
@@ -348,7 +330,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
                 </div>
             </div>
-             <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
                 <div class="our-services-list w-100 serviceCard">
                     <div class="service-icon">
                         <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
@@ -361,7 +343,6 @@
     </div>
 </section>
 <!-- /services Section -->
-
 <!-- Insurance Section -->
 <section class="eyeclinics-section">
     <div class="container">
@@ -382,7 +363,7 @@
                         </a>
                     </div>
                 </div>
-            </div>           
+            </div>
             <div class="item">
                 <div class="our-doctors-card eye-doc d-flex justify-content-center">
                     <div class="doctors-header">
@@ -415,7 +396,7 @@
                 <div class="our-doctors-card eye-doc d-flex justify-content-center">
                     <div class="doctors-header">
                         <a href="#">
-                          <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-2.jpeg" alt="Andrea" class="img-fluid">
+                            <img style="max-height:200px;max-width:200px;margin-top:20px;" src="~/assets/img/InsuranceCompanies/InsuranceCompany-2.jpeg" alt="Andrea" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -427,9 +408,295 @@
     </div>
 </section>
 <!-- /Insurance Section -->
+<!-- Testimonial Section -->
+<section class="testimonial-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="testimonial-slider slick">
+                    <div class="testimonial-grid divHeight">
+                        <div class="testimonial-info">
+                            <div class="testimonial-content">
+                                <div class="section-header section-inner-header testimonial-header">
+                                    <h2 class="text-center">What Our Customers Says</h2>
+                                </div>
+                                <div class="testimonial-details mx-2 mx-sm-5">
+                                    <p class="text-center">
+                                        “This Clinic is always known to be the best dental clinic in town.
+                                        They have dentist with great clinical experties and dedicated staff with excellent customer care.
+                                        Always a pleasure to book regular check up appointments here. Keep it up.”
+                                    </p>
+                                    <h6 class="text-center"><span>Ahmed Razzaq</span> <i>( Happy Customer )</i></h6>
+                                    <div class="rating mt-2 text-center">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star "></i>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-grid divHeight">
+                        <div class="testimonial-info">
+                            <div class="testimonial-content">
+                                <div class="section-header section-inner-header testimonial-header">
+                                    <h2 class="text-center">What Our Customers Says</h2>
+                                </div>
+                                <div class="testimonial-details mx-2 mx-sm-5">
+                                    <p class="text-center">
+                                        “if you are looking for the best dental clinic in Maldives, this is definitely
+                                        the number one dental i would recommend. Their team of doctors are most established
+                                        and longest in service in Maldives, and their staff are the most dedicated.
+                                        The services in vitalcare dental are nothing comparable, their prices are a relief and
+                                        last but most exciting their interior has got every corner for a selfie”
+                                    </p>
+                                    <h6 class="text-center"><span>Dhaina Saeed</span> <i>( Happy Customer )</i></h6>
+                                    <div class="rating mt-2 text-center">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star "></i>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-grid divHeight">
+                        <div class="testimonial-info">
+                            <div class="testimonial-content">
+                                <div class="section-header section-inner-header testimonial-header">
+                                    <h2 class="text-center">What Our Customers Says</h2>
+                                </div>
+                                <div class="testimonial-details mx-2 mx-sm-5">
+                                    <p class="text-center">
+                                        “An excellent clinic with a wonderful and warm experience from the start to finish.
+                                        The staff are very friendly and the customer care in this clinic is very good.
+                                        I especially loved how the staff and the doctors took their time to explain my conditions
+                                        with me as well as my treatment options. I had a great time and the doctors demeanor has really put me in ease so,
+                                        i highly recommend this clinic and the doctors are very experienced and i will definitely consult here again”
+                                    </p>
+                                    <h6 class="text-center"><span>Shua Abdulla</span> <i>( Happy Customer )</i></h6>
+                                    <div class="rating mt-2 text-center">
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <i class="fas fa-star filled"></i>
+                                        <span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Testimonial Section -->
+<!-- Articles Section -->
+<section class="section section-blogs">
+    <div class="container-fluid">
+
+        <!-- Section Header -->
+        <div class="section-header text-center aos" data-aos="fade-up">
+            <h2>Articles</h2>
+            <p class="sub-title">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
+        <!-- /Section Header -->
+
+        <div class="row blog-grid-row">
+            <div class="col-md-6 col-lg-3 col-sm-12 aos" data-aos="fade-up">
+
+                <!-- Blog Post -->
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/blog/blog-01.jpg" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <a href="#">
+                                        <span>Dr. Ruby Perrin</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><i class="far fa-clock"></i> 4 Dec 2023</li>
+                        </ul>
+                        <h3 class="blog-title">
+                            <a href="#">
+                                Doccure – Making your clinic painless
+                                visit?
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+                <!-- /Blog Post -->
+
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-12 aos" data-aos="fade-up">
+
+                <!-- Blog Post -->
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/blog/blog-02.jpg" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <a href="#">
+                                        <span>Dr. Darren Elder</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><i class="far fa-clock"></i> 3 Dec 2023</li>
+                        </ul>
+                        <h3 class="blog-title">
+                            <a href="#">
+                                What are the benefits of Online
+                                Doctor Booking?
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+                <!-- /Blog Post -->
+
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-12 aos" data-aos="fade-up">
+
+                <!-- Blog Post -->
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/blog/blog-03.jpg" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <a href="#">
+                                        <span>Dr. Deborah Angel</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><i class="far fa-clock"></i> 3 Dec 2023</li>
+                        </ul>
+                        <h3 class="blog-title">
+                            <a href="#">
+                                Benefits of consulting with an Online
+                                Doctor
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+                <!-- /Blog Post -->
+
+            </div>
+
+            <div class="col-md-6 col-lg-3 col-sm-12 aos" data-aos="fade-up">
+
+                <!-- Blog Post -->
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href="#">
+                            <img class="img-fluid" src="~/assets/img/blog/blog-04.jpg" alt="Post Image">
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <ul class="entry-meta meta-item">
+                            <li>
+                                <div class="post-author">
+                                    <a href="#">
+                                        <span>Dr. Sofia Brient</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><i class="far fa-clock"></i> 2 Dec 2023</li>
+                        </ul>
+                        <h3 class="blog-title">
+                            <a href="#">
+                                5 Great reasons to use an Online
+                                Doctor
+                            </a>
+                        </h3>
+                        <p class="mb-0">
+                            Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do
+                            eiusmod tempor.
+                        </p>
+                    </div>
+                </div>
+                <!-- /Blog Post -->
+
+            </div>
+        </div>
+        <div class="view-all text-center aos" data-aos="fade-up">
+            <a href="/Home/Articles" class="btn btn-primary specialHomeBtn">View All</a>
+        </div>
+    </div>
+</section>
+<!-- /Blog Section -->
 
 
 <style>
+
+    @@media (min-width:320px) {
+        .divHeight {
+            margin-top: 120px;
+        }
+    }
+
+    @@media (min-width:480px) {
+        .divHeight {
+            margin-top: 100px;
+        }
+    }
+
+    @@media (min-width:600px) {
+        .divHeight {
+            margin-top: 0px;
+        }
+    }
+
+    .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
+        background-color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+    }
+
+    .owl-prev:hover, .owl-prev:focus, .owl-next:hover {
+        background-color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+    }
 
     .specialHomeBtn {
         background-color: #06A5A0;
@@ -438,11 +705,12 @@
 
     .specialHomeBtn:hover {
         color: #06A5A0 !important;
+        background-color: white !important;
         border-color: #06A5A0 !important
     }
 
-    .service-icon{
-         background-color: #06A5A0 !important;
+    .service-icon {
+        background-color: #06A5A0 !important;
     }
 
     .serviceCard:hover {
@@ -452,6 +720,16 @@
 
     .serviceCard:hover .service-icon {
         background-color: white !important;
+    }
+
+    .nav-pills > li > button {
+        color: #4D555F !important;
+        border: 1px solid #06A5A0;
+    }
+
+    .nav-pills > li > button.active {
+        background-color: #06A5A0 !important;
+        color: white !important;
     }
 
 </style>
