@@ -24,5 +24,7 @@ namespace VitalCareWeb.ViewModels.Service
         [Required]
         [DisplayName("Priority")]
         public int Priority { get; set; }
+
+        public string? Image { get; set; }
     }
 }

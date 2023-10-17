@@ -1,4 +1,7 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels.Service;
+@model IEnumerable<ServiceViewModel>;
+
+@{
     ViewData["Title"] = "Services";
 }
 
@@ -35,80 +38,42 @@
             </div>
         </div>
         <div class="row row-gap justify-content-center">
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/injection.svg" alt="injection-icon">
+            @foreach(var service in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                    <a asp-route-id="@service.Id" asp-action="Service" asp-controller="Home">
+                        <div class="our-services-list w-100 serviceCard">
+                        <div class="service-icons">
+                            <img src="@service.ImageUrl" style="height:220px;width:220px;" alt="injection-icon">
+                        </div>
+                        <h4>@service.Name</h4>
+                        <p>@service.ShortDescription</p>
                     </div>
-                    <h4>ENT Specialist Service</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
+                    </a>                    
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/bottel.svg" alt="bottel-icon">
-                    </div>
-                    <h4>Gum Disease</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Dental Hygiene</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Pediatric Dentistry</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Dental Implants</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="~/assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Teeth Whitening</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
+            }          
         </div>
     </div>
 </section>
 <!-- /services Section -->
 
+<div id="SeviceDetailsDiv"></div>
+
 <hr />
 
 <style>
-    .service-icon {
+    /*.service-icon {
         background-color: #06A5A0 !important;
-    }
+    }*/
 
     .serviceCard:hover {
         background-color: #06A5A0 !important;
         border-color: #06A5A0 !important;
     }
 
-    .serviceCard:hover .service-icon {
+    /*.serviceCard:hover .service-icon {
         background-color: white !important;
-    }
+    }*/
 </style>
 
 <style>
@@ -145,6 +110,10 @@
 @section Scripts{
 	<script>
 
+
+        function loadService(id){
+            window.Location(`/Home/Service?id=${id}`);
+        }
 
 	</script>
 }

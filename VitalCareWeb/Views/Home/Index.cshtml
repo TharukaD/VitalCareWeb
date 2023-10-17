@@ -1,4 +1,6 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels
+@model HomePageViewModel
+@{
     ViewData["Title"] = "Male' Maldives'";
 }
 
@@ -50,6 +52,7 @@
     </div>
 </section>
 <!-- /Home Banner -->
+
 <!-- About Us -->
 <section class="section section-specialities">
     <div class="container-fluid">
@@ -273,6 +276,7 @@
     </div>
 </section>
 <!-- /Doctors Section -->
+
 <!-- services Section -->
 <section class="services-section-fourteen">
     <div class="container">
@@ -285,60 +289,18 @@
             </div>
         </div>
         <div class="row row-gap justify-content-center">
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/injection.svg" alt="injection-icon">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                    <div class="our-services-list w-100 serviceCard">
+                        <div class="service-icons">
+                            <img src="@service.ImageUrl" style="height:220px;width:220px;" alt="injection-icon">
+                        </div>
+                        <h4>@service.Name</h4>
+                        <p>@service.ShortDescription</p>
                     </div>
-                    <h4>ENT Specialist Service</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/bottel.svg" alt="bottel-icon">
-                    </div>
-                    <h4>Gum Disease</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Dental Hygiene</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Pediatric Dentistry</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Dental Implants</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
-                <div class="our-services-list w-100 serviceCard">
-                    <div class="service-icon">
-                        <img src="assets/img/icons/pet-doctor.svg" alt="stethoscope-icon">
-                    </div>
-                    <h4>Teeth Whitening</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</p>
-                </div>
-            </div>
+            }           
         </div>
     </div>
 </section>

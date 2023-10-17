@@ -1,0 +1,84 @@
+﻿@using VitalCareWeb.ViewModels.Service;
+@model ServiceViewModel
+@{
+    ViewData["Title"] = "Service";
+}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar-two">
+    <div class="container">
+        <div class="row align-items-center inner-banner">
+            <div class="col-md-12 col-12 text-center">
+                <h2 class="breadcrumb-title">Service</h2>
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Home/Services">Services</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Single Service</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+<section class="services-section-fourteen">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 aos" data-aos="fade-up">
+                        <div class="section-header-fourteen">
+                            <h3 style="color: #06A5A0 !important;">@Model.Name</h3>
+                            <p class="mt-5">
+                                @Model.ShortDescription
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <img alt="Image" src="@Model.ImageUrl" style="height:250px;width:250px" />
+                </div>
+                <div class="row mt-5">
+                    <p style="white-space:pre-wrap;">
+                        @Html.Raw(Model.LongDescription)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+
+</section>
+
+<style>
+
+    #IndexNavId a {
+        color: #4D555F !important;
+    }
+
+    #AboutUsNavId a {
+        color: #4D555F !important;
+    }
+
+    #ServicesNavId a {
+        color: #06A5A0 !important;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+    }
+
+    #DoctorsNavId a {
+        color: #4D555F !important;
+    }
+
+    #ArticlesNavId a {
+        color: #4D555F !important;
+    }
+
+    #ContactNavId a {
+        color: #4D555F !important;
+    }
+
+</style>
