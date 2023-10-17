@@ -1,0 +1,93 @@
+﻿
+@using VitalCareWeb.Constants;
+@using VitalCareWeb.Helpers;
+@{
+    Layout = null;
+
+    if (ViewBag.ModalID == null)
+    {
+        ViewBag.ModalID = Guid.NewGuid().ToString().Replace("-", "");
+    }
+
+    var sizeClass = ModalHelper.GetModalSizeCssClass(ModelConstants.ModalSize.Large);
+
+    if (ViewBag.ModalSize != null)
+    {
+        sizeClass = ModalHelper.GetModalSizeCssClass(ViewBag.ModalSize);
+    }
+
+    var dialogType = "";
+    if (ViewBag.ModalType != null)
+    {
+        dialogType = ModalHelper.GetModalTypeCssClass(ViewBag.ModalType);
+    }
+
+    var showFooter = ViewBag.ModalFooterIsVisible == null || (bool)ViewBag.ModalFooterIsVisible;
+    var showHeader = ViewBag.ModalHeaderIsVisible == null || (bool)ViewBag.ModalHeaderIsVisible;
+
+}
+<div class="modal animated slideInDown "  role="dialog" id="@ViewBag.ModalID"  >
+    <div class="modal-dialog modal-dialog-scrollable @sizeClass" role="document">
+        <div class="modal-content">
+            <div class="modal-header @dialogType " @if (!showHeader) {
+            <text> style="display: none;" </text>
+ }>
+                <h3 class="modal-title">@ViewBag.Title</h3>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top:-35px;">
+                    <span aria-hidden="true" style="font-size: 2.2rem;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body  @ViewBag.BodyCSS" >
+                @RenderBody()
+            </div>
+            <div class="modal-footer " @if (!showFooter) {
+            <text> style="display: none;" </text>
+ }>
+                @{
+                    @(await RenderSectionAsync("ModalFooter", false))
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $.ajaxSetup({
+                cache: false
+            });
+
+            $('#@ViewBag.ModalID').modal(
+            {
+                backdrop: 'static'
+            });
+        });
+
+        function validateForm() {
+
+            var $this = $('#@ViewBag.ModalID form');
+
+            $.validator.unobtrusive.parse($this);
+
+            if (!$this.valid()) {
+                return false;
+            }
+
+            return true;
+        };
+
+        function validateForm_@ViewBag.ModalID () {
+
+            var $this = $('#@ViewBag.ModalID form');
+
+            $.validator.unobtrusive.parse($this);
+
+            if (!$this.valid()) {
+                return false;
+            }
+
+            blockUI();
+            return true;
+        };
+
+</script>

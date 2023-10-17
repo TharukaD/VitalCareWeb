@@ -1,6 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using VitalCareWeb;
 using VitalCareWeb.Data;
+using VitalCareWeb.Services.Serivice;
+using VitalCareWeb.Services.Speciality;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,15 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
     .AddRazorRuntimeCompilation();
+
+//----- Services Manage
+builder.Services.AddScoped<ISpecialityService, SpecialityService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+
+//---- Mapper Configuration
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

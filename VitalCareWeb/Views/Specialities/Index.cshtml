@@ -1,0 +1,104 @@
+﻿@using VitalCareWeb.ViewModels.Speciality;
+@model IEnumerable<SpecialityViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Specialities";
+}
+
+@section header{
+    <h3 class="content-header-title">Specialities</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Specialities" asp-action="Index">Specialities</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+@section headerMenu
+{
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
+       data-ajax-update="#DivModalTarget"
+       data-ajax-begin="blockUI"
+       data-ajax-complete="unblockUI"
+       data-toggle="tooltip"
+       asp-action="Add"
+       asp-controller="Specialities"
+       title="New Speciality">
+        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
+        New
+    </a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="SpecialitiesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var speciality in @Model)
+                                    {
+                                        <tr>
+                                            <td> @speciality.Name</td>
+                                            <td class="text-center">
+                                                <div>            
+                                                <a data-ajax="true"
+                                                    data-ajax-update="#DivModalTarget"
+                                                    data-ajax-begin="blockUI"
+                                                    data-ajax-complete="unblockUI"
+                                                    data-toggle="tooltip"
+                                                    asp-action="Edit"
+                                                    asp-controller="Specialities"
+                                                    asp-route-id="@speciality.Id"
+                                                    title="Edit Speciality">Edit</a>
+                                                </div>
+                                            </td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#SpecialitiesNavId").addClass("active");
+
+            $("#SpecialitiesTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}

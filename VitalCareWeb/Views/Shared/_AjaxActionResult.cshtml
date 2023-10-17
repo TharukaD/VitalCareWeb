@@ -1,0 +1,36 @@
+﻿@model VitalCareWeb.ViewModels.AjaxActionResult
+
+<script>
+    @if (Model.IsSuccessful)
+    {
+        @:toastSuccess('@Model.Message');
+    }
+    else
+    {       
+        @:toastError('@Model.Message');
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.TriggerEventName) && !string.IsNullOrWhiteSpace(Model.TriggerEventData))
+    {
+        @:$("body").trigger('@Model.TriggerEventName', @Html.Raw(Model.TriggerEventData));
+    }
+    else if (!string.IsNullOrWhiteSpace(Model.TriggerEventName))
+    {
+        @:$("body").trigger('@Model.TriggerEventName');
+    }
+
+    @if (!string.IsNullOrEmpty(Model.HideModalId))
+    {
+        @:$('#@Model.HideModalId').modal('hide');
+    }
+
+    @if (Model.IsReloadPage)
+    {
+        <text>
+            setTimeout(function () {
+                blockUI();
+                window.location.reload();
+            }, 1000);
+        </text>
+    }
+</script>

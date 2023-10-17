@@ -1,0 +1,152 @@
+/*================================================================================
+	Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.main-menu.menu-dark .navigation > li > a {
+    padding: 9px 30px 9px 18px;
+}
+
+.required label:after {
+    color: #e32;
+    content: ' *';
+    display: inline;
+}
+
+
+
+.list-item-summary li {
+    margin-right: 45px !important;
+}
+
+.list-item-summary li dd {
+    color: #5a5a5a;
+}
+
+.list-item-summary li dt {
+    font-weight: normal;
+}
+
+.entity-details dt, .entity-details dd {
+    border-bottom: 1px solid #f4f4f4;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+
+.table th, .table td {
+    border-top: none !important;
+}
+
+
+.list-item-summary li {
+    margin-right: 45px !important;
+}
+
+.list-item-summary li dd {
+    color: #5a5a5a;
+}
+
+.list-item-summary li dt {
+    font-weight: normal;
+}
+
+.entity-details dt, .entity-details dd {
+    border-bottom: 1px solid #fcfcfc;
+    margin-bottom: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.twitter-typeahead {
+    width: 100%;
+}
+
+.typeahead, .tt-query, .tt-input, .tt-hint {
+    width: 100%;
+}
+
+.typeahead, .tt-input, .tt-hint { /*    width: 240px;*/
+}
+
+
+
+.tt-menu {
+    background: white;
+    border: 1px solid #eaedf3;
+    box-shadow: 0 0 1px #2e2d2d;
+    width: 100%;
+}
+
+.tt-dataset {
+}
+
+a.tt-suggestion {
+    border-bottom: 1px solid #dbdbdb;
+    color: #3d3d3d;
+    display: block;
+    padding: 8px;
+}
+
+a.tt-suggestion:hover {
+    background: #eaeaea;
+    text-decoration: none;
+}
+
+.tt-cursor {
+    background: #ededed;
+}
+
+.table.table-sm th, .table.table-sm td {
+    padding: 0.6rem 0.5rem;
+
+
+}
+
+table.border{
+    border: 1px solid #dfdfdf !important;
+}
+
+
+
+.ticket-response-item {
+    border-radius: 8px;
+    margin-bottom: 16px;
+    position: relative;
+    border: 1px solid #fff;
+}
+
+
+.ticket-responses > section:nth-of-type(odd) {
+    background-image: linear-gradient(#f5f7f9,#f5f7f9);
+}
+
+.ticket-responses > section:nth-of-type(even) {
+    background-image: linear-gradient(#ffffff,rgba(255, 255, 255, 0.91));
+    border: 1px solid #f5f5f5
+}
+
+
+/* TRANSITIONS */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.pointer {
+    cursor: pointer
+}
+
+.list-group-item {
+    padding: 0.95rem 1.2rem;
+}
