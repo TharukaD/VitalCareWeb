@@ -12,5 +12,16 @@
 
             return ImagePath;
         }
+
+        public static string ReturnDoctorImagePath(string doctorImage)
+        {
+            string ImagePath = "/img/DoctorImages/default.jpg";
+            if (!string.IsNullOrEmpty(doctorImage))
+            {
+                ImagePath = $"/img/DoctorImages/{doctorImage}";
+            }
+
+            return ImagePath;
+        }
     }
 }

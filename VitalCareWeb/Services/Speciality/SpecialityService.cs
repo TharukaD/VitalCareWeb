@@ -29,8 +29,19 @@ public class SpecialityService : ISpecialityService
 
     public async Task<(bool, string)> Delete(int id)
     {
+        var speciality = await _context.Specilities.Include(r => r.Doctors).SingleOrDefaultAsync(r => r.Id == id);
+        if (speciality != null)
+        {
+            if (speciality.Doctors.Any())
+            {
+                return (false, "Speciality already assigned with doctor");
+            }
 
-        return (false, "");
+            _context.Specilities.Remove(speciality);
+            await _context.SaveChangesAsync();
+            return (true, "Success");
+        }
+        return (false, "Speciality not found");
     }
 
     public async Task<bool> IsDublicate(int id, string name)

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.ViewModels;
+using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Service;
 
 namespace VitalCareWeb.Controllers
@@ -145,6 +146,42 @@ namespace VitalCareWeb.Controllers
         #endregion
 
 
+        #region Delete [ HttpGet ]
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var service = await _service.GetById(id);
+            if (service == null)
+            {
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Service not found."));
+            }
+            var viewModel = _mapper.Map<ServiceViewModel>(service);
+            return PartialView("_Delete", viewModel);
+        }
+        #endregion
+
+        #region Delete [ HttpPost ]
+        [HttpPost]
+        public async Task<IActionResult> Delete(DoctorViewModel viewModel)
+        {
+            try
+            {
+                var result = await _service.Delete(viewModel.Id);
+                if (result == true)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully deleted.", "", true));
+                }
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to delete."));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to delete."));
+            }
+        }
+        #endregion
+
+
         #region Upload Service Image [ HttpGet ]
         [HttpGet]
         public IActionResult UploadServiceImage(int id)
@@ -169,7 +206,7 @@ namespace VitalCareWeb.Controllers
                 var service = await _service.GetById(viewModel.ServiceId);
                 if (service == null)
                 {
-                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Person not found."));
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Service not found."));
                 }
 
                 var file = viewModel.UploadedFile;

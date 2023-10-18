@@ -29,14 +29,19 @@ namespace VitalCareWeb.Services.Location
 
         public async Task<(bool, string)> Delete(int id)
         {
-            var location = await _context.Locations.FindAsync(id);
+            var location = await _context.Locations.Include(r => r.Doctors).SingleOrDefaultAsync(r => r.Id == id);
             if (location != null)
             {
+                if (location.Doctors.Any())
+                {
+                    return (false, "Location already assigned with doctor");
+                }
+
                 _context.Locations.Remove(location);
                 await _context.SaveChangesAsync();
                 return (true, "Success");
             }
-            return (false, "");
+            return (false, "Location not found");
         }
 
         public async Task<bool> IsDublicate(int id, string name)

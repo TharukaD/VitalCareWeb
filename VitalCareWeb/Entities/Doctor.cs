@@ -6,11 +6,12 @@ namespace VitalCareWeb.Entities
     public class Doctor
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public string? Image { get; set; }
         public string Qualifications { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
+        public string Gender { get; set; }
 
         public int SpecialityId { get; set; }
         public virtual Speciality Speciality { get; set; }
@@ -32,6 +33,10 @@ namespace VitalCareWeb.Entities
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(200);
+
+            builder.Property(x => x.Gender)
+               .IsRequired()
+               .HasMaxLength(10);
 
             builder.Property(x => x.Image)
                 .HasMaxLength(200);

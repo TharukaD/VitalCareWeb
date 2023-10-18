@@ -13,5 +13,23 @@
             Small, Medium, Default, Large, ExtraLarge
         }
         #endregion
+
+        #region Gender
+        public static class Gender
+        {
+            public const string Male = "Male";
+            public const string Female = "Female";
+        }
+        #endregion
+
+        #region SocialMediaUrls
+        public static class SocialMediaUrls
+        {
+            public const string FacebookUrl = "";
+            public const string InstagramUrl = "";
+            public const string TwitterUrl = "";
+            public const string TiktokUrl = "";
+        }
+        #endregion
     }
 }

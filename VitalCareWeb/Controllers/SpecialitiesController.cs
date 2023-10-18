@@ -129,5 +129,41 @@ namespace VitalCareWeb.Controllers
         }
         #endregion
 
+
+        #region Delete [ HttpGet ]
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var speciality = await _specialityService.GetById(id);
+            if (speciality == null)
+            {
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Speciality not found."));
+            }
+            var viewModel = _mapper.Map<SpecialityViewModel>(speciality);
+            return PartialView("_Delete", viewModel);
+        }
+        #endregion
+
+        #region Delete [ HttpPost ]
+        [HttpPost]
+        public async Task<IActionResult> Delete(SpecialityViewModel viewModel)
+        {
+            try
+            {
+                var result = await _specialityService.Delete(viewModel.Id);
+                if (result.Item1 == true)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully deleted.", "", true));
+                }
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, $"Failed to delete.[ {result.Item2} ]"));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to delete."));
+            }
+        }
+        #endregion
+
     }
 }

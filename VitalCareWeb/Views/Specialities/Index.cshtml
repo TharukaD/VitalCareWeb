@@ -58,15 +58,29 @@
                                             <td> @speciality.Name</td>
                                             <td class="text-center">
                                                 <div>            
-                                                <a data-ajax="true"
-                                                    data-ajax-update="#DivModalTarget"
-                                                    data-ajax-begin="blockUI"
-                                                    data-ajax-complete="unblockUI"
-                                                    data-toggle="tooltip"
-                                                    asp-action="Edit"
-                                                    asp-controller="Specialities"
-                                                    asp-route-id="@speciality.Id"
-                                                    title="Edit Speciality">Edit</a>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="Specialities"
+                                                        asp-route-id="@speciality.Id"
+                                                        title="Edit Speciality">
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="Specialities"
+                                                        asp-route-id="@speciality.Id"
+                                                        title="Delete Speciality">
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>                                       

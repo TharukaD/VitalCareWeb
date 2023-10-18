@@ -1,4 +1,6 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels
+@model DoctorPageViewModel
+@{
     ViewData["Title"] = "Doctors";
 }
 
@@ -57,42 +59,15 @@
                         </div>
                         <div class="filter-widget">
                             <h4>Select Specialist</h4>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist" checked>
-                                    <span class="checkmark"></span> Urology
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist" checked>
-                                    <span class="checkmark"></span> Neurology
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Dentist
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Orthopedic
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Cardiologist
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Cardiologist
-                                </label>
-                            </div>
+                            @foreach(var speciality in Model.Specialities)
+                            {
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="select_specialist" value="@speciality.Id">
+                                        <span class="checkmark"></span>@speciality.Name
+                                    </label>
+                                </div>
+                            }                                                     
                         </div>
                         <div class="btn-search">
                             <button style="background-color:#06A5A0;border-color:#06A5A0" type="button" class="btn w-100">Search</button>
@@ -105,9 +80,9 @@
 
             <div class="col-md-12 col-lg-8 col-xl-9">
                 <div class="row blog-grid-row">
-                    @for (int i = 0; i < 6; i++)
+                    @foreach (var doctor in Model.Doctors)
                     {
-                        <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" />
+                        <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
                     }
                 </div>
             </div>

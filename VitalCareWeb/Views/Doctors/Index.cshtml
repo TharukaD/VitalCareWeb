@@ -1,17 +1,17 @@
-﻿@using VitalCareWeb.ViewModels.Service;
-@model IEnumerable<ServiceViewModel>;
+﻿@using VitalCareWeb.ViewModels.Doctor;
+@model IEnumerable<DoctorViewModel>;
 @{
     Layout = "_AdminLayout";
-    ViewBag.Title = "Services";
+    ViewBag.Title = "Doctors";
 }
 
 @section header{
-    <h3 class="content-header-title">Services</h3>
+    <h3 class="content-header-title">Doctors</h3>
     <div class="row breadcrumbs-top">
         <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a asp-controller="Services" asp-action="Index">Services</a>
+                    <a asp-controller="Doctors" asp-action="Index">Doctors</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a>List</a>
@@ -30,8 +30,8 @@
        data-ajax-complete="unblockUI"
        data-toggle="tooltip"
        asp-action="Add"
-       asp-controller="Services"
-       title="New Service">
+       asp-controller="Doctors"
+       title="New Doctor">
        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
         New
     </a>
@@ -44,44 +44,48 @@
                 <div class="row ">
                     <div class="col-md-12 ">
                         <div class="table-responsive">
-                            <table class="table align-items-center table-sm " id="ServicesTable">
+                            <table class="table align-items-center table-sm " id="DoctorsTable">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
                                         <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Speciality</th>
+                                        <th>Location</th>
                                         <th>Short Description</th>
                                         <th>Long Description</th>
-                                        <th>Priority</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var service in @Model)
+                                    @foreach (var doctor in @Model)
                                     {
                                         <tr>
                                             <td>
-                                                <img height="120" width="120" src="@service.ImageUrl" />
+                                                <img height="120" width="120" src="@doctor.ImageUrl" />
                                                 <div class="text-center" style="margin-top:5px;">
                                                     <a data-ajax="true"
                                                         data-ajax-update="#DivModalTarget"
                                                         data-ajax-begin="blockUI"
                                                         data-ajax-complete="unblockUI"
                                                         data-toggle="tooltip"
-                                                        asp-action="UploadServiceImage"
-                                                        asp-controller="Services"
-                                                        asp-route-id="@service.Id"
+                                                        asp-action="UploadDoctorImage"
+                                                        asp-controller="Doctors"
+                                                        asp-route-id="@doctor.Id"
                                                         title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
                                                 </div>
                                                 
                                             </td>
-                                            <td> @service.Name</td>
-                                            <td> @service.ShortDescription</td>
+                                            <td> @doctor.Name</td>
+                                            <td> @doctor.Gender</td>
+                                            <td> @doctor.SpecialityName</td>
+                                            <td> @doctor.LocationName</td>
+                                            <td> @doctor.ShortDescription</td>
                                             <td>
                                                 <span class="d-inline-block text-truncate" style="max-width:350px;">
-                                                    @service.LongDescription
+                                                    @doctor.LongDescription
                                                 </span>
                                             </td>
-                                            <td> @service.Priority</td>
                                             <td class="text-center">
                                                 <div>
                                                     <a data-ajax="true"
@@ -90,9 +94,9 @@
                                                        data-ajax-complete="unblockUI"
                                                        data-toggle="tooltip"
                                                        asp-action="Edit"
-                                                       asp-controller="Services"
-                                                        asp-route-id="@service.Id"
-                                                       title="Edit Service">Edit</a>
+                                                       asp-controller="Doctors"
+                                                       asp-route-id="@doctor.Id"
+                                                       title="Edit Doctor">Edit</a>
                                                     <span> | </span>
                                                     <a data-ajax="true"
                                                         data-ajax-update="#DivModalTarget"
@@ -100,9 +104,9 @@
                                                         data-ajax-complete="unblockUI"
                                                         data-toggle="tooltip"
                                                         asp-action="Delete"
-                                                        asp-controller="Services"
-                                                        asp-route-id="@service.Id"
-                                                        title="Delete Service">
+                                                        asp-controller="Doctors"
+                                                        asp-route-id="@doctor.Id"
+                                                        title="Delete Doctor">
                                                         <span class="text-danger">Delete</span>
                                                     </a>
                                                 </div>
@@ -124,9 +128,9 @@
         $(function () {
 
             $(".navItems").removeClass("active");
-            $("#ServicesTabId").addClass("active");
+            $("#DoctorsNavId").addClass("active");
 
-            $("#ServicesTable").dataTable(
+            $("#DoctorsTable").dataTable(
                 {
                     bLengthChange: true,
                     bPaginate: true,
