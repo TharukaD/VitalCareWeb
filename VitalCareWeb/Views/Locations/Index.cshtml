@@ -1,28 +1,30 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels.Location;
+@model IEnumerable<LocationViewModel>;
+@{
+    Layout = "_AdminLayout";
     ViewBag.Title = "Locations";
-	Layout = "_AdminLayout";
 }
 
 @section header{
-	<h3 class="content-header-title">Dead People</h3>
-	<div class="row breadcrumbs-top">
-		<div class="breadcrumb-wrapper col-12">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a asp-controller="DeadPeople" asp-action="Index">Dead People</a>
-				</li>
-				<li class="breadcrumb-item">
-					<a>List</a>
-				</li>
-			</ol>
-		</div>
-	</div>
+    <h3 class="content-header-title">Locations</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Locations" asp-action="Index">Locations</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
 }
 
 @section headerMenu
 {
-    <a class="btn btn-outline-dark box-shadow-2 px-2 mb-1"
-       data-ajax="true"
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
        data-ajax-update="#DivModalTarget"
        data-ajax-begin="blockUI"
        data-ajax-complete="unblockUI"
@@ -31,7 +33,7 @@
        asp-controller="Locations"
        title="New Location">
         <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
-        New Location
+        New
     </a>
 }
 
@@ -42,47 +44,47 @@
                 <div class="row ">
                     <div class="col-md-12 ">
                         <div class="table-responsive">
-                            <table class="table align-items-center table-sm table-flush" id="DeadPeopleTable">
+                            <table class="table align-items-center table-sm " id="LocationsTable">
                                 <thead>
                                     <tr>
-                                        <th>Name (English)</th>
-                                        <th>Name (Dhivehi)</th>
-                                        <th>Identity No</th>
-                                        <th class="text-center">
-                                            Date of Birth
-                                        </th>
-                                        <th class="text-center">
-                                            Date of Death
-                                        </th>
+                                        <th>Name</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @*@foreach (var item in Model)
+                                    @foreach(var location in @Model)
                                     {
                                         <tr>
-                                            <td> @item.Name</td>
-                                            <td> @item.NameDhivehi</td>
-                                            <td> @item.IdentityCardNo</td>
-                                            <td class="text-center">@item.DateOfBirthString</td>
-                                            <td class="text-center">@item.DateOfDeathString</td>
+                                            <td> @location.Name</td>
                                             <td class="text-center">
-                                                <div>
-                                                    <a asp-action="Details" asp-controller="DeadPeople" asp-route-id="@item.Id" title="Details" data-toggle="tooltip">Details</a>
-                                                    <span style="margin-left:3px;margin-right:3px;"> | </span>
+                                                <div>            
                                                     <a data-ajax="true"
-                                                   data-ajax-update="#DivModalTarget"
-                                                   data-ajax-begin="blockUI"
-                                                   data-ajax-complete="unblockUI"
-                                                   data-toggle="tooltip"
-                                                   asp-action="Edit"
-                                                   asp-controller="DeadPeople"
-                                                   asp-route-id="@item.Id"
-                                                   title="Edit Person">Edit</a>
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="Locations"
+                                                        asp-route-id="@location.Id"
+                                                        title="Edit Location">
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="Locations"
+                                                        asp-route-id="@location.Id"
+                                                        title="Delete Location">
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
                                                 </div>
                                             </td>
-                                        </tr>
-                                    }*@
+                                        </tr>                                       
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -98,9 +100,9 @@
         $(function () {
 
             $(".navItems").removeClass("active");
-            $("#LocationsTabId").addClass("active");
+            $("#LocationsNavId").addClass("active");
 
-            $("#DeadPeopleTable").dataTable(
+            $("#LocationsTable").dataTable(
                 {
                     bLengthChange: true,
                     bPaginate: true,

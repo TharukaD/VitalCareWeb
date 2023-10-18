@@ -14,6 +14,7 @@ namespace VitalCareWeb.Data
 		public DbSet<ArticleCategory> ArticleCategories { get; set; }
 		public DbSet<Speciality> Specilities { get; set; }
 		public DbSet<Service> Services { get; set; }
+		public DbSet<Location> Locations { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -25,6 +26,7 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new ArticleCategoryConfiguration());
 			modelBuilder.ApplyConfiguration(new SpecialityConfiguration());
 			modelBuilder.ApplyConfiguration(new ServiceConfiguration());
+			modelBuilder.ApplyConfiguration(new LocationConfiguration());
 		}
 	}
 }
