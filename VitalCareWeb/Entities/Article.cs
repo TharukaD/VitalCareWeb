@@ -7,7 +7,8 @@ namespace VitalCareWeb.Entities
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
-		public string Description { get; set; }
+		public string ShortDescription { get; set; }
+		public string LongDescription { get; set; }
 		public string AuthorName { get; set; }
 		public DateTime PublishedDate { get; set; }
 		public string Image { get; set; }
@@ -28,7 +29,11 @@ namespace VitalCareWeb.Entities
 				.IsRequired()
 				.HasMaxLength(300);
 
-			builder.Property(x => x.Description)
+			builder.Property(x => x.ShortDescription)
+				.IsRequired()
+				.HasMaxLength(300);
+
+			builder.Property(x => x.LongDescription)
 				.IsRequired();
 
 			builder.Property(x => x.AuthorName)
