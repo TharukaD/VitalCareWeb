@@ -1,0 +1,38 @@
+﻿@using VitalCareWeb.ViewModels.Doctor
+@model IEnumerable<DoctorViewModel>
+
+@if(Model.Any()){
+    <div class="row blog-grid-row">
+        @foreach (var doctor in Model)
+        {
+            <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
+        }
+    </div>   
+}
+else{
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="row mt-4">
+            <h5 class="text-muted text-center text-xl">No doctor found.</h5>
+            <a 
+                asp-controller="Home" 
+                asp-action="Doctors" 
+                style="background-color: #06A5A0;border-color:#06A5A0 !important;"
+           class="btn btn-primary mt-3 specialHomeBtn">View All Doctors</a>
+        </div>        
+    </div>  
+}
+
+<style>
+
+    .specialHomeBtn {
+        background-color: #06A5A0;
+        border-color: #06A5A0 !important;
+    }
+
+    .specialHomeBtn:hover {
+        color: #06A5A0 !important;
+        background-color: white !important;
+        border-color: #06A5A0 !important
+    }
+
+</style>

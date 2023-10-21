@@ -47,6 +47,9 @@
 
 		<link rel="stylesheet" href="~/assets/css/myCustom.css">
 
+		<link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/extensions/toastr.css">
+		<link rel="stylesheet" type="text/css" href="~/app-assets/css/plugins/extensions/toastr.css">
+
 	</head>		
 	<body>
 
@@ -107,6 +110,11 @@
 
 		<!-- Custom JS -->
 		<script src="~/assets/js/script.js"></script>
+
+		<script src="~/app-assets/vendors/js/extensions/toastr.min.js"></script>
+		<script src="~/app-assets/js/scripts.js"></script>
+
+		<script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
 
 		@await RenderSectionAsync("Scripts", false)
 

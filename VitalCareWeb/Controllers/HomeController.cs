@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 
 using VitalCareWeb.Services.Doctor;
+using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 
 using VitalCareWeb.ViewModels;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
 
@@ -19,13 +21,15 @@ public class HomeController : Controller
     private IServiceService _service;
     private IDoctorService _doctorService;
     private ISpecialityService _specialityService;
+    private ILocationService _locationService;
 
     public HomeController(
         IMapper mapper,
         ILogger<HomeController> logger,
         IServiceService service,
         IDoctorService doctorService,
-        ISpecialityService specialityService
+        ISpecialityService specialityService,
+        ILocationService locationService
     )
     {
         _mapper = mapper;
@@ -33,6 +37,7 @@ public class HomeController : Controller
         _service = service;
         _doctorService = doctorService;
         _specialityService = specialityService;
+        _locationService = locationService;
     }
 
     [HttpGet]
@@ -88,15 +93,23 @@ public class HomeController : Controller
     public async Task<IActionResult> Doctors()
     {
         var viewModel = new DoctorPageViewModel();
-
-        var doctorList = _mapper.Map<List<DoctorViewModel>>(await _doctorService.GetAll());
         var specialities = _mapper.Map<List<SpecialityViewModel>>(await _specialityService.GetAll());
+        var locations = _mapper.Map<List<LocationViewModel>>(await _locationService.GetAll());
 
-        viewModel.Doctors = doctorList;
         viewModel.Specialities = specialities;
+        viewModel.Locations = locations;
 
         return View(viewModel);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> FilterDoctors([FromBody] DoctorsFilterViewModel model)
+    {
+        var doctorList = _mapper.Map<List<DoctorViewModel>>(await _doctorService.GetAllFiltered(model.DoctorName, model.Locations, model.Genders, model.Specialities));
+
+        return PartialView("_FilteredDoctors", doctorList);
+    }
+
 
     [HttpGet]
     public IActionResult Articles()

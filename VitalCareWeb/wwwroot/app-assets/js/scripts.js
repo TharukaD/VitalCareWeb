@@ -199,7 +199,7 @@ function debounce(func, wait, immediate) {
     'use strict';
 
     
-    $.fn.select2.defaults.set("theme", "bootstrap4");
+    //$.fn.select2.defaults.set("theme", "bootstrap4");
 
     //fix modal backdrop when multiple dialogs are shown.
     $(document).on("show.bs.modal",

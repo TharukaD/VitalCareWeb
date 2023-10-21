@@ -1,4 +1,5 @@
 ﻿@using VitalCareWeb.ViewModels
+
 @model DoctorPageViewModel
 @{
     ViewData["Title"] = "Doctors";
@@ -28,65 +29,66 @@
             <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
 
                 <!-- Search Filter -->
+              
                 <div class="card search-filter">
                     <div class="card-header">
                         <h4 class="card-title mb-0">Search Filter</h4>
                     </div>
                     <div class="card-body">
+
                         <div class="filter-widget">
-                            <input type="text" class="form-control" placeholder="Search Doctor">
+                            <input id="doctorNameId" type="text" class="form-control" placeholder="Search Doctor">
                         </div>
                         <div class="filter-widget">
                             <h4>Location</h4>
-                            <div>
-                             
-                            </div>                          
+                            @foreach (var location in Model.Locations)
+                            {
+                                <div>
+                                    <label class="custom_check">
+                                        <input type="checkbox" name="locations" value="@location.Id">
+                                        <span class="checkmark"></span>@location.Name
+                                    </label>
+                                </div>
+                            }
                         </div>
                         <div class="filter-widget">
                             <h4>Gender</h4>
                             <div>
                                 <label class="custom_check">
-                                    <input type="checkbox" name="gender_type" checked>
+                                    <input type="checkbox" name="genders" value="Male">
                                     <span class="checkmark"></span> Male Doctor
                                 </label>
                             </div>
                             <div>
                                 <label class="custom_check">
-                                    <input type="checkbox" name="gender_type">
+                                    <input type="checkbox" name="genders" value="FeMale">
                                     <span class="checkmark"></span> Female Doctor
                                 </label>
                             </div>
                         </div>
                         <div class="filter-widget">
-                            <h4>Select Specialist</h4>
-                            @foreach(var speciality in Model.Specialities)
+                            <h4>Speciality</h4>
+                            @foreach (var speciality in Model.Specialities)
                             {
                                 <div>
                                     <label class="custom_check">
-                                        <input type="checkbox" name="select_specialist" value="@speciality.Id">
+                                        <input type="checkbox" name="specialities" value="@speciality.Id">
                                         <span class="checkmark"></span>@speciality.Name
                                     </label>
                                 </div>
-                            }                                                     
+                            }
                         </div>
                         <div class="btn-search">
-                            <button style="background-color:#06A5A0;border-color:#06A5A0" type="button" class="btn w-100">Search</button>
+                            <button id="SearchButtonId" style="background-color:#06A5A0;border-color:#06A5A0" type="button" class="btn w-100">Search</button>
                         </div>
                     </div>
                 </div>
                 <!-- /Search Filter -->
 
             </div>
-
             <div class="col-md-12 col-lg-8 col-xl-9">
-                <div class="row blog-grid-row">
-                    @foreach (var doctor in Model.Doctors)
-                    {
-                        <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
-                    }
-                </div>
+                 <div id="DoctorsDivId"></div>               
             </div>
-
         </div>
     </div>
 </div>
@@ -123,9 +125,55 @@
 </style>
 
 @section Scripts{
+
     <script>
 
+        $(function () {
+            loadDoctors();
 
+            $("#SearchButtonId").click(function () {
+                loadDoctors();
+            }); 
+
+            function loadDoctors() {
+
+                var locationIds = [];
+                $("input[name='locations']:checked").each(function () { locationIds.push($(this).val()); });
+
+                var genderIds = [];
+                $("input[name='genders']:checked").each(function () { genderIds.push($(this).val()); });
+
+                var specialityIds = [];
+                $("input[name='specialities']:checked").each(function () { specialityIds.push($(this).val()); });
+
+
+                blockUI();
+                var jsonObject =
+                {
+                    "DoctorName": $("#doctorNameId").val(),
+                    "Locations": locationIds,
+                    "Genders": genderIds,
+                    "Specialities": specialityIds
+                };
+
+                $.ajax({
+                    url: "/Home/FilterDoctors",
+                    type: "POST",
+                    data: JSON.stringify(jsonObject),
+                    contentType: "application/json; charset=UTF-8",
+                    dataType: "html",
+                    error: function (response) {
+                        toastError("Failed to load");
+                    },
+                    success: function (response) {                       
+                        $("#DoctorsDivId").html(response);
+                        setTimeout(() => {
+                            unblockUI();
+                        }, "1000");                                          
+                    }
+                });
+            }
+        });
 
     </script>
 }
