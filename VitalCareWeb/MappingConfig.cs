@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Utlity;
+using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
@@ -42,6 +43,11 @@ namespace VitalCareWeb
                 #region Tag
                 config.CreateMap<Tag, TagViewModel>();
                 config.CreateMap<Tag, AddEditTagViewModel>().ReverseMap();
+                #endregion
+
+                #region Article Category
+                config.CreateMap<ArticleCategory, ArticleCategoryViewModel>();
+                config.CreateMap<ArticleCategory, AddEditArticleCategoryViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

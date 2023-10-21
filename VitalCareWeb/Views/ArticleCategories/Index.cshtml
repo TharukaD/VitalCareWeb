@@ -1,0 +1,118 @@
+﻿@using VitalCareWeb.ViewModels.ArticleCategory;
+@model IEnumerable<ArticleCategoryViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Article Categories";
+}
+
+@section header{
+    <h3 class="content-header-title">Article Categories</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="ArticleCategories" asp-action="Index">Article Categories</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+@section headerMenu
+{
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
+       data-ajax-update="#DivModalTarget"
+       data-ajax-begin="blockUI"
+       data-ajax-complete="unblockUI"
+       data-toggle="tooltip"
+       asp-action="Add"
+       asp-controller="ArticleCategories"
+       title="New Category">
+        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
+        New
+    </a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="CategoriesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var category in @Model)
+                                    {
+                                        <tr>
+                                            <td> @category.Name</td>
+                                            <td class="text-center">
+                                                <div>            
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="ArticleCategories"
+                                                        asp-route-id="@category.Id"
+                                                        title="Edit Category">
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="ArticleCategories"
+                                                        asp-route-id="@category.Id"
+                                                        title="Delete Category">
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#ArticleCategoriesNavId").addClass("active");
+
+            $("#CategoriesTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}
