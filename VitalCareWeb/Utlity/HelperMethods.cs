@@ -23,5 +23,16 @@
 
             return ImagePath;
         }
+
+        public static string ReturnArticleImagePath(string articleImage)
+        {
+            string ImagePath = "/img/ArticleImages/default.jpg";
+            if (!string.IsNullOrEmpty(articleImage))
+            {
+                ImagePath = $"/img/ArticleImages/{articleImage}";
+            }
+
+            return ImagePath;
+        }
     }
 }

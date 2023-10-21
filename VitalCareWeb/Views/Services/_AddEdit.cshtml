@@ -34,7 +34,7 @@
             <div class="form-group row required">
                 <label asp-for="ShortDescription" class="col-sm-3 col-form-label"></label>
                 <div class="col-md-8">
-                    <textarea asp-for="ShortDescription" class="form-control" placeholder="Short Description" rows="3">
+                    <textarea asp-for="ShortDescription" class="form-control editor" placeholder="Short Description" rows="3">
                         @Model.ShortDescription
                     </textarea>
                     <span asp-validation-for="ShortDescription" class="text-danger"></span>
@@ -43,7 +43,7 @@
             <div class="form-group row required">
                 <label asp-for="LongDescription" class="col-sm-3 col-form-label"></label>
                 <div class="col-md-8">
-                    <textarea asp-for="LongDescription" class="form-control" placeholder="Long Description" rows="6">
+                    <textarea asp-for="LongDescription" class="form-control editor" placeholder="Long Description" rows="6">
                         @Model.LongDescription
                     </textarea>
                     <span asp-validation-for="LongDescription" class="text-danger"></span>
@@ -69,8 +69,14 @@
 
 <script>
 
-    $("#LongDescription").textArea({
-
+    $('.editor').trumbowyg({
+        btns: [
+            ['formatting'],
+            ['strong', 'em', 'del'],
+            ['superscript', 'subscript'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule']
+        ]
     });
-
 </script>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VitalCareWeb;
 using VitalCareWeb.Data;
+using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.Location;
@@ -31,6 +32,7 @@ builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddScoped<IArticleCategoryService, ArticleCategoryService>();
+builder.Services.AddScoped<IArticleService, ArticleService>();
 
 //---- Mapper Configuration
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();

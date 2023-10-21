@@ -11,7 +11,7 @@ namespace VitalCareWeb.Entities
 		public string LongDescription { get; set; }
 		public string AuthorName { get; set; }
 		public DateTime PublishedDate { get; set; }
-		public string Image { get; set; }
+		public string? Image { get; set; }
 		public virtual IList<ArticleTag> ArticleTags { get; set; }
 		public bool IsPublished { get; set; } = false;
 
@@ -41,7 +41,6 @@ namespace VitalCareWeb.Entities
 				.HasMaxLength(200);
 
 			builder.Property(x => x.Image)
-				.IsRequired()
 				.HasMaxLength(100);
 
 			builder.HasOne(r => r.ArticleCategory)
