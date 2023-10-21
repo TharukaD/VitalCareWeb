@@ -1,36 +1,118 @@
-﻿@model IEnumerable<VitalCareWeb.Entities.Tag>
-
+﻿@using VitalCareWeb.ViewModels.Tag;
+@model IEnumerable<TagViewModel>;
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Tags";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@section header{
+    <h3 class="content-header-title">Tags</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Tags" asp-action="Index">Tags</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+
+@section headerMenu
+{
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
+       data-ajax-update="#DivModalTarget"
+       data-ajax-begin="blockUI"
+       data-ajax-complete="unblockUI"
+       data-toggle="tooltip"
+       asp-action="Add"
+       asp-controller="Tags"
+       title="New Tag">
+        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
+        New
+    </a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="TagsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var tag in @Model)
+                                    {
+                                        <tr>
+                                            <td> @tag.Name</td>
+                                            <td class="text-center">
+                                                <div>            
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="Tags"
+                                                        asp-route-id="@tag.Id"
+                                                        title="Edit Tag">
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="Tags"
+                                                        asp-route-id="@tag.Id"
+                                                        title="Delete Tag">
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#TagsNavId").addClass("active");
+
+            $("#TagsTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}

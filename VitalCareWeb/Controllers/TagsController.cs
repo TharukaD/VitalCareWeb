@@ -1,163 +1,168 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using VitalCareWeb.Data;
 using VitalCareWeb.Entities;
+using VitalCareWeb.Services.Tag;
+using VitalCareWeb.ViewModels;
+using VitalCareWeb.ViewModels.Tag;
 
 namespace VitalCareWeb.Controllers
 {
     public class TagsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private IMapper _mapper;
+        private ITagService _tagService;
+        private readonly ILogger<TagsController> _logger;
 
-        public TagsController(ApplicationDbContext context)
+        public TagsController(
+            IMapper mapper,
+            ILogger<TagsController> logger,
+            ITagService tagService
+            )
         {
-            _context = context;
+            _mapper = mapper;
+            _logger = logger;
+            _tagService = tagService;
         }
 
-        // GET: Tags
+        #region Index
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-              return _context.Tags != null ? 
-                          View(await _context.Tags.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Tags'  is null.");
-        }
+            List<TagViewModel>? output = new();
 
-        // GET: Tags/Details/5
-        public async Task<IActionResult> Details(int? id)
+            var tags = await _tagService.GetAll();
+            output = _mapper.Map<List<TagViewModel>>(tags);
+
+            return View(output);
+        }
+        #endregion
+
+
+        #region Add [ HttpGet ]
+        [HttpGet]
+        public IActionResult Add()
         {
-            if (id == null || _context.Tags == null)
-            {
-                return NotFound();
-            }
-
-            var tag = await _context.Tags
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return View(tag);
+            return PartialView("_AddEdit");
         }
+        #endregion
 
-        // GET: Tags/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Tags/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        #region Add [ HttpPost ]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Tag tag)
+        public async Task<IActionResult> Add(AddEditTagViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(tag);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(tag);
-        }
+                if (!ModelState.IsValid)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Validations failed."));
+                }
 
-        // GET: Tags/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+                if (await _tagService.IsDublicate(0, viewModel.Name.Trim()) == true)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Tag name already exist"));
+                }
+
+                var tag = _mapper.Map<AddEditTagViewModel, Tag>(viewModel);
+
+                await _tagService.Add(tag);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully added.", "", true));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to add."));
+            }
+        }
+        #endregion
+
+
+        #region Edit [ HttpGet ]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Tags == null)
+            try
             {
-                return NotFound();
-            }
+                var tag = await _tagService.GetById(id);
 
-            var tag = await _context.Tags.FindAsync(id);
-            if (tag == null)
-            {
-                return NotFound();
+                if (tag == null)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Tag not found."));
+                }
+
+                var viewModel = _mapper.Map<AddEditTagViewModel>(tag);
+                return PartialView("_AddEdit", viewModel);
             }
-            return View(tag);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, ex.Message));
+            }
         }
+        #endregion
 
-        // POST: Tags/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        #region Edit [ HttpPost ]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Tag tag)
+        public async Task<IActionResult> Edit(AddEditTagViewModel viewModel)
         {
-            if (id != tag.Id)
+            try
             {
-                return NotFound();
-            }
+                if (!ModelState.IsValid)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Validations failed."));
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (await _tagService.IsDublicate(viewModel.Id.Value, viewModel.Name.Trim()) == true)
                 {
-                    _context.Update(tag);
-                    await _context.SaveChangesAsync();
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Tag name already exist"));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TagExists(tag.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+                var tag = _mapper.Map<AddEditTagViewModel, Tag>(viewModel);
+
+                await _tagService.Update(tag);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully saved.", "", true));
             }
-            return View(tag);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to save."));
+            }
         }
+        #endregion
 
-        // GET: Tags/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        #region Delete [ HttpGet ]
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Tags == null)
-            {
-                return NotFound();
-            }
-
-            var tag = await _context.Tags
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var tag = await _tagService.GetById(id);
             if (tag == null)
             {
-                return NotFound();
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Tag not found."));
             }
-
-            return View(tag);
+            var viewModel = _mapper.Map<TagViewModel>(tag);
+            return PartialView("_Delete", viewModel);
         }
+        #endregion
 
-        // POST: Tags/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        #region Delete [ HttpPost ]
+        [HttpPost]
+        public async Task<IActionResult> Delete(TagViewModel viewModel)
         {
-            if (_context.Tags == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Tags'  is null.");
+                var result = await _tagService.Delete(viewModel.Id);
+                if (result.Item1 == true)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully deleted.", "", true));
+                }
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, $"Failed to delete.[ {result.Item2} ]"));
             }
-            var tag = await _context.Tags.FindAsync(id);
-            if (tag != null)
+            catch (Exception ex)
             {
-                _context.Tags.Remove(tag);
+                _logger.LogError(ex.Message);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to delete."));
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
-
-        private bool TagExists(int id)
-        {
-          return (_context.Tags?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        #endregion
     }
 }

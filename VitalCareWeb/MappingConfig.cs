@@ -5,6 +5,7 @@ using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
+using VitalCareWeb.ViewModels.Tag;
 
 namespace VitalCareWeb
 {
@@ -36,6 +37,11 @@ namespace VitalCareWeb
                     .ForMember(r => r.SpecialityName, opt => opt.MapFrom(src => src.Speciality.Name))
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnDoctorImagePath(src.Image)));
                 config.CreateMap<Doctor, AddEditDoctorViewModel>().ReverseMap();
+                #endregion
+
+                #region Tag
+                config.CreateMap<Tag, TagViewModel>();
+                config.CreateMap<Tag, AddEditTagViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;
