@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
+using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.ViewModels;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 
 namespace VitalCareWeb.Controllers
@@ -12,17 +14,20 @@ namespace VitalCareWeb.Controllers
     {
         private IMapper _mapper;
         private IServiceService _service;
+        private ILocationService _locationService;
         private readonly ILogger<ServicesController> _logger;
 
         public ServicesController(
             IMapper mapper,
             ILogger<ServicesController> logger,
-            IServiceService service
+            IServiceService service,
+            ILocationService locationService
             )
         {
             _mapper = mapper;
             _logger = logger;
             _service = service;
+            _locationService = locationService;
         }
 
         #region Index
@@ -56,9 +61,13 @@ namespace VitalCareWeb.Controllers
 
         #region Add [ HttpGet ]
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return PartialView("_AddEdit");
+            var viewModel = new AddEditServiceViewModel();
+            var locationList = _mapper.Map<IList<LocationViewModel>>(await _locationService.GetAll());
+            viewModel.Initialize(locationList.ToList());
+
+            return PartialView("_AddEdit", viewModel);
         }
         #endregion
 
@@ -106,6 +115,10 @@ namespace VitalCareWeb.Controllers
                 }
 
                 var viewModel = _mapper.Map<AddEditServiceViewModel>(service);
+
+                var locationList = _mapper.Map<IList<LocationViewModel>>(await _locationService.GetAll());
+                viewModel.Initialize(locationList.ToList());
+
                 return PartialView("_AddEdit", viewModel);
             }
             catch (Exception ex)
@@ -133,6 +146,7 @@ namespace VitalCareWeb.Controllers
                 }
 
                 var service = _mapper.Map<AddEditServiceViewModel, Service>(viewModel);
+                service.LocationId = viewModel.LocationId;
 
                 await _service.Update(service);
                 return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully saved.", "", true));

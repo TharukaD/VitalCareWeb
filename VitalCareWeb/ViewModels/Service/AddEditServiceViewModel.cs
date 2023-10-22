@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using VitalCareWeb.ViewModels.Location;
 
 namespace VitalCareWeb.ViewModels.Service
 {
@@ -26,5 +28,16 @@ namespace VitalCareWeb.ViewModels.Service
         public int Priority { get; set; }
 
         public string? Image { get; set; }
+
+        [Required]
+        [DisplayName("Location")]
+        public int LocationId { get; set; }
+        public SelectList LocationSelectList { get; set; }
+
+        public void Initialize(List<LocationViewModel> locationList)
+        {
+            LocationSelectList = new SelectList(locationList, "Id", "Name");
+        }
+
     }
 }

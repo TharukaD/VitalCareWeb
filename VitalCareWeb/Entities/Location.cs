@@ -8,6 +8,7 @@ namespace VitalCareWeb.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual IList<Doctor> Doctors { get; set; }
+        public virtual IList<Service> Services { get; set; }
     }
 
     public class LocationConfiguration : IEntityTypeConfiguration<Location>

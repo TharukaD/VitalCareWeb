@@ -12,12 +12,14 @@ namespace VitalCareWeb.Services.Serivice
         }
         public async Task<Entities.Service?> GetById(int id)
         {
-            return await _context.FindAsync<Entities.Service>(id);
+            return await _context.Services.Include(r => r.Location).SingleOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<IEnumerable<Entities.Service>> GetAll()
         {
-            return await _context.Services.OrderBy(r => r.Priority).ToListAsync();
+            return await _context.Services
+                .Include(r => r.Location)
+                .OrderBy(r => r.Priority).ToListAsync();
         }
 
         public async Task<bool> Add(Entities.Service service)

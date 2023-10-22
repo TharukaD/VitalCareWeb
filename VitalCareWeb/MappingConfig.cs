@@ -24,6 +24,7 @@ namespace VitalCareWeb
 
                 #region Service
                 config.CreateMap<Service, ServiceViewModel>()
+                    .ForMember(r => r.LocationName, opt => opt.MapFrom(src => src.Location.Name))
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnServiceImagePath(src.Image)));
                 config.CreateMap<Service, AddEditServiceViewModel>().ReverseMap();
                 #endregion

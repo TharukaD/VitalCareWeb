@@ -11,6 +11,8 @@ namespace VitalCareWeb.Entities
         public string LongDescription { get; set; }
         public int Priority { get; set; }
         public string? Image { get; set; }
+        public int? LocationId { get; set; }
+        public virtual Location? Location { get; set; }
     }
 
     public class ServiceConfiguration : IEntityTypeConfiguration<Service>
@@ -32,6 +34,10 @@ namespace VitalCareWeb.Entities
 
             builder.Property(x => x.LongDescription)
                .IsRequired();
+
+            builder.HasOne(x => x.Location)
+                .WithMany(x => x.Services)
+                .HasForeignKey(x => x.LocationId);
         }
 
     }
