@@ -34,5 +34,10 @@
 
             return ImagePath;
         }
+
+        public static string ToDateString(DateTime input)
+        {
+            return input.ToString("MM/dd/yyyy");
+        }
     }
 }

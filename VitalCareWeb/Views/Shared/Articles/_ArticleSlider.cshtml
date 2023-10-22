@@ -1,7 +1,9 @@
-﻿<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+﻿@using VitalCareWeb.ViewModels;
+@model ArticlesPageViewModel
 
+<div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
 	<!-- Search -->
-	<div class="card search-widget">
+	@*<div class="card search-widget">
 		<div class="card-body">
 			<form class="search-form">
 				<div class="input-group">
@@ -10,7 +12,7 @@
 				</div>
 			</form>
 		</div>
-	</div>
+	</div>*@
 	<!-- /Search -->
 	<!-- Latest Posts -->
 	<div class="card post-widget">
@@ -19,9 +21,9 @@
 		</div>
 		<div class="card-body">
 			<ul class="latest-posts">
-				@for (int i = 0; i < 4; i++)
+				@foreach (var latestArticle in Model.LatestArticles)
 				{
-					<partial name="/Views/Shared/Articles/_ArticleListItem.cshtml" />
+					<partial model="@latestArticle" name="/Views/Shared/Articles/_ArticleListItem.cshtml" />
 				}					
 			</ul>
 		</div>
@@ -34,12 +36,10 @@
 		</div>
 		<div class="card-body">
 			<ul class="categories">
-				<li><a href="#">Cardiology <span>(62)</span></a></li>
-				<li><a href="#">Health Care <span>(27)</span></a></li>
-				<li><a href="#">Nutritions <span>(41)</span></a></li>
-				<li><a href="#">Health Tips <span>(16)</span></a></li>
-				<li><a href="#">Medical Research <span>(55)</span></a></li>
-				<li><a href="#">Health Treatment <span>(07)</span></a></li>
+				@foreach(var category in Model.Categories)
+				{
+					<li><a href="#">@category.Name</a></li>
+				}
 			</ul>
 		</div>
 	</div>
@@ -51,26 +51,10 @@
 		</div>
 		<div class="card-body">
 			<ul class="tags">
-				<li><a href="#" class="tag">Children</a></li>
-				<li><a href="#" class="tag">Disease</a></li>
-				<li><a href="#" class="tag">Appointment</a></li>
-				<li><a href="#" class="tag">Booking</a></li>
-				<li><a href="#" class="tag">Kids</a></li>
-				<li><a href="#" class="tag">Health</a></li>
-				<li><a href="#" class="tag">Family</a></li>
-				<li><a href="#" class="tag">Tips</a></li>
-				<li><a href="#" class="tag">Shedule</a></li>
-				<li><a href="#" class="tag">Treatment</a></li>
-				<li><a href="#" class="tag">Dr</a></li>
-				<li><a href="#" class="tag">Clinic</a></li>
-				<li><a href="#" class="tag">Online</a></li>
-				<li><a href="#" class="tag">Health Care</a></li>
-				<li><a href="#" class="tag">Consulting</a></li>
-				<li><a href="#" class="tag">Doctors</a></li>
-				<li><a href="#" class="tag">Neurology</a></li>
-				<li><a href="#" class="tag">Dentists</a></li>
-				<li><a href="#" class="tag">Specialist</a></li>
-				<li><a href="#" class="tag">Doccure</a></li>
+				@foreach(var tag in Model.Tags)
+				{
+					<li><a href="#" class="tag">@tag.Name</a></li>
+				}
 			</ul>
 		</div>
 	</div>

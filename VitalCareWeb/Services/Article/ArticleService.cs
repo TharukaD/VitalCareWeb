@@ -28,6 +28,17 @@ public class ArticleService : IArticleService
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Article>> GetRandomArticles()
+    {
+        return await _context.Articles
+            .Include(r => r.ArticleCategory)
+            .Include(r => r.ArticleTags)
+                .ThenInclude(r => r.Tag)
+            .OrderBy(r => EF.Functions.Random())
+            .Take(4)
+            .ToListAsync();
+    }
+
     public async Task<bool> Add(Article Article)
     {
         _context.Articles.Add(Article);

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels;
+@model ArticlesPageViewModel
+@{
     ViewData["Title"] = "Articles";
 }
 
@@ -29,10 +31,12 @@
 			<div class="col-lg-8 col-md-12">
 
 				<div class="row blog-grid-row">
-					@for(int i = 0; i < 6; i++)
+					@foreach(var article in Model.AllArticles)
 					{
-						<partial name="/Views/Shared/Articles/_ArticleCard.cshtml" />
-					}																																								
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<partial model="@article" name="/Views/Shared/Articles/_ArticleCard.cshtml" />
+						</div>
+					}																																							
 				</div>
 
 				<!-- Blog Pagination -->
@@ -66,7 +70,7 @@
 			</div>
 
 			<!-- Article Sidebar -->
-			<partial name="/Views/Shared/Articles/_ArticleSlider.cshtml" />
+			<partial model="@Model" name="/Views/Shared/Articles/_ArticleSlider.cshtml" />		
 			<!-- /Article Sidebar -->
 
 		</div>

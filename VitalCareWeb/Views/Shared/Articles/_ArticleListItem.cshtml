@@ -1,13 +1,16 @@
-﻿<li>
+﻿@using VitalCareWeb.ViewModels.Article;
+@model ArticleViewModel
+
+<li>
 	<div class="post-thumb">
-		<a href="blog-details.html">
-			<img class="img-fluid" src="~/assets/img/blog/blog-thumb-01.jpg" alt="blog-image">
+		<a asp-route-id="@Model.Id" asp-action="Article" asp-controller="Home">
+			<img class="img-fluid" src="@Model.ImageUrl" alt="article-image">
 		</a>
 	</div>
 	<div class="post-info">
 		<h4>
-			<a href="blog-details.html">Doccure – Making your clinic painless visit?</a>
+			<a asp-route-id="@Model.Id" asp-action="Article" asp-controller="Home">@Model.Title</a>
 		</h4>
-		<p>4 Dec 2023</p>
+		<p>@Model.PublishedDateString</p>
 	</div>
 </li>

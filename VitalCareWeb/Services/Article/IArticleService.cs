@@ -4,6 +4,7 @@ public interface IArticleService
 {
     Task<Article?> GetById(int id);
     Task<IEnumerable<Article>> GetAll();
+    Task<IEnumerable<Article>> GetRandomArticles();
     Task<bool> Add(Article article);
     Task<bool> Update(Article article);
     Task<(bool, string)> Delete(int id);

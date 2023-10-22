@@ -1,16 +1,20 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-
+using VitalCareWeb.Services.Article;
+using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
-
+using VitalCareWeb.Services.Tag;
 using VitalCareWeb.ViewModels;
+using VitalCareWeb.ViewModels.Article;
+using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
+using VitalCareWeb.ViewModels.Tag;
 
 namespace VitalCareWeb.Controllers;
 
@@ -22,6 +26,9 @@ public class HomeController : Controller
     private IDoctorService _doctorService;
     private ISpecialityService _specialityService;
     private ILocationService _locationService;
+    private IArticleService _articleService;
+    private ITagService _tagService;
+    private IArticleCategoryService _articleCategoryService;
 
     public HomeController(
         IMapper mapper,
@@ -29,7 +36,11 @@ public class HomeController : Controller
         IServiceService service,
         IDoctorService doctorService,
         ISpecialityService specialityService,
-        ILocationService locationService
+        ILocationService locationService,
+        IArticleService articleService,
+        ITagService tagService,
+        IArticleCategoryService articleCategoryService
+
     )
     {
         _mapper = mapper;
@@ -38,6 +49,10 @@ public class HomeController : Controller
         _doctorService = doctorService;
         _specialityService = specialityService;
         _locationService = locationService;
+        _articleService = articleService;
+        _tagService = tagService;
+        _articleCategoryService = articleCategoryService;
+
     }
 
     [HttpGet]
@@ -50,6 +65,9 @@ public class HomeController : Controller
 
         var doctors = await _doctorService.GetAll();
         viewModel.Doctors = _mapper.Map<List<DoctorViewModel>>(doctors);
+
+        var articles = await _articleService.GetRandomArticles();
+        viewModel.Articles = _mapper.Map<List<ArticleViewModel>>(articles);
 
         return View(viewModel);
     }
@@ -112,16 +130,42 @@ public class HomeController : Controller
 
 
     [HttpGet]
-    public IActionResult Articles()
+    public async Task<IActionResult> Articles()
     {
+        var articles = await _articleService.GetAll();
+        var articleList = _mapper.Map<List<ArticleViewModel>>(articles);
+        var latestArticleList = articleList.OrderByDescending(r => r.IsPublished).Take(4).ToList();
 
-        return View();
+        var tags = _mapper.Map<List<TagViewModel>>(await _tagService.GetAll());
+        var categories = _mapper.Map<List<ArticleCategoryViewModel>>(await _articleCategoryService.GetAll());
+
+        var viewModel = new ArticlesPageViewModel();
+        viewModel.AllArticles = articleList;
+        viewModel.LatestArticles = latestArticleList;
+        viewModel.Tags = tags;
+        viewModel.Categories = categories;
+
+        return View(viewModel);
     }
 
     [HttpGet]
-    public IActionResult Article(int id)
+    public async Task<IActionResult> Article(int id)
     {
-        return View();
+        var articles = await _articleService.GetAll();
+        var articleList = _mapper.Map<List<ArticleViewModel>>(articles);
+        var latestArticleList = articleList.OrderByDescending(r => r.IsPublished).Take(4).ToList();
+
+        var tags = _mapper.Map<List<TagViewModel>>(await _tagService.GetAll());
+        var categories = _mapper.Map<List<ArticleCategoryViewModel>>(await _articleCategoryService.GetAll());
+
+        var viewModel = new ArticlesPageViewModel();
+        viewModel.AllArticles = articleList;
+        viewModel.LatestArticles = latestArticleList;
+        viewModel.Tags = tags;
+        viewModel.Categories = categories;
+        viewModel.Article = articleList.FirstOrDefault(r => r.Id == id);
+
+        return View(viewModel);
     }
 
     [HttpGet]

@@ -77,11 +77,11 @@
                                             </td>
                                             <td> @article.Title</td>
                                             <td> @article.ArticleCategoryName</td>
-                                            <td> @article.ShortDescription</td>
+                                            <td> <span class="d-inline-block text-truncate modyfiedText modyfiedText">@article.ShortDescription</span></td>
                                             <td>
-                                                <span class="d-inline-block text-truncate" style="max-width:350px;">
-                                                   @article.LongDescription
-                                                </span>
+                                                <span class="d-inline-block text-truncate modyfiedText">
+                                                 @article.LongDescription
+                                                </span>                                                
                                             </td>
                                             <td> 
                                                 @foreach(var tag in article.Tags)
@@ -125,6 +125,18 @@
         </div>
     </div>
 </div>
+
+<style>
+
+    .modyfiedText {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px !important;
+        max-height:150px !important;
+    }
+
+</style>
 
 @section Scripts{
     <script>
