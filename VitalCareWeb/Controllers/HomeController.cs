@@ -231,4 +231,12 @@ public class HomeController : Controller
         return View();
     }
 
+
+    [HttpGet]
+    public async Task<IActionResult> Appoinment()
+    {
+        var locations = _mapper.Map<List<LocationViewModel>>(await _locationService.GetAll());
+        return View(locations);
+    }
+
 }

@@ -12,36 +12,8 @@
                 <div class="banner-content aos" data-aos="fade-up">
                     <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important">Best Doctors</span> Your Nearby Location.</h1>
                     <p>Feel free to contact us, get better service.</p>
-                    <a asp-controller="Home" asp-action="ContactUs" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">Contact Us</a>
-                </div>
-                @*<div class="search-box-one aos" data-aos="fade-up">
-                    <form action="search-2.html">
-                        <div class="search-input search-line">
-                            <i class="feather-search bficon"></i>
-                            <div class=" mb-0">
-                                <input type="text" class="form-control" placeholder="Search doctor">
-                            </div>
-                        </div>
-                        <div class="search-input search-map-line">
-                            <i class="feather-map-pin"></i>
-                            <div class=" mb-0">
-                                <input type="text" class="form-control" placeholder="Location">
-                                <a class="current-loc-icon current_location" href="javascript:void(0);">
-                                    <i class="feather-crosshair"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="search-input search-calendar-line">
-                            <i class="feather-calendar"></i>
-                            <div class=" mb-0">
-                                <input type="text" class="form-control datetimepicker" placeholder="Date">
-                            </div>
-                        </div>
-                        <div class="form-search-btn">
-                            <button class="btn specialHomeBtn" type="submit" style="background-color: #06A5A0;border-color:#06A5A0 !important;">Search</button>
-                        </div>
-                    </form>
-                </div>*@
+                    <a asp-controller="Home" asp-action="Appoinment" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn"><span style="margin-right:5px;">Book an appoinment</span> <i class="fa fa-arrow-right"></i></a>
+                </div>                
             </div>
             <div class="col-lg-6">
                 @*<div class="banner-img aos" data-aos="fade-up">
@@ -147,7 +119,7 @@
 </section>
 <!-- /About Us -->
 
-<!-- Doctors Section -->
+<!-- Locations Section -->
 <section class="doctors-section">
     <div class="container">
         <div class="row">
@@ -207,6 +179,66 @@
     </div>
 </section>
 <!-- /services Section -->
+
+<!-- Why choose us -->
+<section class="work-sections" style="margin-top:50px;margin-bottom:50px">
+    <div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 work-details">
+				<div class="section-header-one aos" data-aos="fade-up">
+					<h2 class="section-titles text-center">Why choose us</h2>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
+						<div class="work-info">
+							<div class="work-icon">
+								<span><img src="~/assets/img/icons/work-01.svg" alt="search-doctor-icon"></span>
+							</div>
+							<div class="work-content">
+								<h5>Search Doctor</h5>
+								<p>Lorem ipsum dolor consectetur adipiscing elit, tempor incididunt labore dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
+						<div class="work-info">
+							<div class="work-icon">
+								<span><img src="~/assets/img/icons/work-02.svg" alt="doctor-profile-icon"></span>
+							</div>
+							<div class="work-content">
+								<h5>Check Doctor Profile</h5>
+								<p>Lorem ipsum dolor consectetur adipiscing elit, tempor incididunt labore dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
+						<div class="work-info">
+							<div class="work-icon">
+								<span><img src="~/assets/img/icons/work-03.svg" alt="calendar-icon"></span>
+							</div>
+							<div class="work-content">
+								<h5>Schedule Appointment</h5>
+								<p>Lorem ipsum dolor consectetur adipiscing elit, tempor incididunt labore dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 aos" data-aos="fade-up">
+						<div class="work-info">
+							<div class="work-icon">
+								<span><img src="~/assets/img/icons/work-04.svg" alt="solution-icon"></span>
+							</div>
+							<div class="work-content">
+								<h5>Get Your Solution</h5>
+								<p>Lorem ipsum dolor consectetur adipiscing elit, tempor incididunt labore dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Why choose us -->
 
 <!-- Testimonial Section -->
 <section class="testimonial-section">
