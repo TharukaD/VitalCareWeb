@@ -6,9 +6,12 @@ namespace VitalCareWeb.Entities
     public class Location
     {
         public int Id { get; set; }
+        public string? Image { get; set; }
         public string Name { get; set; }
+        public string? ShortDescription { get; set; }
         public virtual IList<Doctor> Doctors { get; set; }
         public virtual IList<Service> Services { get; set; }
+        public int Priority { get; set; }
     }
 
     public class LocationConfiguration : IEntityTypeConfiguration<Location>
@@ -17,9 +20,15 @@ namespace VitalCareWeb.Entities
         {
             builder.HasKey(x => x.Id);
 
+            builder.Property(x => x.Image)
+               .HasMaxLength(200);
+
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(200);
+
+            builder.Property(x => x.ShortDescription)
+                 .HasMaxLength(300);
         }
     }
 }

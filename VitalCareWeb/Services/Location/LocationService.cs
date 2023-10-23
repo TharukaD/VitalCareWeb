@@ -17,7 +17,7 @@ namespace VitalCareWeb.Services.Location
 
         public async Task<IEnumerable<Entities.Location>> GetAll()
         {
-            return await _context.Locations.ToListAsync();
+            return await _context.Locations.OrderBy(r => r.Priority).ToListAsync();
         }
 
         public async Task<bool> Add(Entities.Location Location)

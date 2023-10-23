@@ -164,5 +164,62 @@ namespace VitalCareWeb.Controllers
             }
         }
         #endregion
+
+
+        #region Upload Location Image [ HttpGet ]
+        [HttpGet]
+        public IActionResult UploadLocationImage(int id)
+        {
+            var viewModel = new AddLocationImageViewModel();
+            viewModel.LocationId = id;
+            return PartialView("_UploadLocationImage", viewModel);
+        }
+        #endregion
+
+        #region Upload Location Image [ HttpPost ]
+        [HttpPost]
+        public async Task<IActionResult> UploadLocationImage(AddLocationImageViewModel viewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Validations failed."));
+                }
+
+                var location = await _locationService.GetById(viewModel.LocationId);
+                if (location == null)
+                {
+                    return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Location not found."));
+                }
+
+                var file = viewModel.UploadedFile;
+
+                var extension = file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                string filename = DateTime.Now.Ticks.ToString() + "." + extension;
+
+                var filepath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\LocationImages");
+
+                if (!Directory.Exists(filepath))
+                {
+                    Directory.CreateDirectory(filepath);
+                }
+
+                var exactpath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\LocationImages", filename);
+                using (var stream = new FileStream(exactpath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                location.Image = filename;
+                await _locationService.Update(location);
+                return PartialView("_AjaxActionResult", new AjaxActionResult(true, "Successfully uploaded.", "", true));
+            }
+            catch (Exception ex)
+            {
+                return PartialView("_AjaxActionResult", new AjaxActionResult(false, "Failed to upload."));
+            }
+        }
+        #endregion
     }
 }

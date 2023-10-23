@@ -35,6 +35,17 @@
             return ImagePath;
         }
 
+        public static string ReturnLocationImagePath(string locationImage)
+        {
+            string ImagePath = "/img/LocationImages/default.jpg";
+            if (!string.IsNullOrEmpty(locationImage))
+            {
+                ImagePath = $"/img/LocationImages/{locationImage}";
+            }
+
+            return ImagePath;
+        }
+
         public static string ToDateString(DateTime input)
         {
             return input.ToString("MM/dd/yyyy");

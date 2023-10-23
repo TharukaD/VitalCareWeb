@@ -66,31 +66,39 @@ public class HomeController : Controller
         var articles = await _articleService.GetRandomArticles();
         viewModel.Articles = _mapper.Map<List<ArticleViewModel>>(articles);
 
-        var serviceGroups = await ReturnAllServicesGroupWithLocations();
+        var serviceGroups = await ReturnAllServicesGroupWithLocations(null);
         viewModel.ServiceGroups = serviceGroups;
+
+        var locations = await _locationService.GetAll();
+        viewModel.Locations = _mapper.Map<List<LocationViewModel>>(locations); ;
 
         return View(viewModel);
     }
 
     [HttpGet]
-    public IActionResult AboutUs()
+    public async Task<IActionResult> AboutUs()
     {
-        return View();
+        var locations = _mapper.Map<List<LocationViewModel>>(await _locationService.GetAll());
+        return View(locations);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Services()
+    public async Task<IActionResult> Services(int? locationId)
     {
-        var serviceGroups = await ReturnAllServicesGroupWithLocations();
+        var serviceGroups = await ReturnAllServicesGroupWithLocations(locationId);
         return View(serviceGroups);
     }
 
-    private async Task<List<ServiceGroupViewModel>> ReturnAllServicesGroupWithLocations()
+    private async Task<List<ServiceGroupViewModel>> ReturnAllServicesGroupWithLocations(int? locationId)
     {
         var serviceGroups = new List<ServiceGroupViewModel>();
-        var services = _mapper.Map<List<ServiceViewModel>>(await _service.GetAll());
 
-        var groups = services.GroupBy(x => x.LocationId).Select(grp => grp.ToList()).ToList();
+        var allServices = await _service.GetAll();
+        allServices = allServices.OrderBy(x => x?.Location.Priority).ToList();
+
+        var servicesList = _mapper.Map<List<ServiceViewModel>>(allServices);
+
+        var groups = servicesList.GroupBy(x => x.LocationId).Select(grp => grp.ToList()).ToList();
         foreach (var group in groups)
         {
             var serviceGroup = new ServiceGroupViewModel();
@@ -111,8 +119,25 @@ public class HomeController : Controller
 
         if (serviceGroups.Any())
         {
-            serviceGroups[0].TabHeaderActiveClass = "active";
-            serviceGroups[0].TabContentActiveClass = "show active";
+            if (locationId == null)
+            {
+                serviceGroups[0].TabHeaderActiveClass = "active";
+                serviceGroups[0].TabContentActiveClass = "show active";
+            }
+            else
+            {
+                var relatedServiceGroup = serviceGroups.SingleOrDefault(r => r.LocationId == locationId);
+                if (relatedServiceGroup == null)
+                {
+                    serviceGroups[0].TabHeaderActiveClass = "active";
+                    serviceGroups[0].TabContentActiveClass = "show active";
+                }
+                else
+                {
+                    relatedServiceGroup.TabHeaderActiveClass = "active";
+                    relatedServiceGroup.TabContentActiveClass = "show active";
+                }
+            }
         }
 
         return serviceGroups;

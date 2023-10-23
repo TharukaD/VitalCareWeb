@@ -47,7 +47,10 @@
                             <table class="table align-items-center table-sm " id="LocationsTable">
                                 <thead>
                                     <tr>
+                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Short Description</th>
+                                        <th>Priority</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -55,7 +58,23 @@
                                     @foreach(var location in @Model)
                                     {
                                         <tr>
+                                            <td>
+                                                <img height="120" width="120" src="@location.ImageUrl" />
+                                                <div style="margin-top:5px;">
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="UploadLocationImage"
+                                                        asp-controller="Locations"
+                                                        asp-route-id="@location.Id"
+                                                        title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
+                                                </div>                                                
+                                            </td>
                                             <td> @location.Name</td>
+                                            <td> @location.ShortDescription</td>
+                                            <td> @location.Priority</td>
                                             <td class="text-center">
                                                 <div>            
                                                     <a data-ajax="true"

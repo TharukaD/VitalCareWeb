@@ -30,7 +30,8 @@ namespace VitalCareWeb
                 #endregion
 
                 #region Location
-                config.CreateMap<Location, LocationViewModel>();
+                config.CreateMap<Location, LocationViewModel>()
+                    .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnLocationImagePath(src.Image)));
                 config.CreateMap<Location, AddEditLocationViewModel>().ReverseMap();
                 #endregion
 
