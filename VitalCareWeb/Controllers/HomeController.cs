@@ -60,14 +60,14 @@ public class HomeController : Controller
     {
         var viewModel = new HomePageViewModel();
 
-        var services = await _service.GetAll();
-        viewModel.Services = _mapper.Map<List<ServiceViewModel>>(services);
-
         var doctors = await _doctorService.GetAll();
         viewModel.Doctors = _mapper.Map<List<DoctorViewModel>>(doctors);
 
         var articles = await _articleService.GetRandomArticles();
         viewModel.Articles = _mapper.Map<List<ArticleViewModel>>(articles);
+
+        var serviceGroups = await ReturnAllServicesGroupWithLocations();
+        viewModel.ServiceGroups = serviceGroups;
 
         return View(viewModel);
     }
@@ -81,9 +81,41 @@ public class HomeController : Controller
     [HttpGet]
     public async Task<IActionResult> Services()
     {
-        var services = await _service.GetAll();
-        var viewModels = _mapper.Map<List<ServiceViewModel>>(services);
-        return View(viewModels);
+        var serviceGroups = await ReturnAllServicesGroupWithLocations();
+        return View(serviceGroups);
+    }
+
+    private async Task<List<ServiceGroupViewModel>> ReturnAllServicesGroupWithLocations()
+    {
+        var serviceGroups = new List<ServiceGroupViewModel>();
+        var services = _mapper.Map<List<ServiceViewModel>>(await _service.GetAll());
+
+        var groups = services.GroupBy(x => x.LocationId).Select(grp => grp.ToList()).ToList();
+        foreach (var group in groups)
+        {
+            var serviceGroup = new ServiceGroupViewModel();
+            serviceGroup.LocationId = group[0].LocationId;
+            serviceGroup.LocationName = group[0].LocationName;
+            serviceGroup.Services = new List<ServiceViewModel>();
+            serviceGroup.Services = group;
+
+            serviceGroup.TabId = $"pills-tabs{group[0].LocationId}-tab";
+            serviceGroup.TargetId = $"#pills-tabs{group[0].LocationId}";
+            serviceGroup.AreaControlId = $"pills-tabs{group[0].LocationId}";
+
+            serviceGroup.TabHeaderActiveClass = "";
+            serviceGroup.TabContentActiveClass = "";
+
+            serviceGroups.Add(serviceGroup);
+        }
+
+        if (serviceGroups.Any())
+        {
+            serviceGroups[0].TabHeaderActiveClass = "active";
+            serviceGroups[0].TabContentActiveClass = "show active";
+        }
+
+        return serviceGroups;
     }
 
     [HttpGet]

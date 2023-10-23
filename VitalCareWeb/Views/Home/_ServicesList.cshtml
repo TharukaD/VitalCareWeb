@@ -1,0 +1,45 @@
+﻿@using VitalCareWeb.ViewModels;
+@model IEnumerable<ServiceGroupViewModel>;
+
+<div class="row justify-content-center">
+    <ul class="nav nav-pills gap-2  d-flex justify-content-center" id="pills-tab" role="tablist">
+        @foreach (var group in Model)
+        {
+            <li class="nav-item" role="presentation">
+                <button class="nav-link @group.TabHeaderActiveClass" id="@group.TabId" data-bs-toggle="pill" data-bs-target="@group.TargetId" role="tab" aria-controls="@group.AreaControlId" aria-selected="true">@group.LocationName</button>
+            </li>
+        }
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        @foreach (var group in Model)
+        {
+            <div class="tab-pane fade @group.TabContentActiveClass" id="@group.AreaControlId" role="tabpanel" aria-labelledby="@group.TabId" tabindex="0">
+                <div class="row  justify-content-center">
+                    @if (group.Services.Any())
+                    {
+                        @foreach(var service in group.Services)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+                                <a asp-route-id="@service.Id" asp-action="Service" asp-controller="Home">
+                                    <div class="our-services-list serviceCard">
+                                        <div class="service-icons">
+                                            <img src="@service.ImageUrl" style="height:220px;width:220px;" alt="service image">
+                                        </div>
+                                        <h4>@service.Name</h4>
+                                        <p>@Html.Raw(@service.ShortDescription)</p>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                            <h3>No services found.</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
