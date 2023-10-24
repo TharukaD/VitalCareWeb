@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using VitalCareWeb.Entities;
+using VitalCareWeb.Services.Appointment;
+using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
@@ -8,6 +11,8 @@ using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
 using VitalCareWeb.ViewModels;
+using VitalCareWeb.ViewModels.Appoinment;
+using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
@@ -29,6 +34,8 @@ public class HomeController : Controller
     private IArticleService _articleService;
     private ITagService _tagService;
     private IArticleCategoryService _articleCategoryService;
+    private IAppointmentReasonService _appointmentReasonService;
+    private IAppointmentService _appointmentService;
 
     public HomeController(
         IMapper mapper,
@@ -39,8 +46,9 @@ public class HomeController : Controller
         ILocationService locationService,
         IArticleService articleService,
         ITagService tagService,
-        IArticleCategoryService articleCategoryService
-
+        IArticleCategoryService articleCategoryService,
+        IAppointmentReasonService appointmentReasonService,
+        IAppointmentService appointmentService
     )
     {
         _mapper = mapper;
@@ -52,7 +60,8 @@ public class HomeController : Controller
         _articleService = articleService;
         _tagService = tagService;
         _articleCategoryService = articleCategoryService;
-
+        _appointmentReasonService = appointmentReasonService;
+        _appointmentService = appointmentService;
     }
 
     [HttpGet]
@@ -231,12 +240,76 @@ public class HomeController : Controller
         return View();
     }
 
+    #region Appointment
 
     [HttpGet]
     public async Task<IActionResult> Appointment()
     {
-        var locations = _mapper.Map<List<LocationViewModel>>(await _locationService.GetAll());
-        return View(locations);
+        var reasons = _mapper.Map<List<AppointmentReasonViewModel>>(await _appointmentReasonService.GetAll());
+        var specialities = _mapper.Map<List<SpecialityViewModel>>(await _specialityService.GetAll());
+        var doctors = _mapper.Map<List<DoctorViewModel>>(await _doctorService.GetAll());
+
+        var viewModel = new CreateAppoinmentViewModel();
+        viewModel.Initialize(reasons, specialities, doctors);
+
+        return View(viewModel);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> AppoinmentSuccess(int id)
+    {
+        var appointment = await _appointmentService.GetById(id);
+        if (appointment != null)
+        {
+            var viewModel = _mapper.Map<AppointmentViewModel>(appointment);
+            return View(viewModel);
+        }
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult AppoinmentFailed()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAppoinment(CreateAppoinmentViewModel viewModel)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Appointment");
+            }
+
+            var reason = await _appointmentReasonService.GetById(viewModel.ReasonId);
+            var speciality = await _specialityService.GetById(viewModel.SpecialityId);
+            var doctor = await _doctorService.GetById(viewModel.DoctorId);
+
+            var appointment = _mapper.Map<Appointment>(viewModel);
+            appointment.ReasonForVisit = reason.Name;
+            appointment.SpecialityName = speciality.Name;
+            appointment.DoctorName = doctor.Name;
+            appointment.CreatedDate = DateTime.Now;
+            appointment.PreferredDateTime = new DateTime(
+                year: viewModel.PreferredDate.Year,
+                month: viewModel.PreferredDate.Month,
+                day: viewModel.PreferredDate.Day,
+                hour: viewModel.PreferredTime.Hour,
+                minute: viewModel.PreferredTime.Minute,
+                second: viewModel.PreferredTime.Second);
+
+            await _appointmentService.Add(appointment);
+
+            return RedirectToAction("AppoinmentSuccess", new { id = appointment.Id });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return RedirectToAction("AppoinmentFailed");
+        }
+    }
+    #endregion
 
 }

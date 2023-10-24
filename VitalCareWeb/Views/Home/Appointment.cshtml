@@ -1,4 +1,12 @@
-﻿<section class="work-section mt-5">
+﻿@using VitalCareWeb.ViewModels.Appoinment
+@model CreateAppoinmentViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Appointment";
+}
+
+<section class="work-section mt-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 d-flex">
@@ -7,70 +15,76 @@
                         <div class="section-inner-header contact-inner-header">
                             <h2>Book an appointment</h2>
                         </div>
-                        <form action="#">
+                        <form method="post"
+                              asp-action="CreateAppoinment"
+                              asp-controller="Home">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="mb-2">Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your Name">
+                                    <div class="mb-4">
+                                        <label asp-for="Name" class="mb-2 required"></label>
+                                        <input asp-for="Name" class="form-control" placeholder="Enter Your Name" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="mb-2">Phone Number</label>
-                                        <input type="text" class="form-control" placeholder="(123) 456-789">
+                                    <div class="mb-4">
+                                        <label asp-for="PhoneNo" class="mb-2 required"></label>
+                                        <input asp-for="PhoneNo" class="form-control" placeholder="(123) 456-789" />
+                                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="mb-2">ID Card / Passport No</label>
-                                        <input type="text" class="form-control" placeholder="AXXXXXX">
+                                    <div class="mb-4">
+                                        <label asp-for="IdentityNo" class="mb-2 required"></label>
+                                        <input asp-for="IdentityNo" class="form-control" placeholder="AXXXXXX" />
+                                        <span asp-validation-for="IdentityNo" class="text-danger"></span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="mb-2">Reason for visit</label>
-                                        <input type="text" class="form-control" placeholder="Reason">
+                                    <div class="col-md-6 mb-4">
+                                        <label class="mb-2 required">Reason for visit</label>
+                                        <select class="form-control" asp-for="ReasonId" asp-items="@Model.ReasonSelectList">
+                                            <option></option>
+                                        </select>
+                                        <span asp-validation-for="ReasonId" class="text-danger"></span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="mb-2">Select Speciality</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>                                            
+                                        <div class="mb-4">
+                                            <label class="mb-2 required">Select Speciality</label>
+                                            <select class="form-control" asp-for="SpecialityId" asp-items="@Model.SpecialitySelectList">
+                                                <option></option>
+                                            </select>
+                                            <span asp-validation-for="SpecialityId" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="mb-2">Select Doctor</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected></option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>    
+                                        <div class="mb-4">
+                                            <label class="mb-2 required">Select Doctor</label>
+                                            <select class="form-control" asp-for="DoctorId" asp-items="@Model.DoctorSelectList">
+                                                <option></option>
+                                            </select>
+                                            <span asp-validation-for="DoctorId" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="mb-2">Preferred Date</label>
-                                            <input type="date" class="form-control">
+                                        <div class="mb-6">
+                                            <label asp-for="PreferredDate" class="mb-2 required"></label>
+                                            <input type="date" asp-for="PreferredDate" class="form-control"/>
+                                            <span asp-validation-for="PreferredDate" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="mb-2">Preferred Time</label>
-                                            <input type="time" class="form-control">
+                                        <div class="mb-4">
+                                            <label asp-for="PreferredTime" class="mb-2 required"></label>
+                                            <input type="time" asp-for="PreferredTime" class="form-control" />
+                                            <span asp-validation-for="PreferredTime" class="text-danger"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -96,9 +110,15 @@
         border-color: #06A5A0 !important;
     }
 
-    .specialBtn:hover {
-        color: #06A5A0 !important;
-        border-color: #06A5A0 !important
+        .specialBtn:hover {
+            color: #06A5A0 !important;
+            border-color: #06A5A0 !important
+        }
+
+    .required::after {
+        content: " *";
+        font-weight: bold;
+        color: red;
     }
 
 </style>

@@ -46,9 +46,21 @@
             return ImagePath;
         }
 
+        public static string ReturnAppointmentNo(int id)
+        {
+            string output = id.ToString().PadLeft(5, '0');
+            output = "AP" + output;
+            return output;
+        }
+
         public static string ToDateString(DateTime input)
         {
             return input.ToString("MM/dd/yyyy");
+        }
+
+        public static string ToDateTimeString(DateTime input)
+        {
+            return input.ToString("MM/dd/yyyy h:mm tt");
         }
     }
 }

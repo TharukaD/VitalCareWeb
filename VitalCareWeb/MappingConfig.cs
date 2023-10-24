@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Utlity;
+using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
@@ -66,6 +67,14 @@ namespace VitalCareWeb
                 #region Appointment Reason
                 config.CreateMap<AppointmentReason, AppointmentReasonViewModel>();
                 config.CreateMap<AppointmentReason, AddEditAppointmentReasonViewModel>().ReverseMap();
+                #endregion
+
+                #region Appointment
+                config.CreateMap<Appointment, AppointmentViewModel>()
+                    .ForMember(r => r.AppointmentNo, opt => opt.MapFrom(src => HelperMethods.ReturnAppointmentNo(src.Id)))
+                    .ForMember(r => r.PreferredDateTimeString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.PreferredDateTime)))
+                    .ForMember(r => r.CreatedDateString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.CreatedDate)));
+                config.CreateMap<CreateAppoinmentViewModel, Appointment>();
                 #endregion
             });
             return mappingConfig;

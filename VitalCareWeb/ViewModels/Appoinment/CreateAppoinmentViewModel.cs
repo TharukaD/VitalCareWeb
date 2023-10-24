@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Speciality;
 
@@ -21,23 +22,34 @@ namespace VitalCareWeb.ViewModels.Appoinment
 
         [Required]
         [Display(Name = "Reason for visit")]
-        public string ReasonForVisit { get; set; }
+        public int ReasonId { get; set; }
+        public SelectList ReasonSelectList { get; set; }
 
         [Required]
         [Display(Name = "Select Speciality")]
-        public string SpecialityId { get; set; }
+        public int SpecialityId { get; set; }
         public SelectList SpecialitySelectList { get; set; }
 
-
-        public string DoctorId { get; set; }
+        [Required]
+        [Display(Name = "Select Doctor")]
+        public int DoctorId { get; set; }
         public SelectList DoctorSelectList { get; set; }
+
+        [Required]
+        [Display(Name = "Preferred Date")]
         public DateTime PreferredDate { get; set; }
+
+        [Required]
+        [Display(Name = "Preferred Time")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime PreferredTime { get; set; }
 
-        public void Initialize(List<SpecialityViewModel> specilaityList, List<DoctorViewModel> doctorList)
+        public void Initialize(List<AppointmentReasonViewModel> reasonList, List<SpecialityViewModel> specilaityList, List<DoctorViewModel> doctorList)
         {
+            ReasonSelectList = new SelectList(reasonList, "Id", "Name");
             SpecialitySelectList = new SelectList(specilaityList, "Id", "Name");
             DoctorSelectList = new SelectList(doctorList, "Id", "Name");
+            PreferredDate = DateTime.Now;
         }
     }
 

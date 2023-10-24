@@ -15,6 +15,7 @@ namespace VitalCareWeb.Entities
         public int DoctorId { get; set; }
         public string DoctorName { get; set; }
         public DateTime PreferredDateTime { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 
     public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>

@@ -1,0 +1,91 @@
+﻿@using VitalCareWeb.ViewModels.Appoinment;
+@model IEnumerable<AppointmentViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Appointment";
+}
+
+@section header{
+    <h3 class="content-header-title">Appointments</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Appointments" asp-action="Index">Appointments</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="AppointmentsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Created Date</th>
+                                        <th>Name</th>
+                                        <th>Phone No</th>
+                                        <th>ID/Passport</th>
+                                        <th>Reason For Visit</th>
+                                        <th>Speciality</th>
+                                        <th>Doctor</th>
+                                        <th>Preferred Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var appointment in @Model)
+                                    {
+                                        <tr>
+                                            <td> @appointment.AppointmentNo</td>
+                                            <td> @appointment.CreatedDateString</td>
+                                            <td> @appointment.Name</td>
+                                            <td> @appointment.PhoneNo</td>
+                                            <td> @appointment.IdentityNo</td>
+                                            <td> @appointment.ReasonForVisit</td>
+                                            <td> @appointment.SpecialityName</td>
+                                            <td> @appointment.DoctorName</td>
+                                            <td> @appointment.CreatedDateString</td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#AppointmentsNavId").addClass("active");
+
+            $("#AppointmentsTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    "order": [0,'desc'],
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}
