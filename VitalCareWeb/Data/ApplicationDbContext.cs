@@ -16,6 +16,8 @@ namespace VitalCareWeb.Data
 		public DbSet<Service> Services { get; set; }
 		public DbSet<Location> Locations { get; set; }
 		public DbSet<Doctor> Doctors { get; set; }
+		public DbSet<Appointment> Appointments { get; set; }
+		public DbSet<AppointmentReason> AppointmentReasons { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -29,6 +31,8 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new ServiceConfiguration());
 			modelBuilder.ApplyConfiguration(new LocationConfiguration());
 			modelBuilder.ApplyConfiguration(new DoctorConfiguration());
+			modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+			modelBuilder.ApplyConfiguration(new AppointmentReasonConfiguration());
 		}
 	}
 }

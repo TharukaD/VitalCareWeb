@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Utlity;
+using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
@@ -60,6 +61,11 @@ namespace VitalCareWeb
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnArticleImagePath(src.Image)))
                     .ForMember(r => r.Tags, opt => opt.MapFrom(src => src.ArticleTags.Select(r => new TagViewModel { Id = r.Id, Name = r.Tag.Name })));
                 config.CreateMap<Article, AddEditArticleViewModel>().ReverseMap();
+                #endregion
+
+                #region Appointment Reason
+                config.CreateMap<AppointmentReason, AppointmentReasonViewModel>();
+                config.CreateMap<AppointmentReason, AddEditAppointmentReasonViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

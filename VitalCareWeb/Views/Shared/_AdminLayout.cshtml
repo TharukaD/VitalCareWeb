@@ -164,6 +164,33 @@
                         </span>
                     </a>
                 </li>
+
+                <li class="nav-item navItems" id="SettingsNavId">
+                    <a href="#">
+                        <i class="la la-cubes"></i>
+                        <span class="menu-title">
+                            Manage Apointments
+                        </span>
+                    </a>
+                    <ul class="menu-content">
+                        <li id="AppointmentsNavId">
+                            <a asp-controller="Appointments" asp-action="Index">
+                                <span class="menu-title">
+                                    Apointments
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li id="AppointmentReasonsNavId">
+                            <a asp-controller="AppointmentReasons" asp-action="Index">
+                                <span class="menu-title">
+                                    Apointment Reasons
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                
                 <li class="nav-item navItems" id="ManageDoctorsNavId">
                     <a href="#">
