@@ -75,16 +75,19 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
+                                        @{
+                                            var maxDate = DateTime.Now.AddMonths(1);
+                                        }
                                         <div class="mb-4">
                                             <label asp-for="PreferredDate" class="mb-2 required"></label>
-                                            <input type="date" asp-for="PreferredDate" class="form-control"/>
+                                            <input type="date" asp-for="PreferredDate" min="@DateTime.Now.ToString("yyyy'-'MM'-'dd")" max="@maxDate.ToString("yyyy'-'MM'-'dd")" class="form-control" />
                                             <span asp-validation-for="PreferredDate" class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-4">
                                             <label asp-for="PreferredTime" class="mb-2 required"></label>
-                                            <input type="time" asp-for="PreferredTime" class="form-control" />
+                                            <input type="time" asp-for="PreferredTime" class="form-control tests" />
                                             <span asp-validation-for="PreferredTime" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -92,7 +95,7 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group-btn mb-0">
-                                        <button type="submit" class="btn btn-primary prime-btn specialBtn">Submit</button>
+                                        <button id="SubmitButtonId" type="submit" class="btn btn-primary prime-btn specialBtn">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -114,6 +117,12 @@
     .specialBtn:hover {
         color: #06A5A0 !important;
         border-color: #06A5A0 !important
+    }
+
+    .specialBtn:disabled {
+        color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+        background-color: #F5F5F5 !important;
     }
 
     .required::after {
@@ -195,6 +204,14 @@
                     })
             }
         )
+
+        $('#CreateAppoinmentFormId').submit(function () {
+            $(this).find("button[type='submit']").prop('disabled', true);
+        });
+
+        $('#CreateAppoinmentFormId').change(function () {
+            $('#SubmitButtonId').prop('disabled', false);
+        });
 
     </script>
 }

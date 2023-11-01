@@ -346,15 +346,44 @@ public class HomeController : Controller
     private void SendAppointmentMailWhenCreated(AppointmentViewModel viewModel)
     {
         var emailBody =
-           $"<p style=\"margin: 0\">\r\n Number : {viewModel.AppointmentNo}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Name : {viewModel.Name}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Phone No : {viewModel.PhoneNo}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Id Card / Passport : {viewModel.IdentityNo}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Reason For Visit : {viewModel.ReasonForVisit}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Speciality : {viewModel.SpecialityName}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Doctor : {viewModel.DoctorName}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Prefered Date : {viewModel.PreferredDateTimeString}</p>\r\n " +
-           $"<p style=\"margin: 0\">\r\n Created Date : {viewModel.CreatedDateString}</p>\r\n ";
+            $"<table style=\"border: 1px solid; border-collapse: collapse; width:100%\">" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Number</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.AppointmentNo}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Name</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.Name}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Phone No</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.PhoneNo}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Id Card / Passport</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.IdentityNo}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Reason For Visit</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.ReasonForVisit}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Speciality</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.SpecialityName}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Doctor</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.DoctorName}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Prefered Date</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.PreferredDateTimeString}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Created Date</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.CreatedDateString}</td>" +
+                $"</tr>" +
+            $"</table>";
 
         var emailHTML = _emailService.GetHTMLEmailContent(
             "Appointment Request",
