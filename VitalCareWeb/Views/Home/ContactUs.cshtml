@@ -1,4 +1,6 @@
-﻿@{
+﻿@using VitalCareWeb.ViewModels;
+@model ContactUsPageViewModel;
+@{
     ViewData["Title"] = "Contact Us";
 }
 
@@ -32,154 +34,84 @@
                         </div>
 
                         <ul class="nav nav-pills mb-3 gap-2" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">VitalCare Dental</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" role="tab" aria-controls="pills-tab2" aria-selected="false">VitalCare Multi Speciality</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-tab3-tab" data-bs-toggle="pill" data-bs-target="#pills-tab3" role="tab" aria-controls="pills-tab3" aria-selected="false">VitalCare Kulhuduffushi</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-tab4-tab" data-bs-toggle="pill" data-bs-target="#pills-tab4" role="tab" aria-controls="pills-tab4" aria-selected="false">VitalCare Huvadhoo</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-tab5-tab" data-bs-toggle="pill" data-bs-target="#pills-tab5" role="tab" aria-controls="pills-tab5" aria-selected="false">Jibon Clinic By VitalCare</button>
-                            </li>
+                            @foreach (var contact in Model.Contacts)
+                            {
+                                <li class="nav-item" role="presentation">
+                                    <button class="@contact.TabClass" id="@contact.TabId" data-bs-toggle="pill" data-bs-target="@contact.DataTarget" role="tab" aria-controls="@contact.AreaControl" aria-selected="true">@contact.Name</button>
+                                </li>
+                            }                           
                         </ul>
+
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab" tabindex="0">
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-map-pin" style="color:#06A5A0 !important"></i>
-                                                    </div>
-                                                    <div class="contact-details">
-                                                        <h4>Address</h4>
-                                                        <p>Lonuziyaarai Magu (Near Jamaalhudheen School)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-phone" style="color:#06A5A0 !important"></i>
-                                                    </div>
-                                                    <div class="contact-details">
-                                                        <div class="row">
-                                                            <h4>Phone</h4>
-                                                            <p>3321315</p>
+                            @foreach (var contact in Model.Contacts)
+                            {
+                                <div class="@contact.TabContentClass" id="@contact.AreaControl" role="tabpanel" aria-labelledby="@contact.TabId" tabindex="0">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="card contact-card h-100">
+                                                    <div class="card-body">
+                                                        <div class="contact-icon">
+                                                            <i class="feather-map-pin" style="color:#06A5A0 !important"></i>
                                                         </div>
-                                                        <div class="row mt-4">
-                                                            <h4>Viber / WhatsApp</h4>
-                                                            <p>9191315</p>
+                                                        <div class="contact-details">
+                                                            <h4>Address</h4>
+                                                            <p>@contact.Address</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-mail" style="color:#06A5A0 !important"></i>
-                                                    </div>
-                                                    <div class="contact-details">
-                                                        <h4>Email Address</h4>
-                                                        <p>info@vitalcaremaldives.com</p>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer d-flex justify-content-center">
-                                                    <ul class="nav text-xl gap-3">
-                                                        <li>
-                                                            <a href="https://www.facebook.com/vitalcaredental" target="_blank"><i class="fab fa-facebook"></i> </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://www.instagram.com/vitalcare.dental/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="contact-map d-flex">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3193.7301009561315!2d-76.13077892422932!3d36.82498697224007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89bae976cfe9f8af%3A0xa61eac05156fbdb9!2sBeachStreet%20USA!5e0!3m2!1sen!2sin!4v1669777904208!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab" tabindex="0">
-                                <div class="col-lg-12">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-map-pin" style="color:#06A5A0 !important"></i>
-                                                    </div>
-                                                    <div class="contact-details">
-                                                        <h4>Address</h4>
-                                                        <p>Lonuziyaarai Magu (Near Jamaalhudheen School)</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-phone" style="color:#06A5A0 !important"></i>
-                                                    </div>
-                                                    <div class="contact-details">
-                                                        <div class="row">
-                                                            <h4>Phone</h4>
-                                                            <p>3031350</p>
+                                            <div class="col-md-4">
+                                                <div class="card contact-card h-100">
+                                                    <div class="card-body">
+                                                        <div class="contact-icon">
+                                                            <i class="feather-phone" style="color:#06A5A0 !important"></i>
                                                         </div>
-                                                        <div class="row mt-4">
-                                                            <h4>Viber / WhatsApp</h4>
-                                                            <p>7601315</p>
+                                                        <div class="contact-details">
+                                                            <div class="row">
+                                                                <h4>Phone</h4>
+                                                                <p>@contact.PhoneNo</p>
+                                                            </div>
+                                                            <div class="row mt-4">
+                                                                <h4>Viber / WhatsApp</h4>
+                                                                <p>@contact.ViberWhatsupNo</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card contact-card h-100">
-                                                <div class="card-body">
-                                                    <div class="contact-icon">
-                                                        <i class="feather-mail" style="color:#06A5A0 !important"></i>
+                                            <div class="col-md-4">
+                                                <div class="card contact-card h-100">
+                                                    <div class="card-body">
+                                                        <div class="contact-icon">
+                                                            <i class="feather-mail" style="color:#06A5A0 !important"></i>
+                                                        </div>
+                                                        <div class="contact-details">
+                                                            <h4>Email Address</h4>
+                                                            <p>@contact.EmailAddress</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="contact-details">
-                                                        <h4>Email Address</h4>
-                                                        <p>info@vitalcaremaldives.com</p>
+                                                    <div class="card-footer d-flex justify-content-center">
+                                                        <ul class="nav text-xl gap-3">
+                                                            <li>
+                                                                <a href="@contact.FacebookURL" target="_blank"><i class="fab fa-facebook"></i> </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="@contact.InstagramURL" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                            </li>
+                                                        </ul>
                                                     </div>
-                                                </div>
-                                                <div class="card-footer d-flex justify-content-center">
-                                                    <ul class="nav text-xl gap-3">
-                                                        <li>
-                                                            <a href="https://www.facebook.com/vitalcareMS" target="_blank"><i class="fab fa-facebook"></i> </a>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row mt-4">
-                                        <div class="contact-map d-flex">
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3193.7301009561315!2d-76.13077892422932!3d36.82498697224007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89bae976cfe9f8af%3A0xa61eac05156fbdb9!2sBeachStreet%20USA!5e0!3m2!1sen!2sin!4v1669777904208!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        <div class="row mt-4">
+                                            <div class="contact-map d-flex">
+                                                <iframe src="@contact.IFrameURL" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-tab3" role="tabpanel" aria-labelledby="pills-tab3-tab" tabindex="0">...</div>
-                            <div class="tab-pane fade" id="pills-tab4" role="tabpanel" aria-labelledby="pills-tab4-tab" tabindex="0">...</div>
+                            }
                         </div>
                     </div>
                 </div>

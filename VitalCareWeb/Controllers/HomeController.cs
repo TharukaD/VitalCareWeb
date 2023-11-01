@@ -244,9 +244,12 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public IActionResult ContactUs()
+    public async Task<IActionResult> ContactUs()
     {
-        return View();
+        var locations = _mapper.Map<IEnumerable<LocationViewModel>>(await _locationService.GetAll());
+        var viewModel = new ContactUsPageViewModel();
+        viewModel.Initialize(locations);
+        return View(viewModel);
     }
 
     #region Appointment

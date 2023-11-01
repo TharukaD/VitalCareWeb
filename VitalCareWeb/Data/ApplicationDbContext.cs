@@ -18,6 +18,7 @@ namespace VitalCareWeb.Data
 		public DbSet<Doctor> Doctors { get; set; }
 		public DbSet<Appointment> Appointments { get; set; }
 		public DbSet<AppointmentReason> AppointmentReasons { get; set; }
+		public DbSet<Inquiry> Inquiries { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -33,6 +34,7 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new DoctorConfiguration());
 			modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
 			modelBuilder.ApplyConfiguration(new AppointmentReasonConfiguration());
+			modelBuilder.ApplyConfiguration(new InquiryConfiguration());
 		}
 	}
 }
