@@ -30,8 +30,7 @@ namespace VitalCareWeb.Entities
 				.HasMaxLength(300);
 
 			builder.Property(x => x.ShortDescription)
-				.IsRequired()
-				.HasMaxLength(300);
+				.IsRequired();
 
 			builder.Property(x => x.LongDescription)
 				.IsRequired();

@@ -5,15 +5,31 @@
 
 <section class="" style="margin-top:170px;margin-bottom:100px;">
     <div class="container">
-        <div class="row">
-            <h3 class="text-center text-success">Successfully submited your appointment !!!</h3>
-            <h5 class="text-center">Our team will contact you withing 1 hour.</h5>
-            <div class="d-flex justify-content-center mt-4">
-                <a asp-controller="Home" asp-action="Index" style="background-color: #06A5A0;border-color:#06A5A0 !important;max-width:200px;" class="btn specialHomeBtn">
-                    <span style="margin-right:5px;">Go to Home</span> <i class="fa fa-arrow-right"></i>
-                </a>
+        @if (ViewBag.AppointmentIsExist == true)
+        {
+            <div class="row">
+                <h3 class="text-center text-success">Successfully submited your appointment !!!</h3>
+                <h3 class="text-center mt-3 mb-3">Appointment No : <span class="badge badge-primary">@ViewBag.AppointmentNumber</span></h3>
+                <h5 class="text-center">Our team will contact you withing 1 hour.</h5>
+                <div class="d-flex justify-content-center mt-4">
+                    <a asp-controller="Home" asp-action="Index" style="background-color: #06A5A0;border-color:#06A5A0 !important;max-width:200px;" class="btn specialHomeBtn">
+                        <span style="margin-right:5px;">Go to Home</span> <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <h3 class="text-center text-danger">Appointment can not find !!!</h3>
+                <h5 class="text-center">Contact us to get more details ( TelNo: 960 3321315 ).</h5>
+                <div class="d-flex justify-content-center mt-4">
+                    <a asp-controller="Home" asp-action="Index" style="background-color: #06A5A0;border-color:#06A5A0 !important;max-width:200px;" class="btn specialHomeBtn">
+                        <span style="margin-right:5px;">Go to Home</span> <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        }
     </div>
 </section>
 
@@ -25,10 +41,10 @@
         border-color: #06A5A0 !important;
     }
 
-    .specialHomeBtn:hover {
-        color: #06A5A0 !important;
-        background-color: white !important;
-        border-color: #06A5A0 !important
-    }
+        .specialHomeBtn:hover {
+            color: #06A5A0 !important;
+            background-color: white !important;
+            border-color: #06A5A0 !important
+        }
 
 </style>

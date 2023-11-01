@@ -3,17 +3,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VitalCareWeb;
 using VitalCareWeb.Data;
+using VitalCareWeb.Extensions;
 using VitalCareWeb.Services.Appointment;
 using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
+using VitalCareWeb.Services.EmailService;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureEmailService(builder.Configuration);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -37,6 +41,7 @@ builder.Services.AddScoped<IArticleCategoryService, ArticleCategoryService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IAppointmentReasonService, AppointmentReasonService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 //---- Mapper Configuration
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();

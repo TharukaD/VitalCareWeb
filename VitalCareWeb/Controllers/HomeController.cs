@@ -6,10 +6,12 @@ using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
+using VitalCareWeb.Services.EmailService;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
+using VitalCareWeb.Utlity;
 using VitalCareWeb.ViewModels;
 using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
@@ -36,6 +38,8 @@ public class HomeController : Controller
     private IArticleCategoryService _articleCategoryService;
     private IAppointmentReasonService _appointmentReasonService;
     private IAppointmentService _appointmentService;
+    private IEmailService _emailService;
+    private readonly IConfiguration _configuration;
 
     public HomeController(
         IMapper mapper,
@@ -48,7 +52,9 @@ public class HomeController : Controller
         ITagService tagService,
         IArticleCategoryService articleCategoryService,
         IAppointmentReasonService appointmentReasonService,
-        IAppointmentService appointmentService
+        IAppointmentService appointmentService,
+        IEmailService emailService,
+        IConfiguration configuration
     )
     {
         _mapper = mapper;
@@ -62,6 +68,8 @@ public class HomeController : Controller
         _articleCategoryService = articleCategoryService;
         _appointmentReasonService = appointmentReasonService;
         _appointmentService = appointmentService;
+        _emailService = emailService;
+        _configuration = configuration;
     }
 
     [HttpGet]
@@ -88,6 +96,7 @@ public class HomeController : Controller
     public async Task<IActionResult> AboutUs()
     {
         var locations = _mapper.Map<List<LocationViewModel>>(await _locationService.GetAll());
+
         return View(locations);
     }
 
@@ -256,14 +265,33 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    public async Task<JsonResult> LoadDoctorsBySpecialityId(int specialityId)
+    {
+        var specialityList = new List<int>();
+        specialityList.Add(specialityId);
+        var doctors = await _doctorService.GetAllFiltered(null, null, null, specialityList);
+        var query = doctors.ToList()
+            .Select(dep => new
+            {
+                key = dep.Id,
+                name = dep.Name,
+            });
+        return Json(query);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> AppoinmentSuccess(int id)
     {
+        bool appointmentIsExist = false;
+        string appointmentNumber = "";
         var appointment = await _appointmentService.GetById(id);
         if (appointment != null)
         {
-            var viewModel = _mapper.Map<AppointmentViewModel>(appointment);
-            return View(viewModel);
+            appointmentIsExist = true;
+            appointmentNumber = HelperMethods.ReturnAppointmentNo(id);
         }
+        ViewBag.AppointmentIsExist = appointmentIsExist;
+        ViewBag.AppointmentNumber = appointmentNumber;
         return View();
     }
 
@@ -302,6 +330,9 @@ public class HomeController : Controller
 
             await _appointmentService.Add(appointment);
 
+            var appointmentViewModel = _mapper.Map<AppointmentViewModel>(appointment);
+            SendAppointmentMailWhenCreated(appointmentViewModel);
+
             return RedirectToAction("AppoinmentSuccess", new { id = appointment.Id });
         }
         catch (Exception ex)
@@ -310,6 +341,37 @@ public class HomeController : Controller
             return RedirectToAction("AppoinmentFailed");
         }
     }
+
+
+    private void SendAppointmentMailWhenCreated(AppointmentViewModel viewModel)
+    {
+        var emailBody =
+           $"<p style=\"margin: 0\">\r\n Number : {viewModel.AppointmentNo}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Name : {viewModel.Name}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Phone No : {viewModel.PhoneNo}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Id Card / Passport : {viewModel.IdentityNo}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Reason For Visit : {viewModel.ReasonForVisit}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Speciality : {viewModel.SpecialityName}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Doctor : {viewModel.DoctorName}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Prefered Date : {viewModel.PreferredDateTimeString}</p>\r\n " +
+           $"<p style=\"margin: 0\">\r\n Created Date : {viewModel.CreatedDateString}</p>\r\n ";
+
+        var emailHTML = _emailService.GetHTMLEmailContent(
+            "Appointment Request",
+        emailBody
+        );
+
+        string emailAddress = _configuration["AppointmentRedirectMailAddress"];
+
+        var isEmailSent = _emailService.SendEmail(
+            new EmailDto
+            {
+                To = emailAddress,
+                Subject = "Appointment Reques",
+                Body = emailHTML
+            });
+    }
+
     #endregion
 
 }
