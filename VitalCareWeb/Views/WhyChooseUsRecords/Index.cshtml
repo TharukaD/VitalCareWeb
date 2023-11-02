@@ -1,0 +1,137 @@
+﻿@using VitalCareWeb.ViewModels.WhyChooseUsRecord;
+@model IEnumerable<WhyChooseUsRecordViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Why Choose Us Records";
+}
+
+@section header{
+    <h3 class="content-header-title">Why Choose Us Records</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="WhyChooseUsRecords" asp-action="Index">Why Choose Us Records</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+@section headerMenu
+{
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
+       data-ajax-update="#DivModalTarget"
+       data-ajax-begin="blockUI"
+       data-ajax-complete="unblockUI"
+       data-toggle="tooltip"
+       asp-action="Add"
+       asp-controller="WhyChooseUsRecords"
+       title="New Record">
+        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
+        New
+    </a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="WhyChooseUsRecordsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Priority</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var record in @Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img height="120" width="120" src="@record.ImageUrl" />
+                                                <div style="margin-top:5px;">
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="UploadWhyChooseUsRecordImage"
+                                                        asp-controller="WhyChooseUsRecords"
+                                                   asp-route-id="@record.Id"
+                                                        title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
+                                                </div>                                                
+                                            </td>
+                                            <td> @record.Name</td>
+                                            <td> @record.Description</td>
+                                            <td> @record.Priority</td>
+                                            <td class="text-center">
+                                                <div>            
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="WhyChooseUsRecords"
+                                                        asp-route-id="@record.Id"
+                                                        title="Edit record">
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="WhyChooseUsRecords"
+                                                        asp-route-id="@record.Id"
+                                                        title="Delete record">
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#WhyChooseUsRecordsNavId").addClass("active");
+
+            $("#WhyChooseUsRecordsTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}

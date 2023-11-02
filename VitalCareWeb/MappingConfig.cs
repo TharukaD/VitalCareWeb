@@ -11,6 +11,7 @@ using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
 using VitalCareWeb.ViewModels.Tag;
+using VitalCareWeb.ViewModels.WhyChooseUsRecord;
 
 namespace VitalCareWeb
 {
@@ -82,6 +83,12 @@ namespace VitalCareWeb
                 config.CreateMap<Inquiry, InquiryViewModel>()
                     .ForMember(r => r.CreatedOnString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.CreatedOn)));
                 config.CreateMap<CreateInquiryViewModel, Inquiry>();
+                #endregion
+
+                #region WhyChooseUsRecord
+                config.CreateMap<WhyChooseUsRecord, WhyChooseUsRecordViewModel>()
+                    .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnWhyChooseUsRecordImagePath(src.Image)));
+                config.CreateMap<WhyChooseUsRecord, AddEditWhyChooseUsRecordViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

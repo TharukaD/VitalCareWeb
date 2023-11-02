@@ -12,6 +12,7 @@ using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
+using VitalCareWeb.Services.WhyChooseUsRecord;
 using VitalCareWeb.Utlity;
 using VitalCareWeb.ViewModels;
 using VitalCareWeb.ViewModels.Appoinment;
@@ -24,6 +25,7 @@ using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
 using VitalCareWeb.ViewModels.Tag;
+using VitalCareWeb.ViewModels.WhyChooseUsRecord;
 
 namespace VitalCareWeb.Controllers;
 
@@ -42,6 +44,7 @@ public class HomeController : Controller
     private IAppointmentService _appointmentService;
     private IInquiryService _inquiryService;
     private IEmailService _emailService;
+    private IWhyChooseUsRecordService _whyChooseUsRecordService;
     private readonly IConfiguration _configuration;
 
     public HomeController(
@@ -58,6 +61,7 @@ public class HomeController : Controller
         IAppointmentService appointmentService,
         IInquiryService inquiryService,
         IEmailService emailService,
+        IWhyChooseUsRecordService whyChooseUsRecordService,
         IConfiguration configuration
     )
     {
@@ -75,6 +79,7 @@ public class HomeController : Controller
         _inquiryService = inquiryService;
         _emailService = emailService;
         _configuration = configuration;
+        _whyChooseUsRecordService = whyChooseUsRecordService;
     }
 
     [HttpGet]
@@ -92,7 +97,10 @@ public class HomeController : Controller
         viewModel.ServiceGroups = serviceGroups;
 
         var locations = await _locationService.GetAll();
-        viewModel.Locations = _mapper.Map<List<LocationViewModel>>(locations); ;
+        viewModel.Locations = _mapper.Map<List<LocationViewModel>>(locations);
+
+        var whyChooseUsRecords = await _whyChooseUsRecordService.GetAll();
+        viewModel.WhyChooseUsRecords = _mapper.Map<List<WhyChooseUsRecordViewModel>>(whyChooseUsRecords);
 
         return View(viewModel);
     }

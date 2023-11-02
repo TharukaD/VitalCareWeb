@@ -46,6 +46,17 @@
             return ImagePath;
         }
 
+        public static string ReturnWhyChooseUsRecordImagePath(string locationImage)
+        {
+            string ImagePath = "/img/WhyChooseUsRecordImages/default.jpg";
+            if (!string.IsNullOrEmpty(locationImage))
+            {
+                ImagePath = $"/img/WhyChooseUsRecordImages/{locationImage}";
+            }
+
+            return ImagePath;
+        }
+
         public static string ReturnAppointmentNo(int id)
         {
             string output = id.ToString().PadLeft(5, '0');

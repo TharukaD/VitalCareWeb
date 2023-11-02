@@ -15,6 +15,7 @@ using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
+using VitalCareWeb.Services.WhyChooseUsRecord;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,7 @@ builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IAppointmentReasonService, AppointmentReasonService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IInquiryService, InquiryService>();
+builder.Services.AddScoped<IWhyChooseUsRecordService, WhyChooseUsRecordService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 //---- Mapper Configuration
