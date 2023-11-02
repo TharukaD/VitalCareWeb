@@ -20,6 +20,7 @@ namespace VitalCareWeb.Data
 		public DbSet<AppointmentReason> AppointmentReasons { get; set; }
 		public DbSet<Inquiry> Inquiries { get; set; }
 		public DbSet<WhyChooseUsRecord> WhyChooseUsRecords { get; set; }
+		public DbSet<CounterRecord> CounterRecords { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -37,6 +38,7 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new AppointmentReasonConfiguration());
 			modelBuilder.ApplyConfiguration(new InquiryConfiguration());
 			modelBuilder.ApplyConfiguration(new WhyChooseUsRecordConfiguration());
+			modelBuilder.ApplyConfiguration(new CounterRecordConfiguration());
 		}
 	}
 }
