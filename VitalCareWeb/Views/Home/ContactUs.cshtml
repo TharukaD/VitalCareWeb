@@ -131,41 +131,44 @@
                             <h6 style="color:#06A5A0 !important">Get in touch</h6>
                             <h2>Have Any Question?</h2>
                         </div>
-                        <form action="#">
+                        <form method="post"
+                              asp-action="CreateInquery"
+                              asp-controller="Home"
+                              id="CreateInqueryFormId">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="mb-2">Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your Name">
+                                        <label asp-for="CreateInquiryViewModel.Name" class="mb-2 required"></label>
+                                        <input asp-for="CreateInquiryViewModel.Name" class="form-control" placeholder="Enter Your Name" />
+                                        <span asp-validation-for="CreateInquiryViewModel.Name" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="mb-2">Email Address</label>
-                                        <input type="text" class="form-control" placeholder="Enter Email Address">
+                                        <label asp-for="CreateInquiryViewModel.EmailAddress" class="mb-2 required"></label>
+                                        <input asp-for="CreateInquiryViewModel.EmailAddress" class="form-control" placeholder="Enter Email Address" />
+                                        <span asp-validation-for="CreateInquiryViewModel.EmailAddress" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="mb-2">Phone Number</label>
-                                        <input type="text" class="form-control" placeholder="Enter Phone Number">
+                                        <label asp-for="CreateInquiryViewModel.PhoneNo" class="mb-2 required"></label>
+                                        <input asp-for="CreateInquiryViewModel.PhoneNo" class="form-control" placeholder="Enter Phone Number" />
+                                        <span asp-validation-for="CreateInquiryViewModel.PhoneNo" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="mb-2">Services</label>
-                                        <input type="text" class="form-control" placeholder="Enter Services">
-                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label class="mb-2">Message</label>
-                                        <textarea class="form-control" placeholder="Enter your Inquery" rows="4"></textarea>
+                                        <label asp-for="CreateInquiryViewModel.Message" class="mb-2 required"></label>
+                                        <textarea asp-for="CreateInquiryViewModel.Message" rows="4" class="form-control" placeholder="Enter your Inquery"></textarea>
+                                        <span asp-validation-for="CreateInquiryViewModel.Message" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group-btn mb-0">
-                                        <button type="submit" class="btn btn-primary prime-btn specialBtn">Send Message</button>
+                                        <button type="submit" class="btn btn-primary prime-btn specialBtn" id="SubmitButtonId">Send Message</button>
                                     </div>
                                 </div>
                             </div>
@@ -198,6 +201,12 @@
     .specialBtn:hover {
         color: #06A5A0 !important;
         border-color: #06A5A0 !important
+    }
+
+    .specialBtn:disabled {
+        color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+        background-color: #F5F5F5 !important;
     }
 
 </style>
@@ -235,6 +244,13 @@
 @section Scripts{
     <script>
 
+        $('#CreateInqueryFormId').submit(function () {
+            $(this).find("button[type='submit']").prop('disabled', true);
+        });
+
+        $('#CreateInqueryFormId').change(function () {
+            $('#SubmitButtonId').prop('disabled', false);
+        });
 
     </script>
 }

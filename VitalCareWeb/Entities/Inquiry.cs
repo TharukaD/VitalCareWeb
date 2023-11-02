@@ -10,6 +10,7 @@ namespace VitalCareWeb.Entities
         public string EmailAddress { get; set; }
         public string PhoneNo { get; set; }
         public string Message { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 
     public class InquiryConfiguration : IEntityTypeConfiguration<Inquiry>

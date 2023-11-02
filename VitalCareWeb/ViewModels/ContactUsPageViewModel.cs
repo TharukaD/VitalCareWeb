@@ -1,10 +1,12 @@
-﻿using VitalCareWeb.ViewModels.Location;
+﻿using VitalCareWeb.ViewModels.Inquiry;
+using VitalCareWeb.ViewModels.Location;
 
 namespace VitalCareWeb.ViewModels
 {
     public class ContactUsPageViewModel
     {
         public List<ContactUsTabViewModel> Contacts { get; set; }
+        public CreateInquiryViewModel CreateInquiryViewModel { get; set; }
 
         public void Initialize(IEnumerable<LocationViewModel> locations)
         {

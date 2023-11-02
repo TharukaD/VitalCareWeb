@@ -6,6 +6,7 @@ using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
@@ -75,6 +76,12 @@ namespace VitalCareWeb
                     .ForMember(r => r.PreferredDateTimeString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.PreferredDateTime)))
                     .ForMember(r => r.CreatedDateString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.CreatedDate)));
                 config.CreateMap<CreateAppoinmentViewModel, Appointment>();
+                #endregion
+
+                #region Inquiry
+                config.CreateMap<Inquiry, InquiryViewModel>()
+                    .ForMember(r => r.CreatedOnString, opt => opt.MapFrom(src => HelperMethods.ToDateTimeString(src.CreatedOn)));
+                config.CreateMap<CreateInquiryViewModel, Inquiry>();
                 #endregion
             });
             return mappingConfig;

@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Inquiry";
+} 
+
+
+<section class="" style="margin-top:170px;margin-bottom:100px;">
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center text-success">Successfully submited your inquiry !!!</h3>
+            <h5 class="text-center">Our team will contact you.</h5>
+            <div class="d-flex justify-content-center mt-4">
+                <a asp-controller="Home" asp-action="Index" style="background-color: #06A5A0;border-color:#06A5A0 !important;max-width:200px;" class="btn specialHomeBtn">
+                    <span style="margin-right:5px;">Go to Home</span> <i class="fa fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .specialHomeBtn {
+        color: white;
+        background-color: #06A5A0;
+        border-color: #06A5A0 !important;
+    }
+
+    .specialHomeBtn:hover {
+        color: #06A5A0 !important;
+        background-color: white !important;
+        border-color: #06A5A0 !important
+    }
+
+</style>

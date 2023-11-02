@@ -10,6 +10,7 @@ using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
+using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
@@ -41,6 +42,7 @@ builder.Services.AddScoped<IArticleCategoryService, ArticleCategoryService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IAppointmentReasonService, AppointmentReasonService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<IInquiryService, InquiryService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 //---- Mapper Configuration

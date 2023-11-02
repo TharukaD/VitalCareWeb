@@ -7,6 +7,7 @@ using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
+using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
@@ -18,6 +19,7 @@ using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
@@ -38,6 +40,7 @@ public class HomeController : Controller
     private IArticleCategoryService _articleCategoryService;
     private IAppointmentReasonService _appointmentReasonService;
     private IAppointmentService _appointmentService;
+    private IInquiryService _inquiryService;
     private IEmailService _emailService;
     private readonly IConfiguration _configuration;
 
@@ -53,6 +56,7 @@ public class HomeController : Controller
         IArticleCategoryService articleCategoryService,
         IAppointmentReasonService appointmentReasonService,
         IAppointmentService appointmentService,
+        IInquiryService inquiryService,
         IEmailService emailService,
         IConfiguration configuration
     )
@@ -68,6 +72,7 @@ public class HomeController : Controller
         _articleCategoryService = articleCategoryService;
         _appointmentReasonService = appointmentReasonService;
         _appointmentService = appointmentService;
+        _inquiryService = inquiryService;
         _emailService = emailService;
         _configuration = configuration;
     }
@@ -406,4 +411,89 @@ public class HomeController : Controller
 
     #endregion
 
+    #region Inquiry
+    [HttpGet]
+    public IActionResult InquirySuccess(int id)
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult InquiryFailed()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateInquery(ContactUsPageViewModel viewModel)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("ContactUs");
+            }
+
+            var inquiry = _mapper.Map<Inquiry>(viewModel.CreateInquiryViewModel);
+            inquiry.CreatedOn = DateTime.Now;
+
+            await _inquiryService.Add(inquiry);
+            var inquiryViewModel = _mapper.Map<InquiryViewModel>(inquiry);
+
+            SendInquiryMailWhenCreated(inquiryViewModel);
+
+            return RedirectToAction("InquirySuccess");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return RedirectToAction("AppoinmentFailed");
+        }
+    }
+
+
+    private void SendInquiryMailWhenCreated(InquiryViewModel viewModel)
+    {
+        var emailBody =
+            $"<table style=\"border: 1px solid; border-collapse: collapse; width:100%\">" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Name</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.Name}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Email Address</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.EmailAddress}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Phone Number</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.PhoneNo}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Message</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.Message}</td>" +
+                $"</tr>" +
+                $"<tr style=\"border: 1px solid\">" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">Created Date</td>" +
+                     $"<td style=\"border: 1px solid; padding: 7px\">{viewModel.CreatedOnString}</td>" +
+                $"</tr>" +
+            $"</table>";
+
+        var emailHTML = _emailService.GetHTMLEmailContent(
+            "Inquiry Request",
+            emailBody
+        );
+
+        string emailAddress = _configuration["AppointmentRedirectMailAddress"];
+
+        var isEmailSent = _emailService.SendEmail(
+            new EmailDto
+            {
+                To = emailAddress,
+                Subject = "Appointment Reques",
+                Body = emailHTML
+            });
+    }
+
+
+    #endregion
 }

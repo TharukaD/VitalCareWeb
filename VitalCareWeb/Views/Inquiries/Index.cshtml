@@ -1,0 +1,81 @@
+﻿@using VitalCareWeb.ViewModels.Inquiry;
+@model IEnumerable<InquiryViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "Inquiries";
+}
+
+@section header{
+    <h3 class="content-header-title">Inquiries</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Inquiries" asp-action="Index">Inquiries</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="InquiriesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Created Date</th>
+                                        <th>Email</th>
+                                        <th>Phone No</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var appointment in @Model)
+                                    {
+                                        <tr>
+                                            <td> @appointment.CreatedOnString</td>
+                                            <td> @appointment.EmailAddress</td>
+                                            <td> @appointment.PhoneNo</td>
+                                            <td> @appointment.Message</td>                                           
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#InquiriesNavId").addClass("active");
+
+            $("#InquiriesTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    "order": [0,'desc'],
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}
