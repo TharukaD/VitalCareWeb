@@ -7,7 +7,8 @@ namespace VitalCareWeb.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
+        public string CountInfo { get; set; }
+        public string? Image { get; set; }
         public int Priority { get; set; }
     }
 
@@ -19,6 +20,10 @@ namespace VitalCareWeb.Entities
 
             builder.Property(x => x.Image)
                .HasMaxLength(200);
+
+            builder.Property(x => x.CountInfo)
+             .IsRequired()
+             .HasMaxLength(100);
 
             builder.Property(x => x.Name)
                 .IsRequired()

@@ -57,6 +57,17 @@
             return ImagePath;
         }
 
+        public static string ReturnCounterRecordImagePath(string image)
+        {
+            string ImagePath = "/img/CounterRecordImages/default.jpg";
+            if (!string.IsNullOrEmpty(image))
+            {
+                ImagePath = $"/img/CounterRecordImages/{image}";
+            }
+
+            return ImagePath;
+        }
+
         public static string ReturnAppointmentNo(int id)
         {
             string output = id.ToString().PadLeft(5, '0');

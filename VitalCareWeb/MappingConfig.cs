@@ -5,6 +5,7 @@ using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
+using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
@@ -89,6 +90,12 @@ namespace VitalCareWeb
                 config.CreateMap<WhyChooseUsRecord, WhyChooseUsRecordViewModel>()
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnWhyChooseUsRecordImagePath(src.Image)));
                 config.CreateMap<WhyChooseUsRecord, AddEditWhyChooseUsRecordViewModel>().ReverseMap();
+                #endregion
+
+                #region CounterRecord
+                config.CreateMap<CounterRecord, CounterRecordViewModel>()
+                    .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnCounterRecordImagePath(src.Image)));
+                config.CreateMap<CounterRecord, AddEditCounterRecordViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

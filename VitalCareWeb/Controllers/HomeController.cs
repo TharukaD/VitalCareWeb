@@ -5,6 +5,7 @@ using VitalCareWeb.Services.Appointment;
 using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
+using VitalCareWeb.Services.CounterRecord;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
 using VitalCareWeb.Services.Inquiry;
@@ -19,6 +20,7 @@ using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
+using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
@@ -45,6 +47,7 @@ public class HomeController : Controller
     private IInquiryService _inquiryService;
     private IEmailService _emailService;
     private IWhyChooseUsRecordService _whyChooseUsRecordService;
+    private ICounterRecordService _counterRecordService;
     private readonly IConfiguration _configuration;
 
     public HomeController(
@@ -62,6 +65,7 @@ public class HomeController : Controller
         IInquiryService inquiryService,
         IEmailService emailService,
         IWhyChooseUsRecordService whyChooseUsRecordService,
+        ICounterRecordService counterRecordService,
         IConfiguration configuration
     )
     {
@@ -80,6 +84,7 @@ public class HomeController : Controller
         _emailService = emailService;
         _configuration = configuration;
         _whyChooseUsRecordService = whyChooseUsRecordService;
+        _counterRecordService = counterRecordService;
     }
 
     [HttpGet]
@@ -101,6 +106,9 @@ public class HomeController : Controller
 
         var whyChooseUsRecords = await _whyChooseUsRecordService.GetAll();
         viewModel.WhyChooseUsRecords = _mapper.Map<List<WhyChooseUsRecordViewModel>>(whyChooseUsRecords);
+
+        var counterRecords = await _counterRecordService.GetAll();
+        viewModel.CounterRecords = _mapper.Map<List<CounterRecordViewModel>>(counterRecords);
 
         return View(viewModel);
     }
