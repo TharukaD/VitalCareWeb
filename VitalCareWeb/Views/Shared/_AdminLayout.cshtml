@@ -165,13 +165,31 @@
                     </a>
                 </li>
 
-                <li class="nav-item navItems text-white" id="BrandsNavId">
-                    <a asp-controller="Brands" asp-action="Index">
+                <li class="nav-item navItems">
+                    <a href="#">
                         <i class="la la-flag"></i>
                         <span class="menu-title">
-                            Brands
+                            Manage Brands
                         </span>
                     </a>
+                    <ul class="menu-content">
+                        <li id="BrandsNavId">
+                            <a asp-controller="Brands" asp-action="Index">
+                                <span class="menu-title">
+                                    Brands
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="menu-content">
+                        <li id="ProductsNavId">
+                            <a asp-controller="Products" asp-action="Index">
+                                <span class="menu-title">
+                                    Products
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item navItems" id="SettingsNavId">

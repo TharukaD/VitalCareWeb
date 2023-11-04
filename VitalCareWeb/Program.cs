@@ -14,6 +14,7 @@ using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
 using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.Services.Location;
+using VitalCareWeb.Services.Product;
 using VitalCareWeb.Services.Serivice;
 using VitalCareWeb.Services.Speciality;
 using VitalCareWeb.Services.Tag;
@@ -48,6 +49,7 @@ builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IInquiryService, InquiryService>();
 builder.Services.AddScoped<IWhyChooseUsRecordService, WhyChooseUsRecordService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<ICounterRecordService, CounterRecordService>();
 builder.Services.AddScoped<IEmailService, EmailService>();

@@ -181,27 +181,55 @@
         </div>
     </div>
 </section>
-<!-- /Doctors Section -->
+<!-- /Locations Section -->
 
-<!-- services Section -->
+<!-- Brands Section -->
 <section class="services-section-fourteen">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 aos" data-aos="fade-up">
                 <div class="section-header-fourteen">
-                    <h2>Our Services</h2>
-                    <p>Our Professional Services</p>
+                    <h2>Our Brands</h2>
+                    <p>We provide wide range of medicine brands</p>
                 </div>
             </div>
         </div>
 
-        <partial model="@Model.ServiceGroups" name="/Views/Home/_ServicesList.cshtml" />
+        <div class="row d-flex justify-content-center" data-aos="fade-up">
+            @foreach (var brand in @Model.Brands)
+            {
+                <div class="col-md-6 col-lg-3 col-sm-6 aos px-sm-3 px-5" data-aos="fade-up">
+                    <div class="blog grid-blog row" style="background-color:#f9fafb !important">
+                        <div class="blog-image">
+                            <img class="img-fluid px-3 px-sm-1 px-md-0" src="@brand.ImageUrl" height="100" width="100" alt="Post Image">
+                        </div>
+                        <div class="blog-content">
+                            <h3 class="blog-title">
+                                <a>
+                                    @brand.Name
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
-        <partial name="/Views/Home/_InsuranceList.cshtml" />
-    
+        <div class="row">
+            <div class="banner-content aos d-flex justify-content-center" data-aos="fade-up" style="margin-top:20px;padding-bottom:0px !important">
+                <a asp-controller="Home" asp-action="AllBrands" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">View More</a>
+            </div>
+        </div>
+
     </div>
 </section>
-<!-- /services Section -->
+<!-- /Brands Section -->
+
+<!-- Insurance -->
+<section class="doctors-section">
+    <partial name="/Views/Home/_InsuranceList.cshtml" />
+</section>
+<!-- /Insurance -->
 
 <!-- Why choose us -->
 <section class="work-sections" style="margin-top:50px;margin-bottom:50px">

@@ -1,17 +1,17 @@
-﻿@using VitalCareWeb.ViewModels.Brand;
-@model IEnumerable<BrandViewModel>;
+﻿@using VitalCareWeb.ViewModels.Product;
+@model IEnumerable<ProductViewModel>;
 @{
     Layout = "_AdminLayout";
-    ViewBag.Title = "Brands";
+    ViewBag.Title = "Products";
 }
 
 @section header{
-    <h3 class="content-header-title">Brands</h3>
+    <h3 class="content-header-title">Products</h3>
     <div class="row breadcrumbs-top">
         <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a asp-controller="Brands" asp-action="Index">Brands</a>
+                    <a asp-controller="Products" asp-action="Index">Products</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a>List</a>
@@ -24,13 +24,13 @@
 @section headerMenu
 {
     <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
-       data-ajax="true"
+        data-ajax="true"
        data-ajax-update="#DivModalTarget"
        data-ajax-begin="blockUI"
        data-ajax-complete="unblockUI"
        data-toggle="tooltip"
        asp-action="Add"
-       asp-controller="Brands">
+       asp-controller="Products">
         <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
         New
     </a>
@@ -43,44 +43,49 @@
                 <div class="row ">
                     <div class="col-md-12 ">
                         <div class="table-responsive">
-                            <table class="table align-items-center table-sm " id="BrandsTable">
+                            <table class="table align-items-center table-sm " id="ProductsTable">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
                                         <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Products</th>
+                                        <th>Brand</th>
+                                        <th>Short Description</th>
+                                        <th>Long Description</th>
+                                        <th>Price</th>     
+                                        <th>Old Price</th>
                                         <th>Priority</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var brand in @Model)
+                                    @foreach(var product in @Model)
                                     {
                                         <tr>
                                             <td>
-                                                <img height="120" width="120" src="@brand.ImageUrl" />
+                                                <img height="120" width="120" src="@product.ImageUrl" />
                                                 <div style="margin-top:5px;">
                                                     <a data-ajax="true"
                                                         data-ajax-update="#DivModalTarget"
                                                         data-ajax-begin="blockUI"
                                                         data-ajax-complete="unblockUI"
                                                         data-toggle="tooltip"
-                                                        asp-action="UploadBrandImage"
-                                                        asp-controller="Brands"
-                                                        asp-route-id="@brand.Id"
+                                                        asp-action="UploadProductImage"
+                                                        asp-controller="Products"
+                                                        asp-route-id="@product.Id"
                                                         title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
                                                 </div>                                                
                                             </td>
-                                            <td> @brand.Name</td>
-                                            <td> @brand.Description</td>
+                                            <td> @product.Name</td>
+                                            <td> @product.BrandName</td>
+                                            <td> @product.ShortDescription</td>
                                             <td>
-                                                @foreach (var product in brand.Products)
-                                                {
-                                                    <div class="badge badge-success">@product.Name</div>
-                                                }
+                                                <span class="d-inline-block text-truncate modyfiedText">
+                                                    @product.LongDescription
+                                                </span>  
                                             </td>
-                                            <td> @brand.Priority</td>
+                                            <td> @product.Price</td>
+                                            <td> @product.OldPrice</td>
+                                            <td> @product.Priority</td>
                                             <td class="text-center">
                                                 <div>            
                                                     <a data-ajax="true"
@@ -89,9 +94,8 @@
                                                         data-ajax-complete="unblockUI"
                                                         data-toggle="tooltip"
                                                         asp-action="Edit"
-                                                        asp-controller="Brands"
-                                                        asp-route-id="@brand.Id"
-                                                        >
+                                                        asp-controller="Products"
+                                                        asp-route-id="@product.Id">
                                                         Edit
                                                     </a>
                                                     <span> | </span>
@@ -101,9 +105,8 @@
                                                         data-ajax-complete="unblockUI"
                                                         data-toggle="tooltip"
                                                         asp-action="Delete"
-                                                        asp-controller="Brands"
-                                                        asp-route-id="@brand.Id"
-                                                        >
+                                                        asp-controller="Products"
+                                                        asp-route-id="@product.Id">
                                                         <span class="text-danger">Delete</span>
                                                     </a>
                                                 </div>
@@ -120,14 +123,26 @@
     </div>
 </div>
 
+<style>
+
+    .modyfiedText {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 300px !important;
+        max-height: 150px !important;
+    }
+
+</style>
+
 @section Scripts{
     <script>
         $(function () {
 
             $(".navItems").removeClass("active");
-            $("#BrandsNavId").addClass("active");
+            $("#ProductsNavId").addClass("active");
 
-            $("#BrandsTable").dataTable(
+            $("#ProductsTable").dataTable(
                 {
                     bLengthChange: true,
                     bPaginate: true,

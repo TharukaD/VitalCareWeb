@@ -5,6 +5,7 @@ using VitalCareWeb.Services.Appointment;
 using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
 using VitalCareWeb.Services.ArticleCategory;
+using VitalCareWeb.Services.Brand;
 using VitalCareWeb.Services.CounterRecord;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
@@ -20,6 +21,7 @@ using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
 using VitalCareWeb.ViewModels.ArticleCategory;
+using VitalCareWeb.ViewModels.Brand;
 using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Inquiry;
@@ -48,6 +50,7 @@ public class HomeController : Controller
     private IEmailService _emailService;
     private IWhyChooseUsRecordService _whyChooseUsRecordService;
     private ICounterRecordService _counterRecordService;
+    private IBrandService _brandService;
     private readonly IConfiguration _configuration;
 
     public HomeController(
@@ -66,6 +69,7 @@ public class HomeController : Controller
         IEmailService emailService,
         IWhyChooseUsRecordService whyChooseUsRecordService,
         ICounterRecordService counterRecordService,
+        IBrandService brandService,
         IConfiguration configuration
     )
     {
@@ -85,6 +89,7 @@ public class HomeController : Controller
         _configuration = configuration;
         _whyChooseUsRecordService = whyChooseUsRecordService;
         _counterRecordService = counterRecordService;
+        _brandService = brandService;
     }
 
     [HttpGet]
@@ -110,6 +115,9 @@ public class HomeController : Controller
         var counterRecords = await _counterRecordService.GetAll();
         viewModel.CounterRecords = _mapper.Map<List<CounterRecordViewModel>>(counterRecords);
 
+        var brands = await _brandService.GetAll();
+        viewModel.Brands = _mapper.Map<List<BrandViewModel>>(brands);
+
         return View(viewModel);
     }
 
@@ -126,6 +134,13 @@ public class HomeController : Controller
     {
         var serviceGroups = await ReturnAllServicesGroupWithLocations(locationId);
         return View(serviceGroups);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AllBrands()
+    {
+        var allBrands = _mapper.Map<IList<BrandViewModel>>(await _brandService.GetAll());
+        return View(allBrands);
     }
 
     private async Task<List<ServiceGroupViewModel>> ReturnAllServicesGroupWithLocations(int? locationId)

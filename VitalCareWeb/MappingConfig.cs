@@ -10,6 +10,7 @@ using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
 using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
+using VitalCareWeb.ViewModels.Product;
 using VitalCareWeb.ViewModels.Service;
 using VitalCareWeb.ViewModels.Speciality;
 using VitalCareWeb.ViewModels.Tag;
@@ -101,8 +102,30 @@ namespace VitalCareWeb
 
                 #region Brand
                 config.CreateMap<Brand, BrandViewModel>()
+                    .ForMember(r => r.Products, opt => opt.MapFrom(src =>
+                        src.Products.Select(r =>
+                            new ProductViewModel
+                            {
+                                Id = r.Id,
+                                Name = r.Name,
+                                ImageUrl = HelperMethods.ReturnProductImagePath(r.Image),
+                                ShortDescription = r.ShortDescription,
+                                LongDescription = r.LongDescription,
+                                Price = r.Price,
+                                PriceString = "MVR " + r.Price.ToString("0.##"),
+                                OldPrice = r.OldPrice,
+                                OldPriceString = "MVR " + r.OldPrice.ToString("0.##"),
+                                PurchaseUrl = r.PurchaseUrl,
+                            })))
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnBrandImagePath(src.Image)));
                 config.CreateMap<Brand, AddEditBrandViewModel>().ReverseMap();
+                #endregion
+
+                #region Product
+                config.CreateMap<Product, ProductViewModel>()
+                    .ForMember(r => r.BrandName, opt => opt.MapFrom(src => src.Brand.Name))
+                    .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnProductImagePath(src.Image)));
+                config.CreateMap<Product, AddEditProductViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

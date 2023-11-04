@@ -18,7 +18,7 @@ public class BrandService : IBrandService
 
     public async Task<IEnumerable<Brand>> GetAll()
     {
-        return await _context.Brands.OrderBy(r => r.Priority).ToListAsync();
+        return await _context.Brands.Include(r => r.Products).OrderBy(r => r.Priority).ToListAsync();
     }
 
     public async Task<bool> Add(Brand brand)

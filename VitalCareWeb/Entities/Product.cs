@@ -9,9 +9,11 @@ namespace VitalCareWeb.Entities
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
         public double Price { get; set; }
+        public double OldPrice { get; set; }
         public int Priority { get; set; }
+        public string? PurchaseUrl { get; set; }
 
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
