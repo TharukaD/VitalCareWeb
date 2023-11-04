@@ -46,6 +46,18 @@
             return ImagePath;
         }
 
+        public static string ReturnBrandImagePath(string image)
+        {
+            string ImagePath = "/img/BrandImages/default.jpg";
+            if (!string.IsNullOrEmpty(image))
+            {
+                ImagePath = $"/img/BrandImages/{image}";
+            }
+
+            return ImagePath;
+        }
+
+
         public static string ReturnWhyChooseUsRecordImagePath(string locationImage)
         {
             string ImagePath = "/img/WhyChooseUsRecordImages/default.jpg";

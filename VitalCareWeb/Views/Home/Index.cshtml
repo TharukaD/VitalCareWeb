@@ -5,20 +5,17 @@
 }
 
 <!-- Home Banner -->
-<section class="banner-section d-flex align-items-center homeBackgroundImage" style="height:90vh;">
+<section class="banner-section d-flex align-items-center homeBackgroundImage" style="height:90vh;" id="xxx">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <div class="banner-content aos" data-aos="fade-up">
-                    <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important">Best Doctors</span> Your Nearby Location.</h1>
+                    <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important;">Best Doctors</span> Your Nearby Location.</h1>
                     <p>Feel free to contact us, get better service.</p>
                     <a asp-controller="Home" asp-action="Appointment" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn"><span style="margin-right:5px;">Book an appoinment</span> <i class="fa fa-arrow-right"></i></a>
                 </div>                
             </div>
             <div class="col-lg-6">
-                @*<div class="banner-img aos" data-aos="fade-up">
-                    <img src="~/assets/img/DocImage-1.png" class="img-fluid" alt="patient-image" style="margin-top:50px;padding-left:100px;">
-                </div>*@
             </div>
         </div>
     </div>
@@ -363,7 +360,7 @@
 
    
 
-    @@media (min-width:320px) {
+   /* @@media (min-width:320px) {
         .divHeight {
             margin-top: 120px;
         }
@@ -394,11 +391,6 @@
             background-image: url('/assets/img/homeImageMobile.png') !important;
             background-size: 100% 100%;
         }
-
-        /* .homeBackgroundImage{
-            background-image: url('/assets/img/homeImage.jpeg') !important;
-            background-size: 100% 100%;
-        }*/
     }
 
     @@media (min-width:992px) {
@@ -410,7 +402,7 @@
             background-image: url('/assets/img/homeImage.jpeg') !important;
             background-size: 100% 100%;
         }
-    }
+    }*/
 
     .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
         background-color: #06A5A0 !important;
@@ -495,7 +487,28 @@
 @section Scripts{
     <script>
 
+        const images = ['url(/assets/img/Home/bg-3.jpg)', 'url(/assets/img/homeImage.jpeg)']
+        let counter = 0;
+        const arrayLength = images.length;
 
+        $('#xxx').css({ 'backgroundImage': images[0], 'background-repeat': 'no-repeat', 'background-size': "cover" });
+
+        function changeBg(){
+            const index = counter % arrayLength;
+            const bg = images[index];
+            $('#xxx').css({ 'backgroundImage': bg, 'background-repeat': 'no-repeat', 'background-size': "cover" });
+            
+            counter += 1;
+
+            console.log(index);
+        }
+
+        setInterval(changeBg,5000)
+
+        
+        //$('.carousel').carousel({
+        //    interval: 2000
+        //})
 
     </script>
 }

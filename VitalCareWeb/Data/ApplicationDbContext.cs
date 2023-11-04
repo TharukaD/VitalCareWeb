@@ -21,6 +21,8 @@ namespace VitalCareWeb.Data
 		public DbSet<Inquiry> Inquiries { get; set; }
 		public DbSet<WhyChooseUsRecord> WhyChooseUsRecords { get; set; }
 		public DbSet<CounterRecord> CounterRecords { get; set; }
+		public DbSet<Brand> Brands { get; set; }
+		public DbSet<Product> Products { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -39,6 +41,8 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new InquiryConfiguration());
 			modelBuilder.ApplyConfiguration(new WhyChooseUsRecordConfiguration());
 			modelBuilder.ApplyConfiguration(new CounterRecordConfiguration());
+			modelBuilder.ApplyConfiguration(new BrandConfiguration());
+			modelBuilder.ApplyConfiguration(new ProductConfiguration());
 		}
 	}
 }
