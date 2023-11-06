@@ -2,16 +2,17 @@
 @model HomePageViewModel
 @{
     ViewData["Title"] = "Male' Maldives'";
+    var banners = @Html.Raw(Json.Serialize(Model.Banners));
 }
 
 <!-- Home Banner -->
-<section class="banner-section d-flex align-items-center homeBackgroundImage" style="height:90vh;" id="xxx">
+<section class="banner-section d-flex align-items-center homeBackgroundImage" style="height:90vh;" id="HomeBannerSectionId">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <div class="banner-content aos" data-aos="fade-up">
-                    <h1 class="mt-md-5">Consult <span style="color:#06A5A0 !important;">Best Doctors</span> Your Nearby Location.</h1>
-                    <p>Feel free to contact us, get better service.</p>
+                    <h1 class="mt-md-5" id="HomeBannerTitleId">Consult Best Doctors Your Nearby Location.</h1>
+                    <p id="HomeBannerDescriptionId">Feel free to contact us, get better service.</p>
                     <a asp-controller="Home" asp-action="Appointment" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn"><span style="margin-right:5px;">Book an appoinment</span> <i class="fa fa-arrow-right"></i></a>
                 </div>                
             </div>
@@ -515,28 +516,32 @@
 @section Scripts{
     <script>
 
-        const images = ['url(/assets/img/Home/bg-3.jpg)', 'url(/assets/img/homeImage.jpeg)']
-        let counter = 0;
-        const arrayLength = images.length;
+        
+        const banners = @banners;
 
-        $('#xxx').css({ 'backgroundImage': images[0], 'background-repeat': 'no-repeat', 'background-size': "cover" });
+        let counter = 1;
+        const arrayLength = banners.length;
+
+        const firstImage = "url(" + banners[0].largeImageUrl + ")";
+        $('#HomeBannerSectionId').css({ 'backgroundImage': firstImage, 'background-repeat': 'no-repeat', 'background-size': "cover" });
+        $("#HomeBannerTitleId").text(banners[0].title);
+        $("#HomeBannerTitleId").css({ 'color': banners[0].textColor });
 
         function changeBg(){
             const index = counter % arrayLength;
-            const bg = images[index];
-            $('#xxx').css({ 'backgroundImage': bg, 'background-repeat': 'no-repeat', 'background-size': "cover" });
+            const bgImage = "url(" + banners[index].largeImageUrl + ")";
+            $('#HomeBannerSectionId').css({ 'backgroundImage': bgImage, 'background-repeat': 'no-repeat', 'background-size': "cover" });
             
-            counter += 1;
+            $("#HomeBannerTitleId").text(banners[index].title);
+            $("#HomeBannerTitleId").css({ 'color': banners[index].textColor });
 
-            console.log(index);
+            $("#HomeBannerDescriptionId").text(banners[index].description);
+            $("#HomeBannerDescriptionId").css({ 'color': banners[index].textColor });
+
+            counter += 1;
         }
 
         setInterval(changeBg,5000)
-
-        
-        //$('.carousel').carousel({
-        //    interval: 2000
-        //})
 
     </script>
 }

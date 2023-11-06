@@ -23,6 +23,7 @@ namespace VitalCareWeb.Data
 		public DbSet<CounterRecord> CounterRecords { get; set; }
 		public DbSet<Brand> Brands { get; set; }
 		public DbSet<Product> Products { get; set; }
+		public DbSet<HomePageBanner> HomePageBanners { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -43,6 +44,7 @@ namespace VitalCareWeb.Data
 			modelBuilder.ApplyConfiguration(new CounterRecordConfiguration());
 			modelBuilder.ApplyConfiguration(new BrandConfiguration());
 			modelBuilder.ApplyConfiguration(new ProductConfiguration());
+			modelBuilder.ApplyConfiguration(new HomePageBannerConfiguration());
 		}
 	}
 }

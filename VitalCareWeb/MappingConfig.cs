@@ -8,6 +8,7 @@ using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Brand;
 using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.HomePageBanner;
 using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Product;
@@ -126,6 +127,13 @@ namespace VitalCareWeb
                     .ForMember(r => r.BrandName, opt => opt.MapFrom(src => src.Brand.Name))
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnProductImagePath(src.Image)));
                 config.CreateMap<Product, AddEditProductViewModel>().ReverseMap();
+                #endregion
+
+                #region HomePageBanner
+                config.CreateMap<HomePageBanner, HomePageBannerViewModel>()
+                    .ForMember(r => r.SmallImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnHomePageBannerSmallImagePath(src.SmallImage)))
+                    .ForMember(r => r.LargeImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnHomePageBannerLargeImagePath(src.LargeImage)));
+                config.CreateMap<HomePageBanner, AddEditHomePageBannerViewModel>().ReverseMap();
                 #endregion
             });
             return mappingConfig;

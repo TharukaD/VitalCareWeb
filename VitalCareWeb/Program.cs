@@ -12,6 +12,7 @@ using VitalCareWeb.Services.Brand;
 using VitalCareWeb.Services.CounterRecord;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
+using VitalCareWeb.Services.HomePageBanner;
 using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Product;
@@ -50,7 +51,7 @@ builder.Services.AddScoped<IInquiryService, InquiryService>();
 builder.Services.AddScoped<IWhyChooseUsRecordService, WhyChooseUsRecordService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddScoped<IHomePageBannerService, HomePageBannerService>();
 builder.Services.AddScoped<ICounterRecordService, CounterRecordService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 

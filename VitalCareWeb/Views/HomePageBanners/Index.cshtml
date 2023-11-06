@@ -1,0 +1,157 @@
+﻿@using VitalCareWeb.ViewModels.HomePageBanner;
+@model IEnumerable<HomePageBannerViewModel>;
+@{
+    Layout = "_AdminLayout";
+    ViewBag.Title = "HomePage Banners";
+}
+
+@section header{
+    <h3 class="content-header-title">HomePage Banners</h3>
+    <div class="row breadcrumbs-top">
+        <div class="breadcrumb-wrapper col-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="HomePageBanners" asp-action="Index">HomePage Banners</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>List</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+}
+
+@section headerMenu
+{
+    <a class="btn box-shadow-2 px-2 mb-1 AddEditBtn"
+        data-ajax="true"
+       data-ajax-update="#DivModalTarget"
+       data-ajax-begin="blockUI"
+       data-ajax-complete="unblockUI"
+       data-toggle="tooltip"
+       asp-action="Add"
+       asp-controller="HomePageBanners">
+        <i class="fa fa-plus-circle" style="margin-right:5px;font-size:17px;"></i>
+        New
+    </a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-12 ">
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-sm " id="BannersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Small Image</th>
+                                        <th>Large Image</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Text Color</th>                                       
+                                        <th>Priority</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var banner in @Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img height="120" width="120" src="@banner.SmallImageUrl" />
+                                                <div style="margin-top:5px;">
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="UploadHomePageBannerImage"
+                                                        asp-controller="HomePageBanners"
+                                                        asp-route-id="@banner.Id"
+                                                        asp-route-type="Small"
+                                                        title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
+                                                </div>                                                
+                                            </td>
+                                            <td>
+                                                <img height="120" width="120" src="@banner.LargeImageUrl" />
+                                                <div style="margin-top:5px;">
+                                                    <a data-ajax="true"
+                                                   data-ajax-update="#DivModalTarget"
+                                                   data-ajax-begin="blockUI"
+                                                   data-ajax-complete="unblockUI"
+                                                   data-toggle="tooltip"
+                                                   asp-action="UploadHomePageBannerImage"
+                                                   asp-controller="HomePageBanners"
+                                                   asp-route-id="@banner.Id"
+                                                   asp-route-type="Large"
+                                                   title="Upload Image"><i class="fa fa-upload"> Upload</i></a>
+                                                </div>
+                                            </td>
+                                            <td> @banner.Title</td>
+                                            <td> @banner.Description</td>
+                                            <td>
+                                                <span>@banner.TextColor</span>
+                                            </td>
+                                            <td> @banner.Priority</td>
+                                            <td class="text-center">
+                                                <div>            
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Edit"
+                                                        asp-controller="HomePageBanners"
+                                                        asp-route-id="@banner.Id"
+                                                       >
+                                                        Edit
+                                                    </a>
+                                                    <span> | </span>
+                                                    <a data-ajax="true"
+                                                        data-ajax-update="#DivModalTarget"
+                                                        data-ajax-begin="blockUI"
+                                                        data-ajax-complete="unblockUI"
+                                                        data-toggle="tooltip"
+                                                        asp-action="Delete"
+                                                        asp-controller="HomePageBanners"
+                                                        asp-route-id="@banner.Id"
+                                                        >
+                                                        <span class="text-danger">Delete</span>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".navItems").removeClass("active");
+            $("#HomePageBannersNavId").addClass("active");
+
+            $("#BannersTable").dataTable(
+                {
+                    bLengthChange: true,
+                    bPaginate: true,
+                    ordering: true,
+                    language: {
+                        search: "",
+                        searchPlaceholder: "Search this list...",
+                    }
+                });
+
+        });
+    </script>
+}

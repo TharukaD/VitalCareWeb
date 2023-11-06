@@ -91,6 +91,28 @@
             return ImagePath;
         }
 
+        public static string ReturnHomePageBannerSmallImagePath(string image)
+        {
+            string ImagePath = "/img/HomePageBannerSmallImage/default.jpg";
+            if (!string.IsNullOrEmpty(image))
+            {
+                ImagePath = $"/img/HomePageBannerSmallImage/{image}";
+            }
+
+            return ImagePath;
+        }
+
+        public static string ReturnHomePageBannerLargeImagePath(string image)
+        {
+            string ImagePath = "/img/HomePageBannerLargeImage/default.jpg";
+            if (!string.IsNullOrEmpty(image))
+            {
+                ImagePath = $"/img/HomePageBannerLargeImage/{image}";
+            }
+
+            return ImagePath;
+        }
+
         public static string ReturnAppointmentNo(int id)
         {
             string output = id.ToString().PadLeft(5, '0');

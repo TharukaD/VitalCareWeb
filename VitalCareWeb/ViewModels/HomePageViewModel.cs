@@ -2,6 +2,7 @@
 using VitalCareWeb.ViewModels.Brand;
 using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.HomePageBanner;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.WhyChooseUsRecord;
 
@@ -16,6 +17,7 @@ public class HomePageViewModel
     public List<WhyChooseUsRecordViewModel> WhyChooseUsRecords { get; set; }
     public List<CounterRecordViewModel> CounterRecords { get; set; }
     public List<BrandViewModel> Brands { get; set; }
+    public List<HomePageBannerViewModel> Banners { get; set; }
 
     public HomePageViewModel()
     {
@@ -26,5 +28,6 @@ public class HomePageViewModel
         WhyChooseUsRecords = new List<WhyChooseUsRecordViewModel>();
         CounterRecords = new List<CounterRecordViewModel>();
         Brands = new List<BrandViewModel>();
+        Banners = new List<HomePageBannerViewModel>();
     }
 }

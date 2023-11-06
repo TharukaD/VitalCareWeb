@@ -9,6 +9,7 @@ using VitalCareWeb.Services.Brand;
 using VitalCareWeb.Services.CounterRecord;
 using VitalCareWeb.Services.Doctor;
 using VitalCareWeb.Services.EmailService;
+using VitalCareWeb.Services.HomePageBanner;
 using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.Services.Location;
 using VitalCareWeb.Services.Serivice;
@@ -24,6 +25,7 @@ using VitalCareWeb.ViewModels.ArticleCategory;
 using VitalCareWeb.ViewModels.Brand;
 using VitalCareWeb.ViewModels.CounterRecord;
 using VitalCareWeb.ViewModels.Doctor;
+using VitalCareWeb.ViewModels.HomePageBanner;
 using VitalCareWeb.ViewModels.Inquiry;
 using VitalCareWeb.ViewModels.Location;
 using VitalCareWeb.ViewModels.Service;
@@ -51,6 +53,7 @@ public class HomeController : Controller
     private IWhyChooseUsRecordService _whyChooseUsRecordService;
     private ICounterRecordService _counterRecordService;
     private IBrandService _brandService;
+    private IHomePageBannerService _homePageBannerService;
     private readonly IConfiguration _configuration;
 
     public HomeController(
@@ -70,6 +73,7 @@ public class HomeController : Controller
         IWhyChooseUsRecordService whyChooseUsRecordService,
         ICounterRecordService counterRecordService,
         IBrandService brandService,
+        IHomePageBannerService homePageBannerService,
         IConfiguration configuration
     )
     {
@@ -90,6 +94,7 @@ public class HomeController : Controller
         _whyChooseUsRecordService = whyChooseUsRecordService;
         _counterRecordService = counterRecordService;
         _brandService = brandService;
+        _homePageBannerService = homePageBannerService;
     }
 
     [HttpGet]
@@ -117,6 +122,9 @@ public class HomeController : Controller
 
         var brands = await _brandService.GetAll();
         viewModel.Brands = _mapper.Map<List<BrandViewModel>>(brands);
+
+        var banners = await _homePageBannerService.GetAll();
+        viewModel.Banners = _mapper.Map<List<HomePageBannerViewModel>>(banners);
 
         return View(viewModel);
     }
