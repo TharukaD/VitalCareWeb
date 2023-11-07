@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.Speciality;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.Speciality;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class SpecialitiesController : Controller
     {
         private IMapper _mapper;

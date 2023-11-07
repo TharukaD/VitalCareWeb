@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.AppointmentReason;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.AppointmentReason;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class AppointmentReasonsController : Controller
     {
         private IMapper _mapper;

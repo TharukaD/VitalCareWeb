@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.ArticleCategory;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.ArticleCategory;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class ArticleCategoriesController : Controller
     {
         private IMapper _mapper;

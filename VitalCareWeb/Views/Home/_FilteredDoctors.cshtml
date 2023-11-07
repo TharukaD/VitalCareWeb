@@ -5,7 +5,9 @@
     <div class="row blog-grid-row">
         @foreach (var doctor in Model)
         {
-            <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
+            <div class="col-md-6 col-sm-12">
+                <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
+            </div>
         }
     </div>   
 }

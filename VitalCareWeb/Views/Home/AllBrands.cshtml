@@ -27,6 +27,15 @@
 <section class="services-section-fourteen">
     <div class="container">
 
+        <div class="row">
+            <div class="d-flex flex-row-reverse">
+                <div class="row py-4 rounded-circle text-center" style="margin-right:10px;border: 1px solid #06A5A0">
+                    <h5>CallUs: <b>7835523</b></h5>
+                    <h5>For Orders</h5>
+                </div>                
+            </div> 
+        </div>
+
         @foreach (var brand in Model)
         {
             <div class="row align-items-center pb-3 pt-3">
@@ -68,11 +77,11 @@
                                 </a>
                             </div>
                             <div class="pro-content">
-                                <h3 class="title pb-4">
+                                <h3 class="title">
                                     <a href="@product.PurchaseUrl" target="_blank" tabindex="-1">@product.Name</a>
                                 </h3>
                                @* <p>@product.ShortDescription</p>*@
-                                <div class="row align-items-center">
+                                @*<div class="row align-items-center">
                                     <div class="col-lg-6">
                                         <span class="price">@product.PriceString</span>
                                         @if (@product.Price != product.OldPrice)
@@ -83,7 +92,7 @@
                                     <div class="col-lg-6 text-end">
                                         <a href="@product.PurchaseUrl" target="_blank" class="cart-icon shoppingCartIcon"><i class="fas fa-shopping-cart"></i></a>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
@@ -107,6 +116,10 @@
     }
 
     #ServicesNavId a {
+        color: #4D555F !important;
+    }
+
+    #BrandsNavId a {
         color: #06A5A0 !important;
         text-decoration: underline;
         text-underline-offset: 8px;

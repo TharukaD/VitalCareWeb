@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Services.Appointment;
 using VitalCareWeb.ViewModels.Appoinment;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private IMapper _mapper;

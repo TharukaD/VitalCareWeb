@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.CounterRecord;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.CounterRecord;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class CounterRecordsController : Controller
     {
         private IMapper _mapper;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.Brand;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.Brand;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class BrandsController : Controller
     {
         private IMapper _mapper;

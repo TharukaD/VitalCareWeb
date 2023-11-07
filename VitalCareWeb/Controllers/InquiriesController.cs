@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Services.Inquiry;
 using VitalCareWeb.ViewModels.Inquiry;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class InquiriesController : Controller
     {
         private IMapper _mapper;

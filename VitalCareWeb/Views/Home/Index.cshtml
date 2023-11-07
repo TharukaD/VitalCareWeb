@@ -499,6 +499,10 @@
         color: #4D555F !important;
     }
 
+    #BrandsNavId a {
+        color: #4D555F !important;
+    }
+
     #DoctorsNavId a {
         color: #4D555F !important;
     }
@@ -522,14 +526,23 @@
         let counter = 1;
         const arrayLength = banners.length;
 
-        const firstImage = "url(" + banners[0].largeImageUrl + ")";
+        const windowWidth = $(window).width();
+        let firstImage = "url(" + banners[0].largeImageUrl + ")";
+        if(windowWidth < 640){
+            firstImage = "url(" + banners[0].smallImageUrl + ")";
+        }
+        
         $('#HomeBannerSectionId').css({ 'backgroundImage': firstImage, 'background-repeat': 'no-repeat', 'background-size': "cover" });
         $("#HomeBannerTitleId").text(banners[0].title);
         $("#HomeBannerTitleId").css({ 'color': banners[0].textColor });
 
-        function changeBg(){
+        function changeBg(pageWidth){
             const index = counter % arrayLength;
-            const bgImage = "url(" + banners[index].largeImageUrl + ")";
+            let bgImage = "url(" + banners[index].largeImageUrl + ")";
+            if (pageWidth < 640) {
+                bgImage = "url(" + banners[index].smallImageUrl + ")";
+            }
+
             $('#HomeBannerSectionId').css({ 'backgroundImage': bgImage, 'background-repeat': 'no-repeat', 'background-size': "cover" });
             
             $("#HomeBannerTitleId").text(banners[index].title);
@@ -541,7 +554,12 @@
             counter += 1;
         }
 
-        setInterval(changeBg,5000)
+        let bgChangeInterval = setInterval(() => changeBg(windowWidth), 5000)
+
+        $(window).resize(function () {
+            clearInterval(bgChangeInterval);
+            bgChangeInterval = setInterval(() => changeBg($(window).width()), 5000)
+        });
 
     </script>
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.WhyChooseUsRecord;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.WhyChooseUsRecord;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class WhyChooseUsRecordsController : Controller
     {
         private IMapper _mapper;

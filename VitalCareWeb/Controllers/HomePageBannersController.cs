@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Services.HomePageBanner;
@@ -7,6 +8,7 @@ using VitalCareWeb.ViewModels.HomePageBanner;
 
 namespace VitalCareWeb.Controllers
 {
+    [Authorize]
     public class HomePageBannersController : Controller
     {
         private IMapper _mapper;
