@@ -22,6 +22,14 @@ namespace VitalCareWeb.Services.Serivice
                 .OrderBy(r => r.Priority).ToListAsync();
         }
 
+        public async Task<IEnumerable<Entities.Service>> GetAllByLocationId(int locationId)
+        {
+            return await _context.Services
+                .Where(r => r.LocationId == locationId)
+                .Include(r => r.Location)
+                .OrderBy(r => r.Priority).ToListAsync();
+        }
+
         public async Task<bool> Add(Entities.Service service)
         {
             _context.Services.Add(service);

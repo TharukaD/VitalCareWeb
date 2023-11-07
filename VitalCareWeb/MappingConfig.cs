@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using VitalCareWeb.Entities;
 using VitalCareWeb.Utlity;
+using VitalCareWeb.ViewModels;
 using VitalCareWeb.ViewModels.Appoinment;
 using VitalCareWeb.ViewModels.AppointmentReason;
 using VitalCareWeb.ViewModels.Article;
@@ -38,6 +39,7 @@ namespace VitalCareWeb
                 #endregion
 
                 #region Location
+                config.CreateMap<Location, ContactUsTabViewModel>();
                 config.CreateMap<Location, LocationViewModel>()
                     .ForMember(r => r.ImageUrl, opt => opt.MapFrom(src => HelperMethods.ReturnLocationImagePath(src.Image)));
                 config.CreateMap<Location, AddEditLocationViewModel>().ReverseMap();

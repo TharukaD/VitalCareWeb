@@ -1,0 +1,230 @@
+﻿@using VitalCareWeb.ViewModels;
+@model LocationPageViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb-bar-two bg-white">
+    <div class="container">
+        <div class="row align-items-center inner-banner" >
+            <div class="row ">
+
+                @*==== Show medium devices ======*@
+                <div class="d-md-block d-none">
+                    <div class="row">
+                        <div class="col-md-2 col-12 custom-short-by">
+                            <img class="img-fluid px-3 px-sm-1 px-md-0" src="@Model.ImageUrl" height="200" width="200" alt="Post Image">
+                        </div>
+                        <div class="col-md-10 col-12 custom-short-by">
+                            <h3 class="title pharmacy-title">@Model.Name</h3>
+                            <div class="sort-title" style="font-size:16px;margin-top:20px;">@Model.ShortDescription</div>
+                        </div>
+                    </div>
+                </div>
+
+                @*==== Show in small devices ======*@
+                <div class="d-block d-md-none">
+                    <div class="col-md-10 col-12 custom-short-by">
+                        <h3 class="title pharmacy-title text-center">@Model.Name</h3>
+                        <div class="d-block d-md-none text-center p-3">
+                            <img class="img-fluid px-3 px-sm-1 px-md-0" style="max-height:250px;max-width:250px" src="@Model.ImageUrl" alt="Post Image">
+                        </div>
+                        <div class="sort-title px-2" style="margin-top:20px;">@Model.ShortDescription</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-3">
+                <ul class="nav nav-pills gap-2  d-flex justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1" role="tab" aria-controls="pills-tab1" aria-selected="true">Doctors</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-tab2-tab" data-bs-toggle="pill" data-bs-target="#pills-tab2" role="tab" aria-controls="pills-tab2" aria-selected="false">Services</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-tab3-tab" data-bs-toggle="pill" data-bs-target="#pills-tab3" role="tab" aria-controls="pills-tab3" aria-selected="false">Book an Appointment</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-tab3-tab" data-bs-toggle="pill" data-bs-target="#pills-tab4" role="tab" aria-controls="pills-tab4" aria-selected="false">Contact Us</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    @*==== Doctors Tab ====*@
+                    <div class="tab-pane fade show active" id="pills-tab1" role="tabpanel" aria-labelledby="pills-tab1-tab" tabindex="0">
+                        <div class="row">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;background-color:#F8F8F8">
+                                <div class="card-body">
+
+                                    <div class="row blog-grid-row d-flex justify-content-center">
+                                        @foreach (var doctor in @Model.Doctors)
+                                        {
+                                            <partial name="/Views/Shared/Doctors/_DoctorCard.cshtml" model="@doctor" />
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*==== Services Tab ====*@
+                    <div class="tab-pane fade" id="pills-tab2" role="tabpanel" aria-labelledby="pills-tab2-tab" tabindex="0">
+                        <div class="row">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;background-color:#F8F8F8">
+                                <section class="services-section-fourteen" style="background-color:#F8F8F8">
+                                    <div class="row  justify-content-center">
+                                        @if (Model.Services.Any())
+                                        {
+                                            @foreach (var service in Model.Services)
+                                            {
+                                                <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
+                                                    <a asp-route-id="@service.Id" asp-action="Service" asp-controller="Home">
+                                                        <div class="our-services-list serviceCard">
+                                                            <div class="service-icons">
+                                                                <img src="@service.ImageUrl" style="height:220px;width:220px;" alt="service image">
+                                                            </div>
+                                                            <h4>@service.Name</h4>
+                                                            <p>@Html.Raw(@service.ShortDescription)</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-3 col-md-4 col-sm-12 d-flex">
+                                                <h3>No services found.</h3>
+                                            </div>
+                                        }
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*==== Book an appointment ====*@
+                    <div class="tab-pane fade" id="pills-tab3" role="tabpanel" aria-labelledby="pills-tab3-tab" tabindex="0">
+                        <div class="row">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;background-color:#F8F8F8">
+                                <p class="text-center mt-4">Book an appointment online.</p>
+                                <div class="banner-content aos d-flex justify-content-center" data-aos="fade-up" style="margin-top:10px;margin-bottom:25px;;padding-bottom:0px !important">
+                                    <a asp-controller="Home" asp-action="Appointment" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">
+                                        <span>Book an appoinment </span> <i class="fa fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*==== Contact us ====*@
+                    <div class="tab-pane fade" id="pills-tab4" role="tabpanel" aria-labelledby="pills-tab4-tab" tabindex="0">
+                        <div class="row">
+                            <div class="card contact-card" style="border: 1px solid #06A5A0;background-color:#F8F8F8">
+                                <div class="col-lg-12 p-2 mt-2">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card contact-card h-100">
+                                                <div class="card-body">
+                                                    <div class="contact-icon">
+                                                        <i class="feather-map-pin" style="color:#06A5A0 !important"></i>
+                                                    </div>
+                                                    <div class="contact-details">
+                                                        <h4>Address</h4>
+                                                        <p>@Model.ContactRecord.Address</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card contact-card h-100">
+                                                <div class="card-body">
+                                                    <div class="contact-icon">
+                                                        <i class="feather-phone" style="color:#06A5A0 !important"></i>
+                                                    </div>
+                                                    <div class="contact-details">
+                                                        <div class="row">
+                                                            <h4>Phone</h4>
+                                                            <p>@Model.ContactRecord.PhoneNo</p>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <h4>Viber / WhatsApp</h4>
+                                                            <p>@Model.ContactRecord.ViberWhatsupNo</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card contact-card h-100">
+                                                <div class="card-body">
+                                                    <div class="contact-icon">
+                                                        <i class="feather-mail" style="color:#06A5A0 !important"></i>
+                                                    </div>
+                                                    <div class="contact-details">
+                                                        <h4>Email Address</h4>
+                                                        <p>@Model.ContactRecord.EmailAddress</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer d-flex justify-content-center">
+                                                    <ul class="nav text-xl gap-3">
+                                                        <li>
+                                                            <a href="@Model.ContactRecord.FacebookURL" target="_blank"><i class="fab fa-facebook"></i> </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="@Model.ContactRecord.InstagramURL" target="_blank"><i class="fab fa-instagram"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="contact-map d-flex">
+                                            <iframe src="@Model.ContactRecord.IFrameURL" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /Breadcrumb -->
+
+
+
+<style>
+
+    .nav-pills > li > button {
+        color: #4D555F !important;
+        border: 1px solid #06A5A0;
+    }
+
+    .nav-pills > li > button.active {
+        background-color: #06A5A0 !important;
+        color: white !important;
+    }
+
+    .serviceCard:hover {
+        background-color: #06A5A0 !important;
+        border-color: #06A5A0 !important;
+    }
+
+    .specialHomeBtn {
+        background-color: #06A5A0;
+        border-color: #06A5A0 !important;
+    }
+
+    .specialHomeBtn:hover {
+        color: #06A5A0 !important;
+        background-color: white !important;
+        border-color: #06A5A0 !important
+    }
+
+</style>

@@ -5,6 +5,7 @@ public interface IServiceService
 {
     Task<Service?> GetById(int id);
     Task<IEnumerable<Service>> GetAll();
+    Task<IEnumerable<Service>> GetAllByLocationId(int locationId);
     Task<bool> Add(Service speciality);
     Task<bool> Update(Service speciality);
     Task<bool> Delete(int id);

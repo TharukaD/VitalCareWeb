@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using VitalCareWeb;
 using VitalCareWeb.Data;
 using VitalCareWeb.Extensions;
+using VitalCareWeb.Middleware;
 using VitalCareWeb.Services.Appointment;
 using VitalCareWeb.Services.AppointmentReason;
 using VitalCareWeb.Services.Article;
@@ -36,6 +37,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true)
     .AddRazorRuntimeCompilation();
+
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 //----- Services Manage
 builder.Services.AddScoped<ISpecialityService, SpecialityService>();
@@ -80,6 +83,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllerRoute(
     name: "default",

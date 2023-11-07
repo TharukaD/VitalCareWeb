@@ -145,6 +145,35 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Location(int? locationId)
+    {
+        if (locationId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        var location = await _locationService.GetById(locationId.Value);
+        if (location == null)
+            return RedirectToAction("NotFoundError", "Error");
+
+        var locationViewModel = _mapper.Map<LocationViewModel>(location);
+
+        var doctors = _mapper.Map<List<DoctorViewModel>>(await _doctorService.GetAllByLocationId(locationId.Value));
+        var services = _mapper.Map<List<ServiceViewModel>>(await _service.GetAllByLocationId(locationId.Value));
+        var contactInfo = _mapper.Map<ContactUsTabViewModel>(location);
+
+        var viewModel = new LocationPageViewModel();
+        viewModel.LocationId = locationId.Value;
+        viewModel.Name = locationViewModel.Name;
+        viewModel.ShortDescription = locationViewModel.ShortDescription;
+        viewModel.ImageUrl = locationViewModel.ImageUrl;
+
+        viewModel.Initialize(doctors, services, contactInfo);
+
+        return View(viewModel);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> AllBrands()
     {
         var allBrands = _mapper.Map<IList<BrandViewModel>>(await _brandService.GetAll());

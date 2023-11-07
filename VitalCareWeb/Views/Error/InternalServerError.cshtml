@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Server Error";
+}
+
+
+<section class="flexbox-container" style="margin-top:80px;">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="card-header bg-transparent border-0">
+            <div class="text-center" style="font-size:20px;">Oops..</div>
+            <div class="text-center" style="font-size:30px;color:red">500</div>
+            <div class="text-uppercase text-center" style="font-size:20px;color:red">Internal Server Error !</div>
+            <div class="text-uppercase text-center" style="font-size:12px">Don't panic contact developer to fix this issue.'</div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="banner-content aos d-flex justify-content-center" data-aos="fade-up" style="margin-top:20px;padding-bottom:0px !important">
+            <a asp-controller="Home" asp-action="Index" style="background-color: #06A5A0;border-color:#06A5A0 !important;" class="btn specialHomeBtn">Back to Home</a>
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .specialHomeBtn {
+        background-color: #06A5A0;
+        border-color: #06A5A0 !important;
+    }
+
+    .specialHomeBtn:hover {
+        color: #06A5A0 !important;
+        background-color: white !important;
+        border-color: #06A5A0 !important
+    }
+
+</style>

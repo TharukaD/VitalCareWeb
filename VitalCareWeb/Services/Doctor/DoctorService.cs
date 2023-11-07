@@ -26,6 +26,15 @@ namespace VitalCareWeb.Services.Doctor
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Entities.Doctor>> GetAllByLocationId(int locationId)
+        {
+            return await _context.Doctors
+                .Where(r => r.LocationId == locationId)
+                .Include(d => d.Location)
+                .Include(d => d.Speciality)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Entities.Doctor>> GetAllFiltered(string? doctorName, List<int>? locations, List<string>? genders, List<int>? specialities)
         {
             var doctors = _context.Doctors.AsQueryable();

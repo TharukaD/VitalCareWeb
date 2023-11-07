@@ -60,11 +60,11 @@
             <div class="row mt-3 d-flex justify-content-center">
                 @foreach (var product in brand.Products)
                 {
-                    <div class="col-md-6 col-lg-4 col-xl-4 product-custom">
+                    <div class="col-md-4 col-lg-3 col-xl-3 product-custom" style="max-width:300px;">
                         <div class="profile-widget">
                             <div class="doc-img">
                                 <a href="@product.PurchaseUrl" target="_blank">
-                                    <img class="img-fluid" alt="Product image" style="max-height:250px" src="@product.ImageUrl">
+                                    <img class="img-fluid" alt="Product image" style="max-height:250px;" src="@product.ImageUrl">
                                 </a>
                             </div>
                             <div class="pro-content">
