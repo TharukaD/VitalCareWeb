@@ -131,6 +131,7 @@ public class HomeController : Controller
 	}
 	#endregion
 
+	#region AboutUs
 	[HttpGet]
 	public async Task<IActionResult> AboutUs()
 	{
@@ -138,6 +139,7 @@ public class HomeController : Controller
 
 		return View(locations);
 	}
+	#endregion
 
 	[HttpGet]
 	public async Task<IActionResult> Services(int? locationId)
